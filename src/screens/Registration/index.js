@@ -48,6 +48,12 @@ class Registration extends Component {
             submitting: true,
         };
     }
+    
+    componentDidMount() {
+        console.log(this.state.memtype)
+        const { memtype } = this.props.navigation.state.params;
+        this.setState({ memtype }, () => console.log(this.state.memtype));
+    }
 
     _takeMeTOWelcome = () => {
         this.props.navigation.navigate('Welcome');

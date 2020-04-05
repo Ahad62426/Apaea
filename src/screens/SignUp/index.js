@@ -40,9 +40,9 @@ class SignUp extends Component {
     };
   }
 
-  _takeMeTORegistration = () => {
+  _takeMeTORegistration = memtype => {
 
-    this.props.navigation.navigate('Registration');
+    this.props.navigation.navigate('Registration', { memtype });
   };
   animateLogo = val => {
     this.setState({
@@ -195,15 +195,6 @@ class SignUp extends Component {
               ]}>
               Choose Membership Type
             </Text>
-            <Text
-              style={[
-                CommonStyles.textCenter,
-                CommonStyles.white
-                , DynamicFntSize(15),
-                CommonStyles.textColor
-              ]}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante lacus, eu pretium purus vulputate sit amet.
-            </Text>
           </View>
           <View style={[{ flex: 3, flexDirection: "column", }]}>
 
@@ -215,7 +206,7 @@ class SignUp extends Component {
               textColor="white"
               btnText={'Individual Membership'}
               style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderWidth: 1, borderColor: "white" }]}
-              callback={() => this._takeMeTORegistration()}
+              callback={() => this._takeMeTORegistration("Individual")}
             />
             <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
               <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
@@ -230,7 +221,7 @@ class SignUp extends Component {
               textColor="black"
               btnText={'Institutional Membership'}
               style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
-              callback={() => this._takeMeTORegistration()}
+              callback={() => this._takeMeTORegistration("Institutional")}
             />
           </View>
         </View>
