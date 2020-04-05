@@ -83,9 +83,6 @@ class MasterHeader extends Component {
         return (
             <Header style={[{ zIndex: 10, backgroundColor: TColors.bgColorPrimary }, cstmStyles]}>
                 <Left style={{ flex: 2 }}>
-
-                    {/* {this._getPowerOffBtn()} */}
-                    {/* {this._getProfileIcon()} */}
                     {this._getMenuBtnRight()}
                 </Left>
                 <Body style={[{ flex: 8, justifyContent: 'flex-start', alignItems: 'center' }]}>
@@ -97,7 +94,6 @@ class MasterHeader extends Component {
                 <Right style={[{ flex: 2 }]}>
                     {/* {this._getPowerOffBtn()} */}
                     {this._getProfileIcon()}
-                    {/* {this._getMenuBtnRight()}  */}
                 </Right>
             </Header>
         );

@@ -46,6 +46,34 @@ const NavigationsRoutes = {
       gesturesEnabled: false,
     },
   },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+  },
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+  },
+  Registration: {
+    screen: Registration,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+  },
+  AboutUs: {
+    screen: AboutUs,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+  },
   OurPeople: {
     screen: OurPeople,
     navigationOptions: {
@@ -95,36 +123,8 @@ const NavigationsRoutes = {
       gesturesEnabled: false,
     },
   },
-  SignIn: {
-    screen: SignIn,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  AboutUs: {
-    screen: AboutUs,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
   FAQ: {
     screen: FAQ,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  Registration: {
-    screen: Registration,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  SignUp: {
-    screen: SignUp,
     navigationOptions: {
       headerMode: 'none',
       gesturesEnabled: false,
@@ -196,12 +196,11 @@ export const AuthStack = createStackNavigator(
 export const AppNavigator = createSwitchNavigator(
   {
     //Started: GetStartedStack,
-    //App: AppStack,
-    Drawer: Drawer,
+    App: Drawer,
     Auth: AuthStack,
   },
   {
-    initialRouteName: 'Drawer',
+    initialRouteName: 'App',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#f4511e',
