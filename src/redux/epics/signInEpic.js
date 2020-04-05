@@ -33,7 +33,7 @@ export class signInEpic {
               if (resObj && resObj.success) {
                 const { token } = resObj;
                 // RestClient.setHeader('Authorization', token);
-                NavigationService.navigate('Dashboard')
+                NavigationService.navigate('Drawer')
                 await setItem('@UserAuth', JSON.stringify(token));
                 return customisedAction(SIGN_IN_SUCCESS, token);
               }

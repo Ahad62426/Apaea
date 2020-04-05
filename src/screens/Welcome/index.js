@@ -52,7 +52,7 @@ class SignIn extends Component {
   async componentDidMount() {
     const session = null // await getItem('@UserAuth');
     if (session) {
-      this.props.navigation.navigate('Dashboard');
+      this.props.navigation.navigate('Drawer');
       setTimeout(() => this.setState({ validatingSession: false }), 1000);
     } else this.setState({ validatingSession: false });
   }
