@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { Container, Text, Item, Input, Content, Button } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { View } from 'react-native';
+import { Container } from 'native-base';
 import CommonStyles, {
   DynamicP,
   DynamicM,
@@ -13,7 +11,7 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import { connect } from 'react-redux';
 import { CLogo, LoadingButton, } from '../../components/Utilities';
-import { getUserToken } from '../../actions/AsyncStorage';
+import { getItem } from '../../helperMethods/localstorage';
 import { CCarousel } from '../../components/Carousel';
 
 const weclomedumyData = [
@@ -52,8 +50,8 @@ class SignIn extends Component {
   }
 
   async componentDidMount() {
-    const session = await this.props.getUserToken();
-    if (session && session.token) {
+    const session = null // await getItem('@UserAuth');
+    if (session) {
       this.props.navigation.navigate('Dashboard');
       setTimeout(() => this.setState({ validatingSession: false }), 1000);
     } else this.setState({ validatingSession: false });
@@ -162,8 +160,4 @@ const mapStateToProps = state => ({
   welcomeData: weclomedumyData,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getUserToken: response => dispatch(getUserToken(response)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, {})(SignIn);

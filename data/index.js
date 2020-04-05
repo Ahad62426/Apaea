@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import { RestClient } from '../src/network/RestClient';
 
 export const getToken = async () => {
   let Token = await AsyncStorage.getItem('@UserAuth');
@@ -7,9 +8,9 @@ export const getToken = async () => {
   //return `bearer HD925QDrFaqkfC3eE8TgkDVyfq8ZBI25nYNmRutqk6z6L5vAa7cmZiZ8lZMeqLi-PULfNQbDgWZ6AfK7m53BKq5uJ3HZhH78PGd6TI4zBPaMNqlcSELwD9etsIDfQ9pmm9lJw_bfV1QDOolrbS34gmHIQgoIOJghENyKayh7gpBp3-GcHlC9j-sX14viwFXe0HEJyRvzMANOXMytsnL01WY-G_D46ekS1YL-UlbleXKDBadcS2d7wi0-ijcAsADXOdzohFTNc7BoAK5tmyDGlDkKYE9pjzLr_34yIi7vyuwXMz6Luhf4fQBzYtkl_gES4zldNYGyeg2qYViVG2USaIV2PKEQpsWf1c_Znd6U4Gxn07bVZyeXeZb5LtbepV0aBXfP24ZbORVZdKfozbf7FE2JrKluPFgRj7jyRnGlzdzTB2WLJcd2TSPPCd-D7-KJwlkbA8tLFKk4S8JsUipkAB-l5HVTj0cTA05aNusybFTcHJRN1E7WeZSJx3ZswUO6FdIK6DwG3UE-0BusGbuVb9pcWW3LwW1J13juJZhD4PZQ5zMNTC6cCwPJpwIm7id1iNXCRbuGH0tY0gtKdrG5536xcxP_mT_rmLzFy3u9EBVlHFIZdjS4mTL2_Js1az5oswHPscRNr-0qjObAqassfQ`;
 };
 
-const DomainURL = 'http://18.222.182.147:9000';
+const DomainURL = 'https://www.a-paea.org/dev/api';
 const ApiEndpoints = {
-  signIn: '/token',
+  signIn: '/login',
   signUp: '/api/user',
 };
 
@@ -42,18 +43,17 @@ const PostSecured = async (URL, params) => {
     return await ReturnResponse(response);
   }
 };
-const Post = async (URL, params) => {
-  let response = await fetch(DomainURL + URL, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    method: 'POST',
-    body: JSON.stringify(params),
-  });
 
+
+
+const Post = async (URL, params) => {
+  let response = await RestClient.post(URL, params);
+  console.log(response);
   return await ReturnResponse(response);
 };
+
+
+
 const Get = async URL => {
   let response = await fetch(DomainURL + URL);
   return await ReturnResponse(response);
@@ -75,11 +75,8 @@ const GetToken = async (URL, params) => {
 
 const ReturnResponse = async response => {
   
-  if (response.ok) {
-    let responseJson = await response.clone().json();
-    responseJson.status = response.status;
-
-    return responseJson;
+  if (response.status == 200) {
+    return response.data;
   } else {
     response = {
       error: 'error',

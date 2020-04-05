@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, Image } from 'react-native';
-import { Container, Text, Item, Input, Content, Button, Icon } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { View, Image, ActivityIndicator } from 'react-native';
+import { Container, Text, Item, Content, Icon } from 'native-base';
 
 import CommonStyles, {
   DynamicP,
-  DynamicFntW,
   DynamicM,
-  DynamicBgColor,
   TColors,
-  DynamicFntSize,
-  DynamicTColor,
-  DynamicColor,
 } from '../../components/Styles';
 import { DrawerActions } from 'react-navigation-drawer';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import CInput from '../../components/KeyBoard';
-import { CLogo, validateEmail, CAlert, LoadingButton } from '../../components/Utilities';
-import { doVerify } from '../../actions/AcctountActions';
-import { saveUserToken } from '../../actions/AsyncStorage';
+import { CAlert, LoadingButton } from '../../components/Utilities';
+import { customisedAction } from '../../redux/actions';
+import { SIGN_IN } from '../../constants'
 
 class SignIn extends Component {
   constructor(props) {
@@ -32,10 +26,10 @@ class SignIn extends Component {
       verificationCode: '123456',
       loading: true,
       submitting: true,
-      userName: '',
+      email: 'check@gmail.com',
       isUserNameValid: false,
       isUserNameInValid: false,
-      password: '',
+      password: 'password',
       isPasswordValid: false,
       isPasswordInValid: false,
 
@@ -43,15 +37,6 @@ class SignIn extends Component {
     };
   }
 
-  _takeMeTOAccount = () => {
-
-    this.props.navigation.navigate('MyAccount');
-  };
-
-  _takeMeTOSignUp = () => {
-
-    this.props.navigation.navigate('SignUp');
-  };
   animateLogo = val => {
     this.setState({
       keyboardVisible: !val,
@@ -59,37 +44,17 @@ class SignIn extends Component {
   };
 
 
-  submit = val => {
-    this.props
-      .doVerify(this.state.PhoneNumber)
-      .then(res => {
-
-
-        res.type === 'SUCCESS'
-          ? this.props.navigation.navigate('Agreement')
-          : this._failedLogin();
-      })
-      .catch(err => {
-        CAlert({
-          title: 'Opss',
-          message: 'Something bad happened. Please contact admin',
-          buttons: [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-        });
-      });
-  };
-
-  _failedLogin = () => {
-    CAlert({
-      title: 'Validation Error',
-      message: 'Invalid Username Password',
-      buttons: [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+  submit = () => {
+    const { email, password } = this.state;
+    this.props.customisedAction(SIGN_IN, {
+      email, password
     });
-  };
+  }
 
-  validateUserName = uname => {
-    this.setState({ userName: uname }, () => {
+  validateUserName = email => {
+    this.setState({ email }, () => {
 
-      var resultlength = this.state.userName
+      var resultlength = this.state.email
       resultlength.length == 0
         ?
         this.setState({
@@ -114,6 +79,7 @@ class SignIn extends Component {
       this.setState({ isPasswordValid: true, isPasswordInValid: false })
 
   }
+
   render() {
     return (
       <Container
@@ -159,15 +125,6 @@ class SignIn extends Component {
                 ]}>
                 Login into app
             </Text>
-              <Text
-                style={[
-                  CommonStyles.textCenter,
-                  CommonStyles.white
-                  , DynamicFntSize(12),
-                  CommonStyles.textColor
-                ]}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante lacus, eu pretium purus vulputate sit amet.
-            </Text>
 
               <Item
                 fixedLabel
@@ -179,10 +136,11 @@ class SignIn extends Component {
                   placeholderTextColor={'#A6BCD0'}
                   placeholder="username"
                   placeholderTextColor="white"
+                  value={this.state.email}
                   style={{ color: "white", backgroundColor: TColors.bgSecondary, borderBottomColor: "white", borderBottomWidth: .2 }}
                   KeyboardCallback={val => this.animateLogo(val)}
-                  onSubmitEditing={val =>
-                    this.setState({ userName: val })
+                  onSubmitEditing={email =>
+                    this.setState({ email })
                   }
 
                   onChangeText={uname => {
@@ -205,6 +163,7 @@ class SignIn extends Component {
                   placeholderTextColor={'#A6BCD0'}
                   placeholder="password"
                   placeholderTextColor="white"
+                  value={this.state.password}
                   style={{ backgroundColor: TColors.bgSecondary, color: "white", borderBottomColor: "white", borderBottomWidth: .2 }}
                   KeyboardCallback={val => this.animateLogo(val)}
                   onChangeText={pass => {
@@ -222,16 +181,19 @@ class SignIn extends Component {
 
             </View>
             <View style={[{ flex: 5, flexDirection: "column", }]}>
-              <LoadingButton
-                isBlock={true}
-                submitting={this.state.submitting}
-                rounded={true}
-                loaderColor={'white'}
-                textColor="black"
-                btnText={'Login'}
-                style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
-                callback={() => this._takeMeTOAccount()}
-              />
+              {!this.props.signInReducer.loading ?
+                <LoadingButton
+                  isBlock={true}
+                  submitting={this.state.submitting}
+                  rounded={true}
+                  loaderColor={'white'}
+                  textColor="black"
+                  btnText={'Login'}
+                  style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
+                  callback={() => this.submit()}
+                /> :
+                <ActivityIndicator size="large" color="white" />
+              }
               <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
                 <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
                 <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>or</Text>
@@ -245,7 +207,7 @@ class SignIn extends Component {
                 textColor="white"
                 btnText={'Registers'}
                 style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderWidth: 1, borderColor: "white" }]}
-                callback={() => this._takeMeTOSignUp()}
+                callback={() => this.props.navigation.navigate('SignUp')}
               />
             </View>
           </View>
@@ -257,11 +219,11 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  saveUserToken: response => dispatch(saveUserToken(response)),
-  doVerify: (mobile) => dispatch(doVerify(mobile)),
+const mapStateToProps = ({ signInReducer }) => ({
+  signInReducer
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(
+  mapStateToProps, {
+    customisedAction
+})(SignIn);
