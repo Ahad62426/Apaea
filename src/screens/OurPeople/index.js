@@ -1,6 +1,6 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import { View, ActivityIndicator, Image } from 'react-native';
 import {
     Container,
     Drawer,
@@ -11,7 +11,6 @@ import {
     FooterTab,
     Left,
     Right,
-    Image,
     Label,
     Text,
 } from 'native-base';
@@ -34,6 +33,7 @@ import CommonStyles, {
     DynamicBDRadius,
     DynamicBorderPosition,
 } from '../../components/Styles';
+import { BASE_URL } from '../../constants';
 
 const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
 
@@ -46,11 +46,24 @@ class OurPeople extends Component {
         this.state = {
             submitting: true,
         };
-
     }
+
+    componentDidMount() {
+        console.log(this.props.navigation.state.params);
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.ourPeopleReducer);
+    }
+
+    renderContent = () => {
+        const { data } = this.props.ourPeopleReducer;
+        
+    };
 
 
     render() {
+        const { loading, data } = this.props.ourPeopleReducer;
         return (
             <Container
                 style={{
@@ -61,7 +74,7 @@ class OurPeople extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={'President'}
+                    Screen={this.props.navigation.state.params.title}
                 />
                 <View style={{ height: 0 }}>
                     <View
@@ -70,65 +83,50 @@ class OurPeople extends Component {
                             backgroundColor: TColors.bgColorPrimary,
                         }}></View>
                 </View>
-                <Content
-                    style={[
-                        DynamicM(0, 0, 10, 10),
-                        CommonStyles.BoxShadow,
-                        {
-                            borderTopLeftRadius: 10,
-                            borderTopRightRadius: 10,
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                            backgroundColor: 'white',
-                        },
-                    ]}>
-                    <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
-
-                        {RenderOurPeopleDP("president")}
+                {loading ?
+                    <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', marginBottom: 300 }}>
+                        <ActivityIndicator size="large" color="white" />
                     </View>
-                    <Label
-                        style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
-                            fontSize: 18,
-                        }]}>
-                        {Peoples.getPresidentInfo.name}
-                    </Label>
+                    : 
+                    <Content
+                        style={[
+                            DynamicM(0, 0, 10, 10),
+                            CommonStyles.BoxShadow,
+                            {
+                                borderTopLeftRadius: 10,
+                                borderTopRightRadius: 10,
+                                paddingLeft: 10,
+                                paddingRight: 10,
+                                backgroundColor: 'white',
+                            },
+                        ]}>
+                        
+                        {data.map(people =>
+                            <View>
+                                <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
+                                    <Image style={{ width: 240, height: 240, resizeMode: "contain", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`}} ></Image>
+                                </View>
+                                <Label
+                                    style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
+                                        fontSize: 18,
+                                    }]}>
+                                    {people.name}
+                                </Label>
+                                {people.description.map(text => 
+                                    <Text style={[{ fontSize: 13, lineHeight: 20 }]}>
+                                        {text.trim()}
+                                    </Text>
+                                )}
+                            </View>
+                        )}
 
-
-
-
-                    <Text style={{ fontSize: 13, lineHeight: 20 }}>
-                        PhD (Economics and Econometrics, Monash University),
-                    </Text>
-
-                    <Text style={{ fontSize: 13, lineHeight: 20 }}>
-                        Alfred Deakin Professor,
-                    </Text>
-
-                    <Text style={{ fontSize: 13, lineHeight: 20 }}>
-                        Deakin University,
-                    </Text>
-
-
-                    <Text style={{ fontSize: 13, lineHeight: 20 }}>
-                        Email: narayan@deakin.edu.au
-                    </Text>
-
-                    <Text style={[{ fontSize: 13, lineHeight: 20 }, DynamicM(20, 0, 0, 0)]}>
-                        Paresh Kumar Narayan is an Alfred Deakin Professor at the Deakin Business School. He is the Director of the Centre for Financial Econometrics at Deakin University. Professor Narayan is a co-Editor-in-Chief of Economic Modelling, Associate Editor of Finance Research Letters and Studies in Economics & Finance, Subject Editor of Journal of International Financial Markets Institutions and Money, and has Guest Edited the Journal of Banking & Finance and Energy Economics.
-                    </Text>
-                    <Text style={[{ fontSize: 13, lineHeight: 20 }, DynamicM(20, 0, 0, 0)]}>
-                        Professor Narayan has published extensively in financial economics, financial econometrics and applied finance, covering topics such as forecasting, trading strategies, and the performance of financial markets. He has published around 300 papers in international refereed journals with over 75% of his papers appearing in social science citation impact factor journals. Based on the Australia Business Deans Council (ABDC) journal rankings, Professor Narayan has published 30 papers in A-star journals and over 120 papers in A-ranked impact factor journals. He is ranked amongst the top-1% of the authors in Australia and amongst the top-15 Young Economists in the World by Research Papers in Economics (www.repec.com). Google Scholar counts the citation of Professor Narayan's work at over 13,000 citations, with an h-index=57, and an i10 index=202. In 2014, Professor Narayan received the Scopus Young Researcher award for the best 3 authors in Australia in the Social Science category under the age of 40. In 2015, Professor Narayan was awarded the Mahatma Gandhi Pravasi Samman Award for non-resident Indians who have made substantial contributions to the profession, including contributions to public policy. And, in 2015 he also received the Gold Medal and Citation by the Indian Econometric Society-a medal awarded to someone from around the world who is under the age of 45 and has made a substantial contribution to quantitative economics. In 2016 he won the Malaysian Government's medal and prize for the most innovative idea in Islamic finance research. Professor Narayan has been invited to several conferences and forums as a keynote speaker/invited speaker. In the last two years he has given 10 keynote speeches. Several of his recent keynote speeches have been on Islamic finance research.
-    
-                    </Text>
-
-                </Content>
+                    </Content>
+                }
             </Container >
         );
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ ourPeopleReducer }) => ({ ourPeopleReducer });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(OurPeople);
+export default connect(mapStateToProps, {})(OurPeople);

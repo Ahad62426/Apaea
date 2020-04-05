@@ -12,37 +12,37 @@ export default [
     subMenu: [
       {
         Text: 'President',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },
       {
         Text: 'Secretary',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },
       {
         Text: 'Treasurer',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },
       {
         Text: 'Vice-Presidents',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },
       {
         Text: 'Advisory Board',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },
       {
         Text: 'Resource Persons',
-        Navigation: 'Welcome',
+        Navigation: 'OurPeople',
         color: '#545454',
         cstmClass: '',
       },

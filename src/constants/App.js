@@ -1,3 +1,7 @@
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
+
+export const GET_OUR_PEOPLE = 'GET_OUR_PEOPLE';
+export const OUR_PEOPLE_SUCCESS = 'OUR_PEOPLE_SUCCESS';
+export const OUR_PEOPLE_FAILURE = 'OUR_PEOPLE_FAILURE';

@@ -219,9 +219,7 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = ({ signInReducer }) => ({
-  signInReducer
-});
+const mapStateToProps = ({ signInReducer }) => ({ signInReducer });
 
 export default connect(
   mapStateToProps, {

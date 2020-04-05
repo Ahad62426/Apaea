@@ -1,7 +1,9 @@
-export const BASE_URL = 'https://www.a-paea.org/dev/api';
+export const BASE_URL = 'https://www.a-paea.org';
+export const API_VERSION = '/dev/api';
 
 export const API_ENDPOINTS = {
     signIn: '/login',
+    ourPeople: '/governance',
 };
 
 export const NETWORK_ERROR_MSG = 'NETWORK_ERROR';

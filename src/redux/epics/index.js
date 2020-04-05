@@ -1,6 +1,8 @@
 import { combineEpics } from 'redux-observable';
 import { signInEpic } from './signInEpic';
+import { ourPeopleEpic } from './ourPeopleEpic';
 
 export const epics = combineEpics(
-    signInEpic.signIn
+    signInEpic.signIn,
+    ourPeopleEpic.ourPeople,
 );

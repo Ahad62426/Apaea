@@ -16,9 +16,13 @@ import { connect } from 'react-redux';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import DrawerMeta from '../Sidebar/DrawerMeta';
 import Home from '../../assets/Icons/Home';
-import CommonStyles, { DynamicM } from '../../components/Styles';
+import { DynamicM } from '../../components/Styles';
 import UserImg from '../ThumbNail';
 import { CSvg } from '../../components/SVGassets';
+
+import { customisedAction } from '../../redux/actions';
+import { GET_OUR_PEOPLE } from '../../constants'
+
 const deviceWidth = Dimensions.get('window').width;
 const pLeft = deviceWidth > 480 ? 15 : 15;
 const dataArray = [
@@ -211,7 +215,13 @@ class SideBar extends Component {
       <ListItem
         style={{ marginLeft: 0, borderColor: 'transparent' }}
         key={1}
-        onPress={() => { this.props.navigation.navigate(o.Navigation) }}>
+        onPress={() => {
+          if (o.Navigation === "OurPeople") {
+            this.props.customisedAction(GET_OUR_PEOPLE, o.Text);
+            this.props.navigation.closeDrawer();
+          };
+          this.props.navigation.navigate(o.Navigation, { title: o.Text })
+        }}>
         <Body
           style={{
             flexDirection: 'row',
@@ -351,16 +361,7 @@ class SideBar extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  // token: state.token,
-  // UserData: state.User.UserInfo,
-  // CmpConfigs: state.token.CmpConfigs
-});
-
-const mapDispatchToProps = dispatch => ({
-  // ChangeCompany: () => dispatch(ChangeComp()),
-  // removeUserToken: () => dispatch(removeUserToken()),
-  // reset: isyes => dispatch(reset(isyes))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
+export default connect(
+  null, {
+    customisedAction
+})(SideBar);
