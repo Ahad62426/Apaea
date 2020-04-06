@@ -8,16 +8,7 @@ export default (state = {
       return { ...state, loading: true };    
     case MY_ACCOUNT_SUCCESS:
       return { 
-        ...state, loading: false,
-        workingpaper,
-        workinhistory,
-        proofpaper,
-        proofreading,
-        reviewhistory,
-        reviewpaper,
-        members,
-        conference,
-        conferencehistory1
+        ...state, ...payload, loading: false,
       };    
     case MY_ACCOUNT__FAILURE:
       return { ...state, loading: false };
