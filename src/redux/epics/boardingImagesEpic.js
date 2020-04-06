@@ -5,9 +5,9 @@ import { ofType } from 'redux-observable';
 
 import { customisedAction } from '../actions';
 import {
-  GET_BOARDING_DATA,
-  BOARDING_DATA_SUCCESS,
-  BOARDING_DATA_FAILURE,
+  GET_BOARDING_IMAGES,
+  BOARDING_IMAGES_SUCCESS,
+  BOARDING_IMAGES_FAILURE,
   API_ENDPOINTS,
   NETWORK_ERROR_MSG,
   ERROR_MSG,
@@ -15,41 +15,41 @@ import {
 } from '../../constants';
 import { RestClient } from '../../network/RestClient';
 
-export class boardingDataEpic {
-  static boardingData = action$ =>
+export class boardingImagesEpic {
+  static boardingImages = action$ =>
     action$.pipe(
-      ofType(GET_BOARDING_DATA),
+      ofType(GET_BOARDING_IMAGES),
       switchMap(
         async () => {
           try {
-            const response = await RestClient.get(API_ENDPOINTS.boardingData);
+            const response = await RestClient.get(API_ENDPOINTS.boardingImages);
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
               if (resObj && resObj.length) {
-                return customisedAction(BOARDING_DATA_SUCCESS, resObj);
+                return customisedAction(BOARDING_IMAGES_SUCCESS, resObj);
               }
-              Alert.alert("Unable to fetch boarding data");
-              return customisedAction(BOARDING_DATA_FAILURE);
+              Alert.alert("Unable to fetch boarding images");
+              return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               if (resObj && !resObj.success) {
                 Alert.alert(resObj.message);
-                return customisedAction(BOARDING_DATA_FAILURE);
+                return customisedAction(BOARDING_IMAGES_FAILURE);
               }
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(BOARDING_DATA_FAILURE);
+              return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(BOARDING_DATA_FAILURE);
+              return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             Alert.alert(ERROR_MSG);
-            return customisedAction(BOARDING_DATA_FAILURE);
+            return customisedAction(BOARDING_IMAGES_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('SignIn Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
-            return customisedAction(BOARDING_DATA_FAILURE);
+            return customisedAction(BOARDING_IMAGES_FAILURE);
           }
         }
       )

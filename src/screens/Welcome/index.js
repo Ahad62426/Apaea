@@ -39,13 +39,6 @@ const weclomedumyData = [
 class SignIn extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      Size: 80,
-      keyboardVisible: true,
-      email: '',
-      password: '',
-      loading: true,
-    };
   }
 
   _takeMeTOLogin = () => {
@@ -86,7 +79,7 @@ class SignIn extends Component {
             <View style={[{ flex: 2 }, CommonStyles.vchb]}>
               <CLogo height={100} width={100} />
             </View>
-            {this.props.loading ?
+            {this.props.loading || this.props.loadingImages ?
               <View style={[{ flex: this.props.user ? 3 : 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                 <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
               </View>
@@ -94,7 +87,7 @@ class SignIn extends Component {
               <View style={[{ flex: 6 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                 <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                   <CCarousel
-                    list={weclomedumyData}
+                    list={this.props.sliderImages}
                     callback={ProductID => this._getProduct(ProductID)}
                     type={"image-slider"}
     
@@ -102,7 +95,7 @@ class SignIn extends Component {
                 </View>
                 <View style={[{ flex: 3, }, CommonStyles.vthc, DynamicM(5, 10, 0, 0)]}>
                   <CCarousel
-                    list={weclomedumyData}
+                    list={this.props.sliderData}
                     callback={ProductID => this._getProduct(ProductID)}
                     type={"text-slider"}
                   />
@@ -140,10 +133,9 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = ({ boardingDataReducer, sessionReducer }) => ({
-  loading: boardingDataReducer.loading,
-  aboutUs: boardingDataReducer.aboutUs,
-  user: sessionReducer.user,
+const mapStateToProps = ({ boardingDataReducer: { loading, loadingImages, sliderData, sliderImages }, sessionReducer: { user } }) => ({
+  loading, loadingImages, sliderData, sliderImages,
+  user
 });
 
 export default connect(mapStateToProps, { customisedAction })(SignIn);

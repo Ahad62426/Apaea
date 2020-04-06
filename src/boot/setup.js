@@ -7,7 +7,7 @@ import {AppContainer} from '../navigator';
 import NavigationService from '../helperMethods/navigationService';
 import store from '../redux/store';
 import SplashScreen from 'react-native-splash-screen';
-import { GET_BOARDING_DATA, SET_USER_SESSION } from '../constants';
+import { GET_BOARDING_DATA, GET_BOARDING_IMAGES, SET_USER_SESSION } from '../constants';
 import { getItem } from '../helperMethods/localstorage';
 
 export default class Setup extends Component {
@@ -15,6 +15,7 @@ export default class Setup extends Component {
   async componentDidMount() {
     SplashScreen.hide();
     store.dispatch({ type: GET_BOARDING_DATA });
+    store.dispatch({ type: GET_BOARDING_IMAGES });
 
     const session = await getItem('@UserAuth');
     if (session) store.dispatch({ type: SET_USER_SESSION, payload: session });

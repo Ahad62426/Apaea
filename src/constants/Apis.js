@@ -3,6 +3,7 @@ export const API_VERSION = '/dev/api';
 
 export const API_ENDPOINTS = {
     boardingData: '/about',
+    boardingImages: '/slider',
     signIn: '/login',
     signUp: '/register',
     session: '/user',
