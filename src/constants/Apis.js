@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
     signIn: '/login',
     signUp: '/register',
     session: '/user',
+    myaccount: '/getMyaccount',
     ourPeople: '/governance',
 };
 

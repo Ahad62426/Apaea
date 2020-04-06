@@ -3,6 +3,7 @@ import boardingDataReducer from './boardingDataReducer';
 import signInReducer from './signInReducer';
 import signUpReducer from './signUpReducer';
 import sessionReducer from './sessionReducer';
+import myAccountReducer from './myAccountReducer';
 import ourPeopleReducer from './ourPeopleReducer';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
     signInReducer,
     signUpReducer,
     sessionReducer,
+    myAccountReducer,
     ourPeopleReducer,
 });
