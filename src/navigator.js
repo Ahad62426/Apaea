@@ -29,7 +29,7 @@ import Publications from './screens/Publications';
 import Partners from './screens/Partners';
 
 
-const NoAuthNavigationsRoutes = {
+const NavigationsRoutes = {
   Welcome: {
     screen: Welcome,
     navigationOptions: {
@@ -56,66 +56,6 @@ const NoAuthNavigationsRoutes = {
     navigationOptions: {
       headerMode: 'none',
       gesturesEnabled: false,
-    },
-  },
-  AboutUs: {
-    screen: AboutUs,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  OurPeople: {
-    screen: OurPeople,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  ContactUs: {
-    screen: ContactUs,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  Partners: {
-    screen: Partners,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  Events: {
-    screen: Events,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  FAQ: {
-    screen: FAQ,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-};
-
-const NavigationsRoutes = {
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      header: null,
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        headerMode: 'none',
-        gesturesEnabled: false,
-      },
     },
   },
   AboutUs: {
@@ -181,19 +121,26 @@ const NavigationsRoutes = {
       gesturesEnabled: false,
     },
   },
+  Dashboard: {
+    screen: Dashboard,
+    navigationOptions: {
+      header: null,
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: {
+        headerMode: 'none',
+        gesturesEnabled: false,
+      },
+    },
+  },
 };
 
-const NoAuthDrawer = createDrawerNavigator(NoAuthNavigationsRoutes, {
-  initialRouteName: 'Welcome',
-  overlayColor: '#0000002e',
-  contentComponent: props => <SideBar {...props} />,
-});
-NoAuthDrawer.navigationOptions = {
-  header: null,
-};
 
 const Drawer = createDrawerNavigator(NavigationsRoutes, {
-  initialRouteName: 'Dashboard',
+  initialRouteName: 'Welcome',
   overlayColor: '#0000002e',
   contentComponent: props => <SideBar {...props} />,
 });
@@ -240,8 +187,7 @@ export const AuthStack = createStackNavigator(
 
 export const AppNavigator = createSwitchNavigator(
   {
-    App: NoAuthDrawer,
-    Drawer: Drawer,
+    App: Drawer,
     Auth: AuthStack,
   },
   {

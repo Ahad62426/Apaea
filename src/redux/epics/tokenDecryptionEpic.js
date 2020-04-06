@@ -28,7 +28,7 @@ export class tokenDecryptionEpic {
             if (status && status === 200) {
               if (resObj && resObj.user) {
                 const { user } = resObj;
-                NavigationService.navigate('Drawer')
+                NavigationService.navigate('Welcome')
                 await setItem('@UserAuth', user);
                 return customisedAction(TOKEN_DECRYPTION_SUCCESS, user);
               }

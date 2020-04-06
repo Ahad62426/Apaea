@@ -67,7 +67,7 @@ class MasterHeader extends Component {
                 <Button transparent style={[CommonStyles.backbtn, { marginRight: 10 }]} onPress={async () => {
                     await removeItem('@UserAuth');
                     this.props.customisedAction(SIGN_OUT);
-                    NavigationService.navigate('App');
+                    NavigationService.navigate('Welcome');
                 }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     <Icon type="FontAwesome" name='power-off' style={{ fontSize: 16 }} />
                 </Button>

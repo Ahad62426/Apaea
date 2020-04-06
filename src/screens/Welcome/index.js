@@ -11,10 +11,9 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import { connect } from 'react-redux';
 import { CLogo, LoadingButton, } from '../../components/Utilities';
-import { getItem } from '../../helperMethods/localstorage';
 import { CCarousel } from '../../components/Carousel';
 import { customisedAction } from '../../redux/actions';
-import { SET_USER_SESSION } from '../../constants'
+import { BOARDING_DATA_SUCCESS } from '../../constants'
 
 const weclomedumyData = [
   {
@@ -46,17 +45,7 @@ class SignIn extends Component {
       email: '',
       password: '',
       loading: true,
-      validatingSession: true,
     };
-  }
-
-  async componentDidMount() {
-    const session = await getItem('@UserAuth');
-    if (session) {
-      this.props.customisedAction(SET_USER_SESSION, session);
-      this.props.navigation.navigate('Drawer');
-      setTimeout(() => this.setState({ validatingSession: false }), 1000);
-    } else this.setState({ validatingSession: false });
   }
 
   _takeMeTOLogin = () => {
@@ -85,7 +74,6 @@ class SignIn extends Component {
           }}
           Screen={'Welcome to A-PAEA'}
         />
-        {this.state.validatingSession ?
           <View
             style={[
               {
@@ -98,68 +86,62 @@ class SignIn extends Component {
             <View style={[{ flex: 2 }, CommonStyles.vchb]}>
               <CLogo height={100} width={100} />
             </View>
-            
-          </View> :
-          <View
-            style={[
-              {
-                backgroundColor: TColors.bgSecondary,
-                flex: 1,
-              },
-              CommonStyles.vhc,
-              DynamicP(20, 20, 20, 20),
-            ]}>
-            <View style={[{ flex: 2 }, CommonStyles.vchb]}>
-              <CLogo height={100} width={100} />
-            </View>
-            <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
-              <CCarousel
-                list={this.props.welcomeData}
-                callback={ProductID => this._getProduct(ProductID)}
-                type={"image-slider"}
+            {this.props.loading ?
+              <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
+              : 
+              <View style={[{ flex: 6 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                  <CCarousel
+                    list={weclomedumyData}
+                    callback={ProductID => this._getProduct(ProductID)}
+                    type={"image-slider"}
+    
+                  />
+                </View>
+                <View style={[{ flex: 3, }, CommonStyles.vthc, DynamicM(5, 10, 0, 0)]}>
+                  <CCarousel
+                    list={weclomedumyData}
+                    callback={ProductID => this._getProduct(ProductID)}
+                    type={"text-slider"}
+                  />
+                </View>
+              </View>
+            }
+            {this.props.user ? null :
+              <View style={[{ flex: 2, width: "80%" }, CommonStyles.vchb]}>
+                <LoadingButton
+                  isBlock={true}
+                  submitting={false}
+                  rounded={true}
+                  loaderColor={'white'}
+                  textColor={"white"}
+                  btnText={'Login'}
+                  style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.primaryColor }]}
+                  callback={() => this._takeMeTOLogin()}
+                />
+                <LoadingButton
+                  isBlock={true}
+                  submitting={false}
+                  rounded={true}
+                  textColor={"white"}
 
-              />
-            </View>
-            <View style={[{ flex: 3, }, CommonStyles.vthc, DynamicM(5, 10, 0, 0)]}>
-              <CCarousel
-                list={this.props.welcomeData}
-                callback={ProductID => this._getProduct(ProductID)}
-                type={"text-slider"}
-              />
-            </View>
-            <View style={[{ flex: 2, width: "80%" }, CommonStyles.vchb]}>
-              <LoadingButton
-                isBlock={true}
-                submitting={false}
-                rounded={true}
-                loaderColor={'white'}
-                textColor={"white"}
-                btnText={'Login'}
-                style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.primaryColor }]}
-                callback={() => this._takeMeTOLogin()}
-              />
-              <LoadingButton
-                isBlock={true}
-                submitting={false}
-                rounded={true}
-                textColor={"white"}
-
-                loaderColor={'white'}
-                btnText={'Create Account'}
-                style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderColor: "white", borderWidth: 1 }]}
-                callback={() => this._takeMeTOSignUp()}
-              />
-            </View>
+                  loaderColor={'white'}
+                  btnText={'Create Account'}
+                  style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderColor: "white", borderWidth: 1 }]}
+                  callback={() => this._takeMeTOSignUp()}
+                />
+              </View>
+            }
           </View>
-        }
-
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  welcomeData: weclomedumyData,
+const mapStateToProps = ({ boardingDataReducer, sessionReducer }) => ({
+  loading: boardingDataReducer.loading,
+  aboutUs: boardingDataReducer.aboutUs,
+  user: sessionReducer.user,
 });
 
 export default connect(mapStateToProps, { customisedAction })(SignIn);
