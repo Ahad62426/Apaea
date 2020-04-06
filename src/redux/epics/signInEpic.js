@@ -28,19 +28,11 @@ export class signInEpic {
             });
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.success) {
-                const { token } = resObj;
-                return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_IN_FAILURE });
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_IN_FAILURE);
+              const { token } = resObj;
+              return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_IN_FAILURE });
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                Alert.alert(resObj.message);
-                return customisedAction(SIGN_IN_FAILURE);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(resObj.message);
               return customisedAction(SIGN_IN_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

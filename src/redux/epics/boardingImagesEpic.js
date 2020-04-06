@@ -25,18 +25,10 @@ export class boardingImagesEpic {
             const response = await RestClient.get(API_ENDPOINTS.boardingImages);
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.length) {
-                return customisedAction(BOARDING_IMAGES_SUCCESS, resObj);
-              }
-              Alert.alert("Unable to fetch boarding images");
-              return customisedAction(BOARDING_IMAGES_FAILURE);
+              return customisedAction(BOARDING_IMAGES_SUCCESS, resObj);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                Alert.alert(resObj.message);
-                return customisedAction(BOARDING_IMAGES_FAILURE);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(resObj.message);
               return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

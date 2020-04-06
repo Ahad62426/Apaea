@@ -25,18 +25,10 @@ export class boardingDataEpic {
             const response = await RestClient.get(API_ENDPOINTS.boardingData);
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.length) {
-                return customisedAction(BOARDING_DATA_SUCCESS, resObj);
-              }
-              Alert.alert("Unable to fetch boarding data");
-              return customisedAction(BOARDING_DATA_FAILURE);
+              return customisedAction(BOARDING_DATA_SUCCESS, resObj);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                Alert.alert(resObj.message);
-                return customisedAction(BOARDING_DATA_FAILURE);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(resObj.message);
               return customisedAction(BOARDING_DATA_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

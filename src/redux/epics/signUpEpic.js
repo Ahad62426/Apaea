@@ -25,25 +25,17 @@ export class signUpEpic {
             const response = await RestClient.post(API_ENDPOINTS.signUp, payload);
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.success) {
-                const { token } = resObj;
-                return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_UP_FAILURE });
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_UP_FAILURE);
+              const { token } = resObj;
+              return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_UP_FAILURE });
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                if (resObj.name) Alert.alert(resObj.name[0]);
-                else if (resObj.email) Alert.alert(resObj.email[0]);
-                else if (resObj.password) Alert.alert(resObj.password[0]);
-                else if (resObj.role) Alert.alert(resObj.role[0]);
-                else if (resObj.memtype) Alert.alert(resObj.memtype[0]);
-                else if (resObj.message) Alert.alert(resObj.message);
-                else Alert.alert(status, UNKNOWN_ERROR_MSG);
-                return customisedAction(SIGN_UP_FAILURE);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              if (resObj.name) Alert.alert(resObj.name[0]);
+              else if (resObj.email) Alert.alert(resObj.email[0]);
+              else if (resObj.password) Alert.alert(resObj.password[0]);
+              else if (resObj.role) Alert.alert(resObj.role[0]);
+              else if (resObj.memtype) Alert.alert(resObj.memtype[0]);
+              else if (resObj.message) Alert.alert(resObj.message);
+              else Alert.alert(status, UNKNOWN_ERROR_MSG);
               return customisedAction(SIGN_UP_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

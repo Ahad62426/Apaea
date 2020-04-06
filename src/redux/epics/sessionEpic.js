@@ -26,21 +26,13 @@ export class sessionEpic {
             const response = await RestClient.get(API_ENDPOINTS.session, { token });
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.user) {
-                const { user } = resObj;
-                NavigationService.navigate('Welcome')
-                await setItem('@UserAuth', user);
-                return customisedAction(SET_USER_SESSION, user);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(failure_action);
+              const { user } = resObj;
+              NavigationService.navigate('Welcome')
+              await setItem('@UserAuth', user);
+              return customisedAction(SET_USER_SESSION, user);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                Alert.alert(resObj.message);
-                return customisedAction(failure_action);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(resObj.message);
               return customisedAction(failure_action);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

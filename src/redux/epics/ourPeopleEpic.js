@@ -25,18 +25,10 @@ export class ourPeopleEpic {
             const response = await RestClient.get(`${API_ENDPOINTS.ourPeople}/${payload.toLowerCase().replace(' ', '-')}`);
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
-              if (resObj && resObj.length) {
-                return customisedAction(OUR_PEOPLE_SUCCESS, resObj);
-              }
-              Alert.alert("No Data Available");
-              return customisedAction(OUR_PEOPLE_FAILURE);
+              return customisedAction(OUR_PEOPLE_SUCCESS, resObj);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-              if (resObj && !resObj.success) {
-                Alert.alert(resObj.message);
-                return customisedAction(OUR_PEOPLE_FAILURE);
-              }
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(resObj.message);
               return customisedAction(OUR_PEOPLE_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {

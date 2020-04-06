@@ -24,13 +24,12 @@ export class myAccountEpic {
           try {
             const response = await RestClient.get(API_ENDPOINTS.myaccount, { id, email, type: memtype });
             const { status, data: resObj, problem } = response;
-            
             if (status && status === 200) {
-                return customisedAction(MY_ACCOUNT_SUCCESS, resObj);
+              return customisedAction(MY_ACCOUNT_SUCCESS, resObj);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
-                Alert.alert(resObj.message);
-                return customisedAction(MY_ACCOUNT__FAILURE);
+              Alert.alert(resObj.message);
+              return customisedAction(MY_ACCOUNT__FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
               Alert.alert(NETWORK_ERROR_MSG);
