@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import { CLogo, LoadingButton, } from '../../components/Utilities';
 import { getItem } from '../../helperMethods/localstorage';
 import { CCarousel } from '../../components/Carousel';
+import { customisedAction } from '../../redux/actions';
+import { SET_TOKEN } from '../../constants'
 
 const weclomedumyData = [
   {
@@ -51,6 +53,7 @@ class SignIn extends Component {
   async componentDidMount() {
     const session = await getItem('@UserAuth');
     if (session) {
+      this.props.customisedAction(SET_TOKEN, session);
       this.props.navigation.navigate('Drawer');
       setTimeout(() => this.setState({ validatingSession: false }), 1000);
     } else this.setState({ validatingSession: false });
@@ -94,7 +97,6 @@ class SignIn extends Component {
             ]}>
             <View style={[{ flex: 2 }, CommonStyles.vchb]}>
               <CLogo height={100} width={100} />
-              <ActivityIndicator size="large" color="white" />
             </View>
             
           </View> :
@@ -160,4 +162,4 @@ const mapStateToProps = state => ({
   welcomeData: weclomedumyData,
 });
 
-export default connect(mapStateToProps, {})(SignIn);
+export default connect(mapStateToProps, { customisedAction })(SignIn);

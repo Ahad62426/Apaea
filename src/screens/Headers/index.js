@@ -7,7 +7,10 @@ import CommonStyles, {
     TColors
 } from '../../components/Styles';
 import Menu from '../../assets/Icons/menuSVG';
-import { CLogo } from '../../components/Utilities'
+import NavigationService from '../../helperMethods/navigationService';
+import { removeItem } from '../../helperMethods/localstorage';
+import { customisedAction } from '../../redux/actions';
+import { SIGN_OUT } from '../../constants'
 
 //endregion
 
@@ -59,16 +62,20 @@ class MasterHeader extends Component {
     }
 
     _getPowerOffBtn() {
-        if (this.props.isLogout) {
+        if (this.props.sessionReducer.token) {
             return (
-                <Button transparent style={CommonStyles.backbtn} onPress={this.props.Logout} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
+                <Button transparent style={[CommonStyles.backbtn, { marginRight: 10 }]} onPress={async () => {
+                    await removeItem('@UserAuth');
+                    this.props.customisedAction(SIGN_OUT);
+                    NavigationService.navigate('App');
+                }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     <Icon type="FontAwesome" name='power-off' style={{ fontSize: 16 }} />
                 </Button>
             )
         }
     }
     _getProfileIcon() {
-        if (this.props.isProfile) {
+        if (this.props.sessionReducer.token) {
             return (
                 <Button transparent style={[CommonStyles.backbtn]} onPress={this.props.GoProfile} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     <Image style={{ height: 25, width: 25, resizeMode: "contain", alignSelf: "center" }} source={require('../../assets/Icons/account.png')}></Image>
@@ -92,7 +99,7 @@ class MasterHeader extends Component {
 
                 </Body>
                 <Right style={[{ flex: 2 }]}>
-                    {/* {this._getPowerOffBtn()} */}
+                    {this._getPowerOffBtn()}    
                     {this._getProfileIcon()}
                 </Right>
             </Header>
@@ -100,12 +107,6 @@ class MasterHeader extends Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = ({ sessionReducer }) => ({ sessionReducer });
 
-});
-
-
-const mapDispatchToProps = dispatch => ({
-
-});
-export default connect(mapStateToProps, mapDispatchToProps)(MasterHeader);
+export default connect(mapStateToProps, { customisedAction })(MasterHeader);
