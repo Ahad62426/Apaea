@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { Container } from 'native-base';
 import CommonStyles, {
   DynamicP,
@@ -44,13 +44,12 @@ class SignIn extends Component {
       email: '',
       password: '',
       loading: true,
-      submitting: true,
       validatingSession: true,
     };
   }
 
   async componentDidMount() {
-    const session = null // await getItem('@UserAuth');
+    const session = await getItem('@UserAuth');
     if (session) {
       this.props.navigation.navigate('Drawer');
       setTimeout(() => this.setState({ validatingSession: false }), 1000);
@@ -95,6 +94,7 @@ class SignIn extends Component {
             ]}>
             <View style={[{ flex: 2 }, CommonStyles.vchb]}>
               <CLogo height={100} width={100} />
+              <ActivityIndicator size="large" color="white" />
             </View>
             
           </View> :
@@ -128,7 +128,7 @@ class SignIn extends Component {
             <View style={[{ flex: 2, width: "80%" }, CommonStyles.vchb]}>
               <LoadingButton
                 isBlock={true}
-                submitting={this.state.submitting}
+                submitting={false}
                 rounded={true}
                 loaderColor={'white'}
                 textColor={"white"}
@@ -138,7 +138,7 @@ class SignIn extends Component {
               />
               <LoadingButton
                 isBlock={true}
-                submitting={this.state.submitting}
+                submitting={false}
                 rounded={true}
                 textColor={"white"}
 

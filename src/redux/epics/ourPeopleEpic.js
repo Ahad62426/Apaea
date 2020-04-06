@@ -47,7 +47,7 @@ export class ourPeopleEpic {
             return customisedAction(OUR_PEOPLE_FAILURE, null);
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log('Login Unknown Error', error);
+            console.log('OurPeople Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
             return customisedAction(OUR_PEOPLE_FAILURE, null);
           }

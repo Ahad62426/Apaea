@@ -35,8 +35,6 @@ class SignUp extends Component {
       codesent: false,
       verificationCode: '123456',
       loading: true,
-      submitting: true,
-
     };
   }
 
@@ -200,7 +198,7 @@ class SignUp extends Component {
 
             <LoadingButton
               isBlock={true}
-              submitting={this.state.submitting}
+              submitting={false}
               rounded={true}
               loaderColor={'white'}
               textColor="white"
@@ -215,7 +213,7 @@ class SignUp extends Component {
             </View>
             <LoadingButton
               isBlock={true}
-              submitting={this.state.submitting}
+              submitting={false}
               rounded={true}
               loaderColor={'white'}
               textColor="black"

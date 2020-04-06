@@ -3,6 +3,7 @@ export const API_VERSION = '/dev/api';
 
 export const API_ENDPOINTS = {
     signIn: '/login',
+    signUp: '/register',
     ourPeople: '/governance',
 };
 

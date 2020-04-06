@@ -1,71 +1,76 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import {
     Container,
-    Drawer,
-    Button,
-    Icon,
     Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
     Form,
     Item,
     Input,
-    Label,
     Textarea,
-    Text,
 } from 'native-base';
-import SideBar from '../Sidebar';
 import { TColors, DynamicWidth, DynamicFntSize } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
 import { LoadingButton } from '../../components/Utilities';
-import IonIcons from 'react-native-vector-icons/Entypo';
 
-import CommonStyles, {
-    DynamicP,
-    DynamicFntW,
-    DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicBDRadius,
-    DynamicBorderPosition,
-} from '../../components/Styles';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
-
-//endregion
+import CommonStyles, { DynamicP, DynamicM } from '../../components/Styles';
+import { customisedAction } from '../../redux/actions';
+import { SIGN_UP } from '../../constants'
 
 class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            submitting: true,
+            firstName: 'usamaali',
+            lastName: 'shah',
+            email: 'check@gmail.com',
+            password: 'password',
+            memtype: '',
+            address: 'Karachi',
+            title: 'Research',
+            website: 'http://technexpaksolution.com/',
+            city: 'Karachi',
+            state: 'Pakistan',
+            zipcode: '610000',
+            phone: '03133245587',
+            insitute: 'Mehran',
         };
     }
     
     componentDidMount() {
-        console.log(this.state.memtype)
         const { memtype } = this.props.navigation.state.params;
-        this.setState({ memtype }, () => console.log(this.state.memtype));
+        this.setState({ memtype });
+    }
+
+
+    submit = () => {
+      const { firstName, lastName, email, password, memtype, address, title, website, city, state, zipcode, phone, insitute } = this.state;
+      this.props.customisedAction(SIGN_UP, {
+        name: firstName+' '+lastName,
+        email,
+        role: 'member',
+        password,
+        memtype,
+        address,
+        title,
+        website,
+        city,
+        state,
+        zipcode,
+        phone,
+        insitute
+      });
     }
 
     _takeMeTOWelcome = () => {
         this.props.navigation.navigate('Welcome');
     };
 
-    _showAlert(title, msg, btn) {
-        Alert.alert(title, msg, [
-            { text: btn == null ? 'Okay' : btn, onPress: () => { } },
-        ]);
-    }
-
     render() {
+        const { firstName, lastName, email, password, address, title, website, city, state, zipcode, phone, insitute } = this.state;
+        const { loading } = this.props.signUpReducer;
         return (
             <Container
                 style={{
@@ -102,38 +107,66 @@ class Registration extends Component {
 
                     <Form style={[DynamicM(0, 10, 0, 0), DynamicP(10, 5, 5, 5)]}>
                      
-                    <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="First Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                        <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
+                            <Input placeholder="First Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={firstName}
+                                onChangeText={value => this.setState({ firstName: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="First Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="Last Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={lastName}
+                                onChangeText={value => this.setState({ lastName: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-
-                            <Input placeholder="Last Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="Title" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={title}
+                                onChangeText={value => this.setState({ title: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="Title" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="Institute" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={insitute}
+                                onChangeText={value => this.setState({ insitute: value })}
+                            />
                         </Item>
-                      
+                        <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
+                            <Input placeholder="Website" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={website}
+                                onChangeText={value => this.setState({ website: value })}
+                            />
+                        </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                             <Textarea style={[CommonStyles.inputRadius, DynamicP(10, 10, 10, 10), DynamicWidth("100%")
-                                , { alignSelf: "flex-start" }]} rowSpan={4} bordered placeholder="Address" />
+                                , { alignSelf: "flex-start" }]} rowSpan={4} bordered placeholder="Address"
+                                value={address}
+                                onChangeText={value => this.setState({ address: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="Institute" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="City" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={city}
+                                onChangeText={value => this.setState({ city: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="City" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="State" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={state}
+                                onChangeText={value => this.setState({ state: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="State" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="Zip" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={zipcode}
+                                onChangeText={value => this.setState({ zipcode: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="Zip" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
-                        </Item>
-                        <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                            <Input placeholder="Phone Number" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]} />
+                            <Input placeholder="Phone Number" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                value={phone}
+                                onChangeText={value => this.setState({ phone: value })}
+                            />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                             <Input style={[
@@ -144,6 +177,8 @@ class Registration extends Component {
                                 DynamicFntSize(15)
                             ]}
                             placeholder="Email Address"
+                            value={email}
+                            onChangeText={value => this.setState({ email: value })}
                             />
                         </Item>
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(5, 5, 0, 0)]}  >
@@ -155,11 +190,13 @@ class Registration extends Component {
                                 CommonStyles.inputBgColor,
                                 DynamicFntSize(15)
                             ]} 
+                            value={password}
+                            onChangeText={value => this.setState({ password: value })}
                             placeholder="Password"/>
                         </Item>
                         <LoadingButton
                             isBlock={true}
-                            submitting={this.state.submitting}
+                            submitting={loading}
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
@@ -169,7 +206,7 @@ class Registration extends Component {
                                 backgroundColor: TColors.bgSecondary,
                                 
                             }]}
-                            callback={() => this._takeMeTOWelcome()}
+                            callback={() => this.submit()}
                         />
                     </Form>
 
@@ -179,8 +216,6 @@ class Registration extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ signUpReducer }) => ({ signUpReducer });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default connect( mapStateToProps, { customisedAction })(Registration);

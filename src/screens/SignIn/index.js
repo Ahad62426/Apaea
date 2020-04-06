@@ -25,7 +25,6 @@ class SignIn extends Component {
       codesent: false,
       verificationCode: '123456',
       loading: true,
-      submitting: true,
       email: 'check@gmail.com',
       isUserNameValid: false,
       isUserNameInValid: false,
@@ -181,19 +180,16 @@ class SignIn extends Component {
 
             </View>
             <View style={[{ flex: 5, flexDirection: "column", }]}>
-              {!this.props.signInReducer.loading ?
-                <LoadingButton
-                  isBlock={true}
-                  submitting={this.state.submitting}
-                  rounded={true}
-                  loaderColor={'white'}
-                  textColor="black"
-                  btnText={'Login'}
-                  style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
-                  callback={() => this.submit()}
-                /> :
-                <ActivityIndicator size="large" color="white" />
-              }
+              <LoadingButton
+                isBlock={true}
+                submitting={this.props.signInReducer.loading}
+                rounded={true}
+                loaderColor={'white'}
+                textColor="black"
+                btnText={'Login'}
+                style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
+                callback={() => this.submit()}
+              />
               <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
                 <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
                 <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>or</Text>
@@ -201,7 +197,7 @@ class SignIn extends Component {
               </View>
               <LoadingButton
                 isBlock={true}
-                submitting={this.state.submitting}
+                submitting={this.props.signInReducer.loading}
                 rounded={true}
                 loaderColor={'white'}
                 textColor="white"
