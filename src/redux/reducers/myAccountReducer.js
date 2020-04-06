@@ -1,8 +1,6 @@
 import { GET_MY_ACCOUNT, MY_ACCOUNT_SUCCESS, MY_ACCOUNT__FAILURE } from '../../constants'
 
-export default (state = {
-  loading: false, workingpaper: [], workinhistory: [], proofpaper: [], proofreading: [], reviewhistory: [], reviewpaper: [], members: [], conference: null, conferencehistory1: []
-}, { type, payload }) => {
+export default (state = {}, { type, payload }) => {
   switch (type) {
     case GET_MY_ACCOUNT:
       return { ...state, loading: true };    
