@@ -14,6 +14,7 @@ import {
     Label,
     Text,
 } from 'native-base';
+import HTML from 'react-native-render-html';
 import SideBar from '../Sidebar';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
@@ -48,22 +49,10 @@ class OurPeople extends Component {
         };
     }
 
-    componentDidMount() {
-        console.log(this.props.navigation.state.params);
-    }
-
-    componentDidUpdate() {
-        console.log(this.props.ourPeopleReducer);
-    }
-
-    renderContent = () => {
-        const { data } = this.props.ourPeopleReducer;
-        
-    };
-
 
     render() {
         const { loading, data } = this.props.ourPeopleReducer;
+        debugger;
         return (
             <Container
                 style={{
@@ -103,20 +92,19 @@ class OurPeople extends Component {
                         
                         {data.map(people =>
                             <View>
-                                <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
-                                    <Image style={{ width: 240, height: 240, resizeMode: "contain", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`}} ></Image>
-                                </View>
+                                {people.image.includes('.') ?
+                                    <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
+                                        <Image style={{ width: 240, height: 240, resizeMode: "contain", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`}} ></Image>
+                                    </View>
+                                    : null
+                                }
                                 <Label
                                     style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
                                         fontSize: 18,
                                     }]}>
                                     {people.name}
                                 </Label>
-                                {people.description.map(text => 
-                                    <Text style={[{ fontSize: 13, lineHeight: 20 }]}>
-                                        {text.trim()}
-                                    </Text>
-                                )}
+                                <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '')} />
                             </View>
                         )}
 

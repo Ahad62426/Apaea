@@ -221,7 +221,4 @@ class SignIn extends Component {
 
 const mapStateToProps = ({ signInReducer }) => ({ signInReducer });
 
-export default connect(
-  mapStateToProps, {
-    customisedAction
-})(SignIn);
+export default connect( mapStateToProps, { customisedAction })(SignIn);

@@ -26,12 +26,7 @@ export class ourPeopleEpic {
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
               if (resObj && resObj.length) {
-                const parsedData = resObj.map(data => {
-                  const tempData = data;
-                  tempData.description = parseStringToArray(tempData.description);
-                  return tempData
-                });
-                return customisedAction(OUR_PEOPLE_SUCCESS, parsedData);
+                return customisedAction(OUR_PEOPLE_SUCCESS, resObj);
               }
               Alert.alert("No Data Available");
               return customisedAction(OUR_PEOPLE_FAILURE, null);
@@ -59,19 +54,4 @@ export class ourPeopleEpic {
         }
       )
     );
-}
-
-const parseStringToArray = string => {
-  let newString = string.replace('\r\n', '').replace(/\n/ig, '');
-  newString = newString.split('<br>');
-
-  newString = newString.map(text => {
-    if (text.includes('<p>') && text.includes('</p>')) {
-
-    } else text = text.replace('<p>', '').replace('</p>', '');
-
-    // if (text.includes())
-    return text;
-  })
-  return newString;
 }

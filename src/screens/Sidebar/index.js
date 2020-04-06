@@ -361,7 +361,4 @@ class SideBar extends Component {
   }
 }
 
-export default connect(
-  null, {
-    customisedAction
-})(SideBar);
+export default connect( null, { customisedAction })(SideBar);
