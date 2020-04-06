@@ -7,7 +7,7 @@ import { setItem } from '../../helperMethods/localstorage';
 import { customisedAction } from '../actions';
 import {
   SIGN_IN_SUCCESS,
-  TOKEN_DECRYPTION_SUCCESS,
+  SET_USER_SESSION,
   API_ENDPOINTS,
   NETWORK_ERROR_MSG,
   ERROR_MSG,
@@ -30,7 +30,7 @@ export class sessionEpic {
                 const { user } = resObj;
                 NavigationService.navigate('Welcome')
                 await setItem('@UserAuth', user);
-                return customisedAction(TOKEN_DECRYPTION_SUCCESS, user);
+                return customisedAction(SET_USER_SESSION, user);
               }
               Alert.alert(NETWORK_ERROR_MSG);
               return customisedAction(failure_action);

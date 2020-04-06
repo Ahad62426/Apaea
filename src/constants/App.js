@@ -13,8 +13,6 @@ export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
-export const TOKEN_DECRYPTION_SUCCESS = 'TOKEN_DECRYPTION_SUCCESS';
-
 export const SET_USER_SESSION = 'SET_USER_SESSION';
 export const SIGN_OUT = 'SIGN_OUT';
 
