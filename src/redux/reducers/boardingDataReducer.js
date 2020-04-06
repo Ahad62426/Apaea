@@ -28,7 +28,7 @@ export default (state = { loading: false, loadingImages: false, aboutUs: null, s
       const newSliderImages = [];
       newSliderImages.push(payload[5])
       newSliderImages.push(payload[4])
-      newSliderImages.push(payload[6])
+      newSliderImages.push(payload[3])
       return {
         ...state, loadingImages: false,
         sliderImages: newSliderImages,
