@@ -14,7 +14,7 @@ import { CLogo, LoadingButton, } from '../../components/Utilities';
 import { getItem } from '../../helperMethods/localstorage';
 import { CCarousel } from '../../components/Carousel';
 import { customisedAction } from '../../redux/actions';
-import { SET_TOKEN } from '../../constants'
+import { SET_USER_SESSION } from '../../constants'
 
 const weclomedumyData = [
   {
@@ -53,7 +53,7 @@ class SignIn extends Component {
   async componentDidMount() {
     const session = await getItem('@UserAuth');
     if (session) {
-      this.props.customisedAction(SET_TOKEN, session);
+      this.props.customisedAction(SET_USER_SESSION, session);
       this.props.navigation.navigate('Drawer');
       setTimeout(() => this.setState({ validatingSession: false }), 1000);
     } else this.setState({ validatingSession: false });

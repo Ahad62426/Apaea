@@ -11,7 +11,7 @@ export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
 
 export const TOKEN_DECRYPTION_SUCCESS = 'TOKEN_DECRYPTION_SUCCESS';
 
-export const SET_TOKEN = 'SET_TOKEN';
+export const SET_USER_SESSION = 'SET_USER_SESSION';
 export const SIGN_OUT = 'SIGN_OUT';
 
 export const GET_OUR_PEOPLE = 'GET_OUR_PEOPLE';
