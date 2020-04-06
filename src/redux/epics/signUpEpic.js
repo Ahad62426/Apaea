@@ -30,7 +30,7 @@ export class signUpEpic {
                 return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_UP_FAILURE });
               }
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_UP_FAILURE, null);
+              return customisedAction(SIGN_UP_FAILURE);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               if (resObj && !resObj.success) {
@@ -41,22 +41,22 @@ export class signUpEpic {
                 else if (resObj.memtype) Alert.alert(resObj.memtype[0]);
                 else if (resObj.message) Alert.alert(resObj.message);
                 else Alert.alert(status, UNKNOWN_ERROR_MSG);
-                return customisedAction(SIGN_UP_FAILURE, null);
+                return customisedAction(SIGN_UP_FAILURE);
               }
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_UP_FAILURE, null);
+              return customisedAction(SIGN_UP_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_UP_FAILURE, null);
+              return customisedAction(SIGN_UP_FAILURE);
             }
             Alert.alert(ERROR_MSG);
-            return customisedAction(SIGN_UP_FAILURE, null);
+            return customisedAction(SIGN_UP_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('SignUp Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
-            return customisedAction(SIGN_UP_FAILURE, null);
+            return customisedAction(SIGN_UP_FAILURE);
           }
         }
       )

@@ -52,7 +52,6 @@ class OurPeople extends Component {
 
     render() {
         const { loading, data } = this.props.ourPeopleReducer;
-        debugger;
         return (
             <Container
                 style={{

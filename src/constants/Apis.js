@@ -2,9 +2,10 @@ export const BASE_URL = 'https://www.a-paea.org';
 export const API_VERSION = '/dev/api';
 
 export const API_ENDPOINTS = {
+    boardingData: '/about',
     signIn: '/login',
     signUp: '/register',
-    tokenDecryption: '/user',
+    session: '/user',
     ourPeople: '/governance',
 };
 

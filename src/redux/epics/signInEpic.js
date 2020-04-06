@@ -33,27 +33,27 @@ export class signInEpic {
                 return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_IN_FAILURE });
               }
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_IN_FAILURE, null);
+              return customisedAction(SIGN_IN_FAILURE);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               if (resObj && !resObj.success) {
                 Alert.alert(resObj.message);
-                return customisedAction(SIGN_IN_FAILURE, null);
+                return customisedAction(SIGN_IN_FAILURE);
               }
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_IN_FAILURE, null);
+              return customisedAction(SIGN_IN_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
               Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(SIGN_IN_FAILURE, null);
+              return customisedAction(SIGN_IN_FAILURE);
             }
             Alert.alert(ERROR_MSG);
-            return customisedAction(SIGN_IN_FAILURE, null);
+            return customisedAction(SIGN_IN_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('SignIn Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
-            return customisedAction(SIGN_IN_FAILURE, null);
+            return customisedAction(SIGN_IN_FAILURE);
           }
         }
       )

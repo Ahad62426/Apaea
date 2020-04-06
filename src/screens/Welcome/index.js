@@ -87,7 +87,9 @@ class SignIn extends Component {
               <CLogo height={100} width={100} />
             </View>
             {this.props.loading ?
-              <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
+              <View style={[{ flex: this.props.user ? 3 : 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
+              </View>
               : 
               <View style={[{ flex: 6 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                 <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
