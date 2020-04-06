@@ -1,13 +1,13 @@
-import { SET_TOKEN, SIGN_IN_SUCCESS, SIGN_OUT } from '../../constants'
+import { SET_TOKEN, TOKEN_DECRYPTION_SUCCESS, SIGN_OUT } from '../../constants'
 
-export default (state = { token: null }, { type, payload }) => {
+export default (state = { user: null }, { type, payload }) => {
   switch (type) {
     case SET_TOKEN:
-      return { ...state, token: payload };    
-    case SIGN_IN_SUCCESS:
-      return { ...state, token: payload };    
+      return { ...state, user: payload };    
+    case TOKEN_DECRYPTION_SUCCESS:
+      return { ...state, user: payload };    
     case SIGN_OUT:
-      return { ...state, token: null };
+      return { ...state, user: null };
     default:
       return state;
   }

@@ -1,9 +1,15 @@
+export const GET_BOARDING_DATA = 'GET_BOARDING_DATA';
+export const BOARDING_DATA_SUCCESS = 'BOARDING_DATA_SUCCESS';
+export const BOARDING_DATA_FAILURE = 'BOARDING_DATA_FAILURE';
+
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+
+export const TOKEN_DECRYPTION_SUCCESS = 'TOKEN_DECRYPTION_SUCCESS';
 
 export const SET_TOKEN = 'SET_TOKEN';
 export const SIGN_OUT = 'SIGN_OUT';

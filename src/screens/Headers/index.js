@@ -62,7 +62,7 @@ class MasterHeader extends Component {
     }
 
     _getPowerOffBtn() {
-        if (this.props.sessionReducer.token) {
+        if (this.props.user) {
             return (
                 <Button transparent style={[CommonStyles.backbtn, { marginRight: 10 }]} onPress={async () => {
                     await removeItem('@UserAuth');
@@ -75,7 +75,7 @@ class MasterHeader extends Component {
         }
     }
     _getProfileIcon() {
-        if (this.props.sessionReducer.token) {
+        if (this.props.user) {
             return (
                 <Button transparent style={[CommonStyles.backbtn]} onPress={this.props.GoProfile} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     <Image style={{ height: 25, width: 25, resizeMode: "contain", alignSelf: "center" }} source={require('../../assets/Icons/account.png')}></Image>
@@ -107,6 +107,6 @@ class MasterHeader extends Component {
     }
 }
 
-const mapStateToProps = ({ sessionReducer }) => ({ sessionReducer });
+const mapStateToProps = ({ sessionReducer }) => ({ user: sessionReducer.user });
 
 export default connect(mapStateToProps, { customisedAction })(MasterHeader);

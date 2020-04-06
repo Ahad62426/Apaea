@@ -3,7 +3,6 @@ import { Alert } from 'react-native';
 import { switchMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
-import { setItem } from '../../helperMethods/localstorage';
 import { customisedAction } from '../actions';
 import {
   SIGN_UP,
@@ -14,7 +13,6 @@ import {
   ERROR_MSG,
   UNKNOWN_ERROR_MSG
 } from '../../constants';
-import NavigationService from '../../helperMethods/navigationService';
 import { RestClient } from '../../network/RestClient';
 
 export class signUpEpic {
@@ -26,13 +24,10 @@ export class signUpEpic {
           try {
             const response = await RestClient.post(API_ENDPOINTS.signUp, payload);
             const { status, data: resObj, problem } = response;
-            console.log(response);
             if (status && status === 200) {
               if (resObj && resObj.success) {
                 const { token } = resObj;
-                NavigationService.navigate('Drawer')
-                await setItem('@UserAuth', JSON.stringify(token));
-                return customisedAction(SIGN_IN_SUCCESS, token);
+                return customisedAction(SIGN_IN_SUCCESS, { token, failure_action: SIGN_UP_FAILURE });
               }
               Alert.alert(NETWORK_ERROR_MSG);
               return customisedAction(SIGN_UP_FAILURE, null);
