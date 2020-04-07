@@ -1,41 +1,16 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert, FlatList } from 'react-native';
-import {
-    Container,
-    Drawer,
-    Button,
-    Icon,
-    Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Label,
-    Accordion,
-} from 'native-base';
-import SideBar from '../Sidebar';
+import { View, Alert, FlatList } from 'react-native';
+import { Container } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { CCard } from '../../components/Card';
 
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
-import { LoadingButton, CHeading } from '../../components/Utilities';
+import { CHeading } from '../../components/Utilities';
 
-import CommonStyles, {
-    DynamicP,
-    DynamicFntW,
-    DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicBDRadius,
-    DynamicBorderPosition,
-
-} from '../../components/Styles';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
+import CommonStyles, { DynamicM } from '../../components/Styles';
 
 const dataArray = [
     {
@@ -64,13 +39,13 @@ const dataArray = [
     },
 
 ];
-//endregion
 
 class MyAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
             submitting: true,
+            dataArray: []
         };
     }
 
@@ -86,6 +61,7 @@ class MyAccount extends Component {
 
 
     render() {
+        const { data, heading } = this.props.navigation.state.params;
         return (
             <Container
                 style={{
@@ -129,15 +105,15 @@ class MyAccount extends Component {
                 >
                     <CHeading
                         style={[{}, DynamicM(10, 5, 0, 0), CommonStyles.hc]}
-                        text={"Assigned Working Paper"}
+                        text={heading}
                         borderWidth={100}
                     >
 
                     </CHeading>
 
                     <FlatList
-                        data={this.props.productsListData}
-                        keyExtractor={(item, index) => `${item.id}`}
+                        data={data}
+                        keyExtractor={item => `${item.id}`}
                         renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard" }))}
                     >
                     </FlatList>
@@ -147,13 +123,8 @@ class MyAccount extends Component {
         );
     }
 }
-MyAccount.defaultProps = {
-    productsListData: dataArray
-}
 
 const mapStateToProps = state => ({
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyAccount);
+export default connect(mapStateToProps, {})(MyAccount);

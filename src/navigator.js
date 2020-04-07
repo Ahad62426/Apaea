@@ -120,12 +120,12 @@ const NavigationsRoutes = {
       headerMode: 'none',
       gesturesEnabled: false,
     },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        headerMode: 'none',
-        gesturesEnabled: false,
-      },
+  },
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
     },
   },
 };

@@ -1,14 +1,15 @@
 //references Region
 import React, { Component } from 'react';
-import { View, Alert, Modal } from 'react-native';
-import { Container, Icon, Content } from 'native-base';
+import { View, Modal } from 'react-native';
+import { Container, Content } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
-import { DrawerActions } from 'react-navigation-drawer';
 import { LoadingButton } from '../../components/Utilities';
-import CommonStyles, { DynamicM, DynamicFntSize } from '../../components/Styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import CommonStyles, { DynamicM } from '../../components/Styles';
+import NavigationService from '../../helperMethods/navigationService';
+import { customisedAction } from '../../redux/actions';
+import { SET_ACCOUNT_MENU } from '../../constants'
 
 class MyAccountActions extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class MyAccountActions extends Component {
     }
 
     _takeMeTOSignUp = () => {
-        this.props.navigation.navigate('SingIn');
+        NavigationService.navigate('Welcome');
     };
 
     render() {
@@ -74,7 +75,13 @@ class MyAccountActions extends Component {
                                 backgroundColor: '#31567E', borderWidth: 1,
                                 borderColor: "white"
                             }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Assigned Working Paper",
+                                    data: this.props.workingpaper
+                                })
+                            }}
                         />
 
                         <LoadingButton
@@ -87,7 +94,13 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Submitted Working Paper",
+                                    data: this.props.workinhistory
+                                })
+                            }}
                         />
 
                         <LoadingButton
@@ -100,7 +113,13 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Assigned Review Paper",
+                                    data: this.props.reviewpaper
+                                })
+                            }}
                         />
 
                         <LoadingButton
@@ -113,7 +132,13 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Submitted Review Paper",
+                                    data: this.props.reviewhistory
+                                })
+                            }}
                         />
 
                         <LoadingButton
@@ -126,7 +151,13 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 17 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Assigned Proof Reading Scripts",
+                                    data: this.props.proofreading
+                                })
+                            }}
                         />
 
                         <LoadingButton
@@ -139,7 +170,28 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 16 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Submitted Proof Reading Scripts",
+                                    data: this.props.proofpaper
+                                })
+                            }}
+                        />
+                        <LoadingButton
+                            isBlock={true}
+                            submitting={this.state.submitting}
+                            rounded={true}
+                            loaderColor={'white'}
+                            textColor="white"
+                            btnText={'Conference Paper Assigned'}
+                            textStyle={{ fontSize: 18 }}
+                            style={[DynamicM(10, 5, 0, 0),
+                            { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                this._takeMeTOSignUp()
+                            }}
                         />
                         <LoadingButton
                             isBlock={true}
@@ -151,7 +203,10 @@ class MyAccountActions extends Component {
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
-                            callback={() => this._takeMeTOSignUp()}
+                            callback={() => {
+                                this.props.customisedAction(SET_ACCOUNT_MENU, false)
+                                this._takeMeTOSignUp()
+                            }}
                         />
                     </Content>
                 </Container>
@@ -160,6 +215,16 @@ class MyAccountActions extends Component {
     }
 }
 
-const mapStateToProps = ({ myAccountReducer: { accountMenu } }) => ({ accountMenu });
+const mapStateToProps = ({ myAccountReducer: {
+    accountMenu, workingpaper, workinhistory, proofpaper, proofreading, reviewhistory, reviewpaper
+} }) => ({
+    accountMenu,
+    workingpaper,
+    workinhistory,
+    reviewpaper,
+    reviewhistory,
+    proofreading,
+    proofpaper
+});
 
-export default connect(mapStateToProps, {})(MyAccountActions);
+export default connect(mapStateToProps, { customisedAction })(MyAccountActions);

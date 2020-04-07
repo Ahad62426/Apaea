@@ -71,7 +71,7 @@ CactionCardItemHeading = text => {
 
 CactionCardItemtext = text => {
   return (
-    <Text style={[{ color: '#2e2e2e', }, DynamicM(3, 10, 0, 0)]}>
+    <Text style={[{ color: '#2e2e2e' }, DynamicM(3, 10, 0, 0)]}>
       {text}
     </Text>
   )
@@ -116,7 +116,7 @@ renderCardBody = props => {
 
 
           {CactionCardItemHeading("Main Author :")}
-          {CactionCardItemtext(props.author)}
+          {CactionCardItemtext(props.mauthor)}
 
           <View
             style={[{
@@ -327,26 +327,6 @@ const CBreadCrumb = props => {
                 numberOfLines={1}>
                 {props.text}
               </Text>
-              {/* <Text
-                style={[CommonStyles.cardSubTitle, CommonStyles.uppercase]}
-                numberOfLines={1}>
-                <Text
-                  style={[CommonStyles.cardSubTitle, CommonStyles.uppercase]}
-                  numberOfLines={1}>
-                  {props.text}
-                </Text>
-                <Text
-                  style={[CommonStyles.cardSubTitle, CommonStyles.uppercase]}
-                  numberOfLines={1}>
-                  {props.text}
-                </Text>
-                <Text
-                  style={[CommonStyles.cardSubTitle, CommonStyles.uppercase]}
-                  numberOfLines={1}>
-                  {props.text}
-                </Text>
-              </Text>
-             */}
             </Body>
           </Left>
           {props.right !== false ? (
