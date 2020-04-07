@@ -23,7 +23,6 @@ import ContactUs from './screens/ContactUs';
 
 import Registration from './screens/Registration';
 import MyAccount from './screens/MyAccount';
-import MyAccountActions from './screens/MyAccountActions';
 import Events from './screens/Events';
 import Publications from './screens/Publications';
 import Partners from './screens/Partners';
@@ -102,13 +101,6 @@ const NavigationsRoutes = {
   },
   Events: {
     screen: Events,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  MyAccountActions: {
-    screen: MyAccountActions,
     navigationOptions: {
       headerMode: 'none',
       gesturesEnabled: false,

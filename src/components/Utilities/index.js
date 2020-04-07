@@ -99,7 +99,7 @@ const LoadingButton = props => {
       rounded={props.rounded}
       style={props.style}
       onPress={!props.submitting ? props.callback : null}>
-      <Text style={[CommonStyles.BtnTxt, { color: props.textColor }]}>
+      <Text style={[CommonStyles.BtnTxt, { color: props.textColor }, props.textStyle ]}>
         {props.submitting ? `Submitting` : `${props.btnText}`}
       </Text>
       {props.submitting ? (

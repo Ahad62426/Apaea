@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Root, StyleProvider} from 'native-base';
+import {Root, StyleProvider, View} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import variables from '../../native-base-theme/variables/material';
 import {Provider} from 'react-redux';
@@ -9,6 +9,7 @@ import store from '../redux/store';
 import SplashScreen from 'react-native-splash-screen';
 import { GET_BOARDING_DATA, GET_BOARDING_IMAGES, SET_USER_SESSION } from '../constants';
 import { getItem } from '../helperMethods/localstorage';
+import MyAccountActions from '../screens/MyAccountActions'
 
 export default class Setup extends Component {
 
@@ -26,7 +27,10 @@ export default class Setup extends Component {
       <Provider store={store}>
         <Root>
           <StyleProvider style={getTheme(variables)}>
-            <AppContainer ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
+            <View style={{ flex: 1 }}>
+              <MyAccountActions />
+              <AppContainer ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
+            </View>
           </StyleProvider>
         </Root>
       </Provider>
