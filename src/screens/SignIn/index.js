@@ -184,7 +184,7 @@ class SignIn extends Component {
                 isBlock={true}
                 submitting={this.props.signInReducer.loading}
                 rounded={true}
-                loaderColor={'white'}
+                loaderColor={TColors.bgSecondary}
                 textColor="black"
                 btnText={'Login'}
                 style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}

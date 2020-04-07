@@ -39,7 +39,7 @@ export class boardingDataEpic {
             return customisedAction(BOARDING_DATA_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log('SignIn Unknown Error', error);
+            console.log('BoardingData Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
             return customisedAction(BOARDING_DATA_FAILURE);
           }

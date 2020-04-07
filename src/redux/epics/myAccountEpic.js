@@ -39,7 +39,7 @@ export class myAccountEpic {
             return customisedAction(MY_ACCOUNT__FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log('OurPeople Unknown Error', error);
+            console.log('MyAccount Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
             return customisedAction(MY_ACCOUNT__FAILURE);
           }

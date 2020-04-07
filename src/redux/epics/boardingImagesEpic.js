@@ -39,7 +39,7 @@ export class boardingImagesEpic {
             return customisedAction(BOARDING_IMAGES_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log('SignIn Unknown Error', error);
+            console.log('BoardingImages Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
             return customisedAction(BOARDING_IMAGES_FAILURE);
           }
