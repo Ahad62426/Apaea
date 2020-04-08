@@ -215,16 +215,24 @@ class MyAccountActions extends Component {
     }
 }
 
-const mapStateToProps = ({ myAccountReducer: {
-    accountMenu, workingpaper, workinhistory, proofpaper, proofreading, reviewhistory, reviewpaper
-} }) => ({
-    accountMenu,
-    workingpaper,
-    workinhistory,
-    reviewpaper,
-    reviewhistory,
-    proofreading,
-    proofpaper
-});
+const mapStateToProps = ({ myAccountReducer: { accountMenu, data } }) => {
+    const {
+        workingpaper,
+        workinhistory,
+        reviewpaper,
+        reviewhistory,
+        proofreading,
+        proofpaper
+    } = data;
+    return {
+        accountMenu,
+        workingpaper,
+        workinhistory,
+        reviewpaper,
+        reviewhistory,
+        proofreading,
+        proofpaper
+    };
+}
 
 export default connect(mapStateToProps, { customisedAction })(MyAccountActions);

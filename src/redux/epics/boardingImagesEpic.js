@@ -32,7 +32,6 @@ export class boardingImagesEpic {
               return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
               return customisedAction(BOARDING_IMAGES_FAILURE);
             }
             Alert.alert(ERROR_MSG);

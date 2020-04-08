@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { Container } from 'native-base';
+import { NavigationEvents } from 'react-navigation';
+import { Container, Title } from 'native-base';
 import CommonStyles, {
   DynamicP,
   DynamicM,
@@ -13,45 +14,19 @@ import { connect } from 'react-redux';
 import { CLogo, LoadingButton, } from '../../components/Utilities';
 import { CCarousel } from '../../components/Carousel';
 import { customisedAction } from '../../redux/actions';
-import { BOARDING_DATA_SUCCESS } from '../../constants'
-
-const weclomedumyData = [
-  {
-    title: 'Care on-Demand',
-    desc: 'Start a visit from anywhere, 24/7, for diagnosis, treatment and peace of mind',
-    svg: 'welcome1',
-    size: 200
-  },
-  {
-    title: 'Board Certified Physicians',
-    svg: 'welcome1',
-    desc: 'Our doctors deliver the full spectrum of primary care via secure, in-app messaging',
-    size: 200
-  },
-  {
-    title: 'Diagnosis and treatment',
-    svg: 'welcome1',
-    desc: 'Get a personalized Care Plan and necessary prescription or labs ordered all whithin the app',
-    size: 200
-  },
-];
+import { GET_BOARDING_DATA, GET_BOARDING_IMAGES } from '../../constants';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
   }
 
-  _takeMeTOLogin = () => {
+  _takeMeTOLogin = () => { this.props.navigation.navigate('SignIn'); };
 
-    this.props.navigation.navigate('SignIn');
-  };
-
-  _takeMeTOSignUp = () => {
-
-    this.props.navigation.navigate('SignUp');
-  };
+  _takeMeTOSignUp = () => { this.props.navigation.navigate('SignUp'); };
 
   render() {
+    const { user, loadingData, loadingImages, sliderData, sliderImages, customisedAction } = this.props;
     return (
       <Container
         style={[
@@ -60,6 +35,10 @@ class SignIn extends Component {
             justifyContent: 'space-between',
           },
         ]}>
+          <NavigationEvents onDidFocus={() => {
+            if (!loadingData && !sliderData) customisedAction(GET_BOARDING_DATA);
+            if (!loadingImages && !sliderImages) customisedAction(GET_BOARDING_IMAGES);
+          }} />
         <CstHeader
           isMenuRight={true}
           OpenMenu={() => {
@@ -79,30 +58,31 @@ class SignIn extends Component {
             <View style={[{ flex: 2 }, CommonStyles.vchb]}>
               <CLogo height={100} width={100} />
             </View>
-            {this.props.loading || this.props.loadingImages ?
-              <View style={[{ flex: this.props.user ? 3 : 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+            {loadingData || loadingImages ?
+              <View style={[{ flex: user ? 3 : 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                 <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
               </View>
-              : 
-              <View style={[{ flex: 6 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
-                <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
-                  <CCarousel
-                    list={this.props.sliderImages}
-                    callback={ProductID => this._getProduct(ProductID)}
-                    type={"image-slider"}
-    
-                  />
+              : sliderData && sliderData.length && sliderImages && sliderImages.length ?
+                <View style={[{ flex: 6 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                  <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                    <CCarousel
+                      list={sliderImages}
+                      callback={ProductID => this._getProduct(ProductID)}
+                      type={"image-slider"}
+      
+                    />
+                  </View>
+                  <View style={[{ flex: 3, }, CommonStyles.vthc, DynamicM(5, 10, 0, 0)]}>
+                    <CCarousel
+                      list={sliderData}
+                      callback={ProductID => this._getProduct(ProductID)}
+                      type={"text-slider"}
+                    />
+                  </View>
                 </View>
-                <View style={[{ flex: 3, }, CommonStyles.vthc, DynamicM(5, 10, 0, 0)]}>
-                  <CCarousel
-                    list={this.props.sliderData}
-                    callback={ProductID => this._getProduct(ProductID)}
-                    type={"text-slider"}
-                  />
-                </View>
-              </View>
+              : <View><Title style={{ top: user ? -150 : 0, fontSize: 18 }}>Slider data not available!</Title></View>
             }
-            {this.props.user ? null :
+            {user ? null :
               <View style={[{ flex: 2, width: "80%" }, CommonStyles.vchb]}>
                 <LoadingButton
                   isBlock={true}
@@ -133,8 +113,8 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = ({ boardingDataReducer: { loading, loadingImages, sliderData, sliderImages }, sessionReducer: { user } }) => ({
-  loading, loadingImages, sliderData, sliderImages,
+const mapStateToProps = ({ boardingDataReducer: { loadingData, loadingImages, sliderData, sliderImages }, sessionReducer: { user } }) => ({
+  loadingData, loadingImages, sliderData, sliderImages,
   user
 });
 

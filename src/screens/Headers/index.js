@@ -1,7 +1,7 @@
 //region References
 import React, { Component } from 'react';
-import { TouchableNativeFeedback, Text, Image, Platform } from 'react-native';
-import { Header, Icon, Left, Body, Right, Title, Button, Subtitle, } from 'native-base';
+import { TouchableNativeFeedback, Image, Platform } from 'react-native';
+import { Header, Icon, Left, Body, Right, Title, Button } from 'native-base';
 import { connect } from 'react-redux';
 import CommonStyles, {
     TColors
@@ -10,7 +10,7 @@ import Menu from '../../assets/Icons/menuSVG';
 import NavigationService from '../../helperMethods/navigationService';
 import { removeItem } from '../../helperMethods/localstorage';
 import { customisedAction } from '../../redux/actions';
-import { SIGN_OUT, SET_ACCOUNT_MENU } from '../../constants'
+import { SIGN_OUT, SET_ACCOUNT_MENU, SET_USER_SESSION } from '../../constants'
 
 //endregion
 
@@ -71,10 +71,13 @@ class MasterHeader extends Component {
         }
     }
     _getProfileIcon() {
-        const { user, loading, accountMenu } = this.props;
+        const { user, loading, accountMenu, data } = this.props;
         if (user && !loading) {
             return (
-                <Button transparent style={[CommonStyles.backbtn]} onPress={() => this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
+                <Button transparent style={[CommonStyles.backbtn]} onPress={() => {
+                    if (!loading && !accountMenu && !Object.keys(data).length) this.props.customisedAction(SET_USER_SESSION, user)
+                    this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)
+                }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     {!accountMenu ?
                         <Image style={{ height: 25, width: 25, resizeMode: "contain", alignSelf: "center" }} source={require('../../assets/Icons/account.png')}></Image>
                         : <Icon name="closecircleo" type="AntDesign" style={{ color: "white" }}></Icon>
@@ -105,8 +108,8 @@ class MasterHeader extends Component {
     }
 }
 
-const mapStateToProps = ({ sessionReducer: { user }, myAccountReducer: { loading, accountMenu } }) => ({
-    user, loading, accountMenu
+const mapStateToProps = ({ sessionReducer: { user }, myAccountReducer: { loading, accountMenu, data } }) => ({
+    user, loading, accountMenu, data
 });
 
 export default connect(mapStateToProps, { customisedAction })(MasterHeader);

@@ -32,7 +32,6 @@ export class myAccountEpic {
               return customisedAction(MY_ACCOUNT__FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
               return customisedAction(MY_ACCOUNT__FAILURE);
             }
             Alert.alert(ERROR_MSG);

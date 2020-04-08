@@ -7,10 +7,10 @@ import {
   BOARDING_IMAGES_FAILURE
 } from '../../constants'
 
-export default (state = { loading: false, loadingImages: false, aboutUs: null, sliderData: [], sliderImages: [] }, { type, payload }) => {
+export default (state = {}, { type, payload }) => {
   switch (type) {
     case GET_BOARDING_DATA:
-      return { ...state, loading: true };
+      return { ...state, loadingData: true };
     case GET_BOARDING_IMAGES:
       return { ...state, loadingImages: true };
     case BOARDING_DATA_SUCCESS: {
@@ -19,7 +19,7 @@ export default (state = { loading: false, loadingImages: false, aboutUs: null, s
       newSlider.push(payload[2])
       newSlider.push(payload[3])
       return {
-        ...state, loading: false,
+        ...state, loadingData: false,
         aboutUs: payload[0],
         sliderData: newSlider,
       };
@@ -35,7 +35,7 @@ export default (state = { loading: false, loadingImages: false, aboutUs: null, s
       };
     }
     case BOARDING_DATA_FAILURE:
-      return { ...state, loading: false };
+      return { ...state, loadingData: false };
     case BOARDING_IMAGES_FAILURE:
       return { ...state, loadingImages: false };
     default:

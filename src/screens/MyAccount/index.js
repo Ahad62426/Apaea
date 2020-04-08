@@ -62,6 +62,7 @@ class MyAccount extends Component {
 
     render() {
         const { data, heading } = this.props.navigation.state.params;
+        const { loading } = this.props;
         return (
             <Container
                 style={{
@@ -111,6 +112,7 @@ class MyAccount extends Component {
 
                     </CHeading>
 
+                    
                     <FlatList
                         data={data}
                         keyExtractor={item => `${item.id}`}
@@ -124,7 +126,6 @@ class MyAccount extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-});
+const mapStateToProps = ({ myAccountReducer: { loading } }) => ({ loading });
 
 export default connect(mapStateToProps, {})(MyAccount);

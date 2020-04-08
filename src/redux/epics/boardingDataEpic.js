@@ -32,7 +32,6 @@ export class boardingDataEpic {
               return customisedAction(BOARDING_DATA_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
               return customisedAction(BOARDING_DATA_FAILURE);
             }
             Alert.alert(ERROR_MSG);
