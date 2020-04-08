@@ -182,7 +182,7 @@ class SignUp extends Component {
             <Image style={[{ width: 300, height: 220, resizeMode: "contain" }]} source={require('../../assets/images/register.png')} ></Image >
           </View>
 
-          <View style={[{ flex: 3 }, CommonStyles.vthc]}>
+          <View style={[{ flex: 1 }, CommonStyles.vthc]}>
             <Text
               style={[
                 CommonStyles.textCenter,

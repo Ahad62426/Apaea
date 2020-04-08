@@ -77,12 +77,6 @@ export default [
         color: '#545454',
         cstmClass: '',
       },
-      {
-        Text: 'Credit Card Payment',
-        Navigation: 'Events',
-        color: '#545454',
-        cstmClass: '',
-      },
     ],
   },
   {
@@ -164,12 +158,6 @@ export default [
         cstmClass: '',
       },
     ],
-  },
-  {
-    Text: 'Membership',
-    Navigation: 'Membership',
-    color: '#545454',
-    cstmClass: '',
   },
   {
     Text: 'News',

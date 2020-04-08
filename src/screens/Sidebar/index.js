@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Image, View, TouchableOpacity, Dimensions, Alert } from 'react-native';
+import { View, TouchableOpacity, Dimensions } from 'react-native';
 import {
   Text,
   Container,
   List,
-  Left,
   Body,
   Accordion,
   ListItem,
@@ -15,42 +14,11 @@ import { Col } from 'react-native-easy-grid';
 import { connect } from 'react-redux';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import DrawerMeta from '../Sidebar/DrawerMeta';
-import Home from '../../assets/Icons/Home';
 import { DynamicM } from '../../components/Styles';
 import UserImg from '../ThumbNail';
 import { CSvg } from '../../components/SVGassets';
-
 import { customisedAction } from '../../redux/actions';
 import { GET_OUR_PEOPLE } from '../../constants'
-
-const deviceWidth = Dimensions.get('window').width;
-const pLeft = deviceWidth > 480 ? 15 : 15;
-const dataArray = [
-  {
-    title: 'First Element',
-    content: [
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-    ],
-  },
-  {
-    title: 'Second Element',
-    content: [
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-    ],
-  },
-  {
-    title: 'Third Element',
-    content: [
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-      'Lorem ipsum dolor sit amet',
-    ],
-  },
-];
 
 class SideBar extends Component {
   constructor(props) {
@@ -64,8 +32,6 @@ class SideBar extends Component {
       btn1Text: '',
       bgColor: '#0E3968',
     };
-
-
   }
 
   _checkDrawer(Navigation) {
@@ -79,11 +45,8 @@ class SideBar extends Component {
       },
     );
   }
-  _bootstrapAsync = () => {
-    AsyncStorage.clear().then(() => console.log('Cleared'));
-    this.props.navigation.navigate('CompanyCode');
-  };
-  _BGColor() {
+
+  _BGColor(user) {
     return (
       <View
         style={{
@@ -103,13 +66,13 @@ class SideBar extends Component {
             borderRadius: 20,
             position: 'absolute',
             alignSelf: 'flex-start',
-            top: 25,
+            top: 10,
             padding: 5,
             margin: 10,
           }}>
-          {this._getThumbnail(this.props.UserData)}
+          {this._getThumbnail(user)}
         </View>
-        <View style={{ position: 'absolute', alignSelf: 'center', top: 50 }}>
+        <View style={{ position: 'absolute', alignSelf: 'center', top: 30 }}>
           <TouchableOpacity
             onPress={() => {
               this.props.navigation.navigate('MyAccount');
@@ -119,96 +82,29 @@ class SideBar extends Component {
                 fontSize: 20,
                 color: '#FFFFFF',
               }}>
-              John Doe
+              {user ? user.name : "Not Logged In"}
             </Text>
           </TouchableOpacity>
         </View>
       </View>
     );
   }
-  _getThumbnail(Obj) {
-    return (
-      <UserImg
-        UserInfo={{
-          FirstName: 'John',
-          LastName: 'Doe',
-          UserImage: '',
-          UserImageColor: '#3E83FF',
-        }}
-        size={40}
-      />
-    );
-  }
-
-  _getSvg(SvgId) {
-    switch (SvgId) {
-      case 0:
-        return <Home size={27} color={this.state.bgColor} />;
-      default:
-        break;
+  _getThumbnail(user) {
+    if (user) {
+      const name = user.name.split(' ');
+      return (
+        <UserImg
+          UserInfo={{
+            FirstName: name[0] || '',
+            LastName: name[1] || '',
+            UserImage: '',
+            UserImageColor: '#3E83FF',
+          }}
+          size={40}
+        />
+      );
     }
   }
-  Logout = () => {
-    // this.setState({
-    //   showAlert: true,
-    //   theme: "warning",
-    //   title: "Logout",
-    //   subTitle:
-    //     "Are You sure you want to Logout By Clicking Logout Your session Will be remove",
-    //   btn1Text: "Logout",
-    //   actionFunction: () => this.LogoutUser()
-    // });
-    Alert.alert(
-      'Logout',
-      'Are You sure you want to Logout? By Clicking Logout Your session Will be removed ',
-      [
-        {
-          text: 'Logout',
-          onPress: () => {
-            this.LogoutUser();
-          },
-        },
-        { text: 'Cancel', onPress: () => { } },
-      ],
-    );
-  };
-  LogoutUser = () => {
-    this.props
-      .removeUserToken()
-      .then(async () => {
-        await this.props.reset(true);
-        this.props.navigation.navigate('Auth');
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-  };
-  changeCompany = () => {
-    // this.setState({
-    //   showAlert: true,
-    //   theme: "warning",
-    //   title: "Change Learning Center Code",
-    //   subTitle: "Are you sure you want to change the Learning Center Code?",
-    //   btn1Text: "Change",
-    //   actionFunction: () => this._bootstrapAsync()
-    // });
-    Alert.alert(
-      'Change Learning Center Code',
-      'Are you sure you want to change the Learning Center Code? ',
-      [
-        {
-          text: 'Change',
-          onPress: () => {
-            this._bootstrapAsync();
-          },
-        },
-        { text: 'Cancel', onPress: () => { } },
-      ],
-    );
-  };
-  handleClose = () => {
-    this.setState({ showAlert: false });
-  };
 
   _renderContent = item => {
     return item.subMenu.map(o => (
@@ -265,63 +161,62 @@ class SideBar extends Component {
   render() {
     return (
       <Container>
-        {this._BGColor()}
-        <View
-          style={{
-            alignSelf: 'stretch',
-            backgroundColor: this.state.bgColor,
-            flexDirection: 'row',
-            position: 'relative',
-            zIndex: 10,
-            top: 80,
-            paddingTop: 20,
-          }}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('SignIn')}
-            style={[{ flex: 1, alignItems: 'center', justifyContent: 'center' }]}>
+        {this._BGColor(this.props.user)}
+        {!this.props.user ? 
+          <View
+            style={{
+              alignSelf: 'stretch',
+              backgroundColor: this.state.bgColor,
+              flexDirection: 'row',
+              position: 'relative',
+              zIndex: 10,
+              top: 70,
+            }}>
             <Item
-              fixedLabel
-              style={[
-                DynamicM(5, 5, 0, 0),
-                {
-                  borderColor: 'transparent',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                },
-              ]}>
-              <Col size={4}>
-                <CSvg size={20} name="login" />
-              </Col>
-              <Col size={8}>
-                <Text style={{ padding: 5, color: 'white' }}>Login</Text>
-              </Col>
+                fixedLabel
+                style={[{ flex: 1, borderColor: 'transparent', alignItems: 'center', justifyContent: 'center' }]}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('SignIn')}
+                style={[ DynamicM(5, 5, 0, 0),
+                  {
+                    flex: 1,
+                    flexDirection: "row",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  },
+                ]}>
+                <Col size={4}>
+                  <CSvg size={20} name="login" />
+                </Col>
+                <Col size={8}>
+                  <Text style={{ padding: 5, color: 'white' }}>Login</Text>
+                </Col>
+              </TouchableOpacity>
             </Item>
-          </TouchableOpacity>
-          <TouchableOpacity
-
-            onPress={() => { this.props.navigation.navigate('SignUp') }}
-            style={[{ flex: 1, alignItems: 'center', justifyContent: 'center' }]}>
-
             <Item
-              fixedLabel
-              style={[
-                DynamicM(5, 5, 0, 0),
-                {
-                  borderColor: 'transparent',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                },
-              ]}>
-
-              <Col size={4}>
-                <CSvg size={20} name="joinUS" />
-              </Col>
-              <Col size={8}>
-                <Text style={{ padding: 5, color: 'white' }}>Join Us</Text>
-              </Col>
+                fixedLabel
+                style={[{ flex: 1, borderColor: 'transparent', alignItems: 'center', justifyContent: 'center' }]}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('SignUp')}
+                style={[ DynamicM(5, 5, 0, 0),
+                  {
+                    flex: 1,
+                    flexDirection: "row",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  },
+                ]}>
+                <Col size={4}>
+                  <CSvg size={20} name="joinUS" />
+                </Col>
+                <Col size={8}>
+                  <Text style={{ padding: 5, color: 'white' }}>Join Us</Text>
+                </Col>
+              </TouchableOpacity>
             </Item>
-          </TouchableOpacity>
-        </View>
+          </View>
+          : null
+        }
         <Content style={{ backgroundColor: '#81A2DA' }}>
           <List style={{ marginTop: 90 }}>
             {DrawerMeta.map((Obje, index) => {
@@ -361,4 +256,6 @@ class SideBar extends Component {
   }
 }
 
-export default connect( null, { customisedAction })(SideBar);
+const mapStateToProps = ({ sessionReducer: { user } }) => ({ user });
+
+export default connect( mapStateToProps, { customisedAction })(SideBar);
