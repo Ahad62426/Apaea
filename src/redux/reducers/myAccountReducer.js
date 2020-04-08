@@ -1,8 +1,8 @@
-import { GET_MY_ACCOUNT, MY_ACCOUNT_SUCCESS, MY_ACCOUNT__FAILURE, SET_ACCOUNT_MENU } from '../../constants'
+import { SET_USER_SESSION, MY_ACCOUNT_SUCCESS, MY_ACCOUNT__FAILURE, SET_ACCOUNT_MENU } from '../../constants'
 
 export default (state = { loading: false, data: {}, accountMenu: false }, { type, payload }) => {
   switch (type) {
-    case GET_MY_ACCOUNT:
+    case SET_USER_SESSION:
       return { ...state, loading: true };    
     case MY_ACCOUNT_SUCCESS:
       return { 

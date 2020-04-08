@@ -1,6 +1,6 @@
 //references Region
 import React, { Component } from 'react';
-import { View, Alert, FlatList } from 'react-native';
+import { View, Alert, FlatList, ActivityIndicator } from 'react-native';
 import { Container } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
@@ -12,57 +12,14 @@ import { CHeading } from '../../components/Utilities';
 
 import CommonStyles, { DynamicM } from '../../components/Styles';
 
-const dataArray = [
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-    {
-        title: 'Do financial technology firms influence bank performance?',
-        author: 'Dinh Phan',
-    },
-
-];
-
 class MyAccount extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            submitting: true,
-            dataArray: []
-        };
     }
-
-    _takeMeTOChat = () => {
-        this.props.navigation.navigate('ChatSc');
-    };
-
-    _showAlert(title, msg, btn) {
-        Alert.alert(title, msg, [
-            { text: btn == null ? 'Okay' : btn, onPress: () => { } },
-        ]);
-    }
-
 
     render() {
-        const { data, heading } = this.props.navigation.state.params;
-        const { loading } = this.props;
+        const { dataKey, heading } = this.props.navigation.state.params;
+        const { loading, data } = this.props;
         return (
             <Container
                 style={{
@@ -78,15 +35,7 @@ class MyAccount extends Component {
                     Screen={'My Account'}
                 />
                 <View style={{ height: 0 }}>
-                    <View
-                        style={{
-                            height: 200,
-                            backgroundColor: TColors.bgColorPrimary,
-                        }}>
-
-
-                    </View>
-
+                    <View style={{ height: 200, backgroundColor: TColors.bgColorPrimary }}></View>
                 </View>
                 <View
                     style={[
@@ -112,13 +61,17 @@ class MyAccount extends Component {
 
                     </CHeading>
 
-                    
-                    <FlatList
-                        data={data}
-                        keyExtractor={item => `${item.id}`}
-                        renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard" }))}
-                    >
-                    </FlatList>
+                    {loading ?
+                        <ActivityIndicator style={{ marginTop: 20 }} size="large" color={TColors.bgSecondary} />
+                        : <View style={{ flex: 1 }}>
+                            <FlatList
+                                data={data[dataKey]}
+                                keyExtractor={item => `${item.id}`}
+                                renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard" }))}
+                            >
+                            </FlatList>
+                        </View>
+                    }
 
                 </View>
             </Container >
@@ -126,6 +79,6 @@ class MyAccount extends Component {
     }
 }
 
-const mapStateToProps = ({ myAccountReducer: { loading } }) => ({ loading });
+const mapStateToProps = ({ myAccountReducer: { loading, data } }) => ({ loading, data });
 
 export default connect(mapStateToProps, {})(MyAccount);
