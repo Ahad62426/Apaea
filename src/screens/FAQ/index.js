@@ -1,51 +1,14 @@
 //references Region
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Alert} from 'react-native';
-import {
-  Container,
-  Drawer,
-  Button,
-  Icon,
-  Content,
-  Footer,
-  FooterTab,
-  Left,
-  Right,
-  Label,
-  Accordion,
-} from 'native-base';
-import SideBar from '../Sidebar';
+import { View, Alert, ActivityIndicator } from 'react-native';
+import { Container, Content } from 'native-base';
 import {TColors} from '../../components/Styles';
 import CstHeader from '../Headers';
 import {connect} from 'react-redux';
 import {DrawerActions} from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
-import {LoadingButton} from '../../components/Utilities';
 import {CAccordian} from '../../components/Accordian';
 
-import CommonStyles, {
-  DynamicP,
-  DynamicFntW,
-  DynamicM,
-  DynamicBgColor,
-  DynamicHeight,
-  DynamicBDRadius,
-  DynamicBorderPosition,
-} from '../../components/Styles';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
-
-const dataArray = [
-  {
-    title: 'Q: Publication ethics and publication malpractice statement',
-    content:
-      'All APAEA publications follow the publication ethics and malpractice statements developed for editors and authors by Wagner & Kleinert (2011).See https://publicationethics.org/node/11184',
-  },
-  {
-    title: 'Q: Your Questions and Feedbacks',
-    content: 'Please direct all questions and feedback to the attention of APAEA Secretary: contact@a-paea.org',
-  }
-];
+import CommonStyles, { DynamicM } from '../../components/Styles';
 //endregion
 
 class FAQ extends Component {
@@ -56,17 +19,8 @@ class FAQ extends Component {
     };
   }
 
-  _takeMeTOChat = () => {
-    this.props.navigation.navigate('ChatSc');
-  };
-
-  _showAlert(title, msg, btn) {
-    Alert.alert(title, msg, [
-      {text: btn == null ? 'Okay' : btn, onPress: () => {}},
-    ]);
-  }
-
   render() {
+    const { loading, dataKey, data } = this.props;
     return (
       <Container
         style={{
@@ -77,7 +31,7 @@ class FAQ extends Component {
           OpenMenu={() => {
             this.props.navigation.dispatch(DrawerActions.toggleDrawer());
           }}
-          Screen={'FAQ'}
+          Screen={this.props.navigation.state.params.title}
         />
         <View style={{height: 0}}>
           <View
@@ -98,15 +52,20 @@ class FAQ extends Component {
               backgroundColor: 'white',
             },
           ]}>
-          <CAccordian dataArray={dataArray} />
+            {loading ?
+              <View style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}>
+                <ActivityIndicator size="large" color={TColors.bgSecondary} />
+              </View>
+                : <CAccordian dataArray={data[dataKey]} />
+            }
         </Content>
       </Container>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = ({ metaDataReducer: { loading, dataKey, data } }) => ({ 
+    loading, dataKey, data
+});
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FAQ);
+export default connect(mapStateToProps, {})(FAQ);

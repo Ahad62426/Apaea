@@ -221,6 +221,9 @@ export default [
   {
     Text: 'FAQ',
     Navigation: 'FAQ',
+    metaDataAction: GET_META_DATA,
+    action: SET_DATA_KEY,
+    dataKey: 'faq',
     color: '#545454',
     cstmClass: '',
   },

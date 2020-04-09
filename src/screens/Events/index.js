@@ -17,7 +17,7 @@ class Events extends Component {
     }
 
     render() {
-        const { loading, dataKey, data } = this.props
+        const { loading, dataKey, data } = this.props;
         return (
             <Container
                 style={{
@@ -59,15 +59,13 @@ class Events extends Component {
                 >
                     {loading ?
                         <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
-                        : <View style={{ flex: 1 }}>
-                            <FlatList
-                                data={data[dataKey]}
-                                keyExtractor={(item, index) => `${item.id}`}
-                                renderItem={({ item }) => CCard(Object.assign(item, { type: "eventCard" }))}
-                                style={{ marginVertical: 8 }}
-                            >
-                            </FlatList>
-                        </View>
+                        : <FlatList
+                            data={data[dataKey]}
+                            keyExtractor={(item, index) => `${item.id}`}
+                            renderItem={({ item }) => CCard(Object.assign(item, { type: "eventCard" }))}
+                            style={{ marginVertical: 8 }}
+                        >
+                        </FlatList>
                     }
                 </View>
             </Container >

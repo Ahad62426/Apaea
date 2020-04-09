@@ -12,6 +12,7 @@ export default (state = { dataKey: null, data: {
   upconferences: null,
   workshop: null,
   partner: null,
+  faq: null,
 }}, { type, payload }) => {
   switch (type) {
     case SET_DATA_KEY:

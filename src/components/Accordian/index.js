@@ -32,7 +32,7 @@ const _renderHeader = (item, expanded) => {
           fontSize: 12,
        
         }}>
-        {item.title}
+        {`Q: ${item.title}`}
       </Text>
     </View>
   );
@@ -51,7 +51,7 @@ const _renderContent = item => {
         borderBottomLeftRadius: 8,
         borderBottomRightRadius: 8,
       }}>
-      {item.content}
+      {`Ans: ${item.excerpt || ''}`}
     </Text>
   );
 };
