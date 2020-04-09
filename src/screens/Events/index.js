@@ -11,46 +11,6 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import CommonStyles, { DynamicM } from '../../components/Styles';
 
-const dataArray = [
-    {
-        title: '4th International Energy Finance Conference 2019',
-        manager: 'Dinh Phan',
-        price: "USD 400",
-        accomodation: "USD",
-        food: "USD",
-        transport: "USD",
-        discount: "%",
-        total: "USD 400"
-
-    },
-    {
-        title: '8th Applied Financial Modelling Conference	',
-        manager: 'Dinh Phan',
-        price: "USD 250",
-        accomodation: "USD",
-        food: "USD",
-        transport: "USD",
-        discount: "%",
-        total: "USD 250"
-
-    },
-    {
-        title: '4th International Energy Finance Conference 2019_Participants',
-        manager: 'Dinh Phan',
-        price: "USD 300",
-        accomodation: "USD",
-        food: "USD",
-        transport: "USD",
-        discount: "%",
-        total: "USD 300"
-
-    },
-
-
-
-];
-//endregion
-
 class Events extends Component {
     constructor(props) {
         super(props);

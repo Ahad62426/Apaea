@@ -45,7 +45,7 @@ class MasterHeader extends Component {
     _getPowerOffBtn() {
         if (this.props.user && !this.props.accountMenu) {
             return (
-                <Button transparent style={[CommonStyles.backbtn, { top: -7 }]} onPress={async () => {
+                <Button transparent style={[CommonStyles.backbtn, { top: -7, left: 7 }]} onPress={async () => {
                     await removeItem('@UserAuth');
                     this.props.customisedAction(SIGN_OUT);
                     NavigationService.navigate('Welcome');
@@ -59,7 +59,7 @@ class MasterHeader extends Component {
         const { user, loading, accountMenu, data } = this.props;
         if (user) {
             return (
-                <Button transparent style={[CommonStyles.backbtn], { zIndex: 10 }} onPress={() => {
+                <Button transparent style={[CommonStyles.backbtn], { zIndex: 10, left: 7 }} onPress={() => {
                     if (!loading && !accountMenu && !Object.keys(data).length) this.props.customisedAction(SET_USER_SESSION, user)
                     this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)
                 }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>

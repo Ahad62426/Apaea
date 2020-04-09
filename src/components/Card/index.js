@@ -11,7 +11,6 @@ import {
   Separator
 } from 'native-base';
 import Icon from 'react-native-vector-icons/AntDesign';
-import NavigationService from '../../helperMethods/navigationService';
 
 import { ActionButton } from '../Utilities';
 import store from '../../redux/store';
@@ -81,21 +80,20 @@ CactionCardItemtext = text => {
 }
 CTwoColText = (firstLabel, firstText, secondLabel, secondText) => {
   return (
-    <View style={[CommonStyles.row, { width: "100%", justifyContent: "space-between" }, DynamicM(3, 10, 0, 0)]}>
-      <View style={[{}, CommonStyles.row, CommonStyles.vc,]}>
-        <Text >
+    <View style={[{ width: "100%", flexDirection: "row" }, DynamicM(3, 10, 0, 0)]}>
+      <View style={{ flex: 5, flexDirection: "row", flexWrap: "wrap" }}>
+        <Text style={{ size: 16 }}>
           {firstLabel}
         </Text>
-        <Text style={[DynamicM(0, 0, 0, 5)]}>
+        <Text style={{ size: 16 }, [DynamicM(0, 0, 0, 5)]}>
           {firstText}
         </Text>
       </View>
-      <View style={[{}, CommonStyles.row, CommonStyles.vc]}>
-        <Text >
+      <View style={{ flex: 3, flexDirection: "row", flexWrap: "wrap" }}>
+        <Text style={{ size: 16 }}>
           {secondLabel}
-
         </Text>
-        <Text style={[DynamicM(0, 0, 0, 5)]}>
+        <Text style={{ size: 16 }, [DynamicM(0, 0, 0, 5)]}>
           {secondText}
         </Text>
       </View>
@@ -189,10 +187,10 @@ renderCardBody = props => {
       return (
         <Body>
           {this.CBlogPostTitle(props.title)}
-          {this.CTwoColText("Manager:", props.manager, "Price:", props.price)}
-          {this.CTwoColText("Accomodation:", props.accomodation, "Food:", props.food)}
-          {this.CTwoColText("Transportation:", props.transport, "Discount:", props.discount)}
-          {this.CTwoColText("Total:", props.total)}
+          {this.CTwoColText("Manager:", props.name, "Price:", `USD ${props.price || ''}`)}
+          {this.CTwoColText("Accomodation:", `USD ${props.accomodation || ''}`, "Food:", `USD ${props.food || ''}`)}
+          {this.CTwoColText("Transportation:", `USD ${props.transportation || ''}`, "Discount:", `${props.discount || ''}%`)}
+          {this.CTwoColText("Total:", `USD ${props.total || ''}`)}
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
