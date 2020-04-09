@@ -208,17 +208,13 @@ renderCardBody = props => {
 
           </View>
         </Body>
-
       )
       break;
 
     case 'blogPostCard':
       return (
         <Body>
-
           {this.CBlogPostTitle(props.title)}
-
-
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
@@ -241,7 +237,7 @@ renderCardBody = props => {
     case "partnerCard":
       return (
         <Body style={[CommonStyles.vhc]}>
-          {this.renderPartnerCardLogo(props.img)}
+          <Image style={{ width: 117, height: 90, resizeMode: "contain", resizeMethod: "scale" }} source={{ uri: `${BASE_URL}/dev/${props.image}`, cache: "force-cache" }}></Image>
         </Body>
       )
       break;
@@ -304,7 +300,7 @@ const CPartnerCard = props => {
           {this.renderCardBody(props)}
         </CardItem>
       </Card >
-      <Text style={[{ height: 50, color: TColors.primaryColor }, DynamicFntSize(14), CommonStyles.textCenter]}>{props.title}</Text>
+      <Text style={[{ height: 50, color: TColors.primaryColor }, DynamicFntSize(14), CommonStyles.textCenter]}>{props.name}</Text>
     </View >
   );
 };

@@ -157,10 +157,11 @@ class SideBar extends Component {
   }
 
   render() {
+    const { loading, data, user } = this.props;
     return (
       <Container>
-        {this._BGColor(this.props.user)}
-        {!this.props.user ? 
+        {this._BGColor(user)}
+        {!user ? 
           <View
             style={{
               alignSelf: 'stretch',
@@ -223,7 +224,12 @@ class SideBar extends Component {
                   key={index}
                   style={{ borderColor: 'transparent', marginLeft: 0 }}
                   onPress={() => {
-                    this._checkDrawer(Obje.Navigation);
+                    if (Obje.action) this.props.customisedAction(Obje.action, Obje.dataKey || Obje.Text)
+                    if (Obje.metaDataAction) {
+                      if (!data[Obje.dataKey] && !loading) this.props.customisedAction(Obje.metaDataAction, { dataKey: Obje.dataKey, sub_url: Obje.sub_url })
+                    }
+                    this.props.navigation.closeDrawer();
+                    this.props.navigation.navigate(Obje.Navigation, { title: Obje.Text })
                   }}>
                   <Body style={{ flex: 10 }}>
                     <Text

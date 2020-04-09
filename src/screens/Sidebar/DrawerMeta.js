@@ -206,6 +206,9 @@ export default [
   {
     Text: 'Partners',
     Navigation: 'Partners',
+    metaDataAction: GET_META_DATA,
+    action: SET_DATA_KEY,
+    dataKey: 'partner',
     color: '#545454',
     cstmClass: '',
   },

@@ -14,21 +14,7 @@ import CommonStyles, { DynamicM } from '../../components/Styles';
 class Events extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            submitting: true,
-        };
     }
-
-    _takeMeTOChat = () => {
-        this.props.navigation.navigate('ChatSc');
-    };
-
-    _showAlert(title, msg, btn) {
-        Alert.alert(title, msg, [
-            { text: btn == null ? 'Okay' : btn, onPress: () => { } },
-        ]);
-    }
-
 
     render() {
         const { loading, dataKey, data } = this.props
@@ -42,7 +28,7 @@ class Events extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={'Events'}
+                    Screen={this.props.navigation.state.params.title}
                 />
                 <View style={{ height: 0 }}>
                     <View

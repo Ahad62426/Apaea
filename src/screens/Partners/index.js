@@ -1,106 +1,22 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert, FlatList } from 'react-native';
-import {
-    Container,
-    Drawer,
-    Button,
-    Icon,
-    Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Label,
-    Accordion,
-} from 'native-base';
-import SideBar from '../Sidebar';
+import { View, ActivityIndicator, FlatList } from 'react-native';
+import { Container } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { CPartnerCard } from '../../components/Card';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
-import { LoadingButton, CHeading } from '../../components/Utilities';
-import CommonStyles, {
-    DynamicP,
-    DynamicFntW,
-    DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicBDRadius,
-    DynamicBorderPosition,
-} from '../../components/Styles';
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
-const dataArray = [
-    {
-        id: 0,
-        title: 'Fiji National University',
-        img: 'partner-6',
-    },
-    {
-        id: 1,
-        title: "Xi'an University of Technology",
-        img: 'partner-4',
-    },
-    {
-        id: 2,
-        title: 'Fiji National University',
-        img: 'partner-6',
-    },
-    {
-        id: 3,
-        title: "Xi'an University of Technology",
-        img: 'partner-4',
-    },
-    {
-        id: 4,
-
-        title: "Xi'an Jiaotong University",
-        img: 'partner-1',
-    },
-    {
-        id: 5,
-
-        title: "Xi'an International Studies University",
-        img: 'partner-5',
-    },
-    {
-        id: 6,
-
-        title: "Bank Indonesia",
-        img: 'partner-2',
-    },
-    {
-        id: 7,
-
-        title: "Xi'an University of Technology",
-        img: 'partner-3',
-    },
-
-];
+import CommonStyles, { DynamicM } from '../../components/Styles';
 //endregion
 
 class Partners extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            submitting: true,
-        };
     }
-
-    _takeMeTOChat = () => {
-        this.props.navigation.navigate('ChatSc');
-    };
-
-    _showAlert(title, msg, btn) {
-        Alert.alert(title, msg, [
-            { text: btn == null ? 'Okay' : btn, onPress: () => { } },
-        ]);
-    }
-
 
     render() {
+        const { loading, dataKey, data } = this.props;
         return (
             <Container
                 style={{
@@ -112,7 +28,7 @@ class Partners extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={'Partners'}
+                    Screen={this.props.navigation.state.params.title}
                 />
                 <View style={{ height: 0 }}>
                     <View
@@ -141,31 +57,28 @@ class Partners extends Component {
                         },
                     ]}
                 >
+                    {loading ?
+                        <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
+                        : <View style={{ flex: 1 }}>
+                            <FlatList
+                                data={data[dataKey]}
+                                keyExtractor={(item, index) => `${item.id}`}
+                                numColumns={2}
+                                renderItem={({ item }) => CPartnerCard(Object.assign(item, { type: "partnerCard" }))}
 
-                    <FlatList
-                        data={this.props.productsListData}
-                        keyExtractor={(item, index) => `${item.id}`}
-                        numColumns={2}
-                        renderItem={({ item }) => CPartnerCard(Object.assign(item, { type: "partnerCard" }))}
-
-                        style={{ marginVertical: 15}}
-                    >
-                    </FlatList>
-
-
-
+                                style={{ marginVertical: 15}}
+                            >
+                            </FlatList>
+                        </View>
+                    }
                 </View>
             </Container >
         );
     }
 }
-Partners.defaultProps = {
-    productsListData: dataArray
-}
 
-const mapStateToProps = state => ({
+const mapStateToProps = ({ metaDataReducer: { loading, dataKey, data } }) => ({ 
+    loading, dataKey, data
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Partners);
+export default connect(mapStateToProps, {})(Partners);
