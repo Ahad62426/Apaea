@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Root, StyleProvider, View} from 'native-base';
+import { Root, StyleProvider, View } from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import variables from '../../native-base-theme/variables/material';
 import {Provider} from 'react-redux';
@@ -10,10 +10,12 @@ import SplashScreen from 'react-native-splash-screen';
 import { GET_BOARDING_DATA, GET_BOARDING_IMAGES, SET_USER_SESSION } from '../constants';
 import { getItem } from '../helperMethods/localstorage';
 import MyAccountActions from '../screens/MyAccountActions'
+import DataDisplay from '../screens/DataDisplay'
 
 export default class Setup extends Component {
 
   async componentDidMount() {
+    console.disableYellowBox = true;
     SplashScreen.hide();
     store.dispatch({ type: GET_BOARDING_DATA });
     store.dispatch({ type: GET_BOARDING_IMAGES });
@@ -29,6 +31,7 @@ export default class Setup extends Component {
           <StyleProvider style={getTheme(variables)}>
             <View style={{ flex: 1 }}>
               <MyAccountActions />
+              <DataDisplay />
               <AppContainer ref={navigatorRef => NavigationService.setTopLevelNavigator(navigatorRef)} />
             </View>
           </StyleProvider>

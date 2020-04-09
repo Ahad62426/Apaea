@@ -67,7 +67,7 @@ class MyAccount extends Component {
                             <FlatList
                                 data={data[dataKey]}
                                 keyExtractor={item => `${item.id}`}
-                                renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard" }))}
+                                renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard", screen: 'My Account' }))}
                             >
                             </FlatList>
                         </View>

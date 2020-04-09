@@ -4,6 +4,7 @@ import signInReducer from './signInReducer';
 import signUpReducer from './signUpReducer';
 import sessionReducer from './sessionReducer';
 import myAccountReducer from './myAccountReducer';
+import dataScreenReducer from './dataScreenReducer';
 import ourPeopleReducer from './ourPeopleReducer';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
     signUpReducer,
     sessionReducer,
     myAccountReducer,
+    dataScreenReducer,
     ourPeopleReducer,
 });

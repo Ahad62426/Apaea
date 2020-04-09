@@ -3,7 +3,6 @@ import {
   Container,
   Header,
   Content,
-  Icon,
   Accordion,
   Text,
   View,

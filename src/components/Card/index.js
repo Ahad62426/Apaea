@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Image, View } from 'react-native';
+import React from 'react';
+import { Image, View, Linking, TouchableOpacity } from 'react-native';
 import {
   Card,
   CardItem,
@@ -8,13 +8,16 @@ import {
   Left,
   Body,
   Right,
-  Separator,
-  Row,
+  Separator
 } from 'native-base';
 import Icon from 'react-native-vector-icons/AntDesign';
+import NavigationService from '../../helperMethods/navigationService';
 
-import { ActionButton, CHeading } from '../Utilities';
-import CommonStyles, { DynamicM, DynamicP, DynamicHeight, TColors, DynamicFntW, DynamicFntSize, DynamicColor } from '../Styles';
+import { ActionButton } from '../Utilities';
+import store from '../../redux/store';
+import CommonStyles, { DynamicM, DynamicP, TColors, DynamicFntW, DynamicFntSize } from '../Styles';
+import { BASE_URL } from '../../constants/Apis';
+import { DISPLAY_DATA_SCREEN } from '../../constants';
 
 renderPartnerCardLogo = props => {
   switch (props) {
@@ -118,7 +121,7 @@ renderCardBody = props => {
           {CactionCardItemHeading("Main Author :")}
           {CactionCardItemtext(props.mauthor)}
 
-          <View
+          <TouchableOpacity
             style={[{
               flexDirection: 'row',
               paddingHorizontal: 8,
@@ -130,48 +133,30 @@ renderCardBody = props => {
               borderRadius: 8,
               width: "100%"
             }, DynamicM(3, 10, 0, 0)]}
-          >
+            onPress={() => 
+              store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
+                heading: "Abstract", description: props.abstract
+              }})
+            }>
             {CactionCardItemHeading("Abstract :")}
-
-
-            <View style={{
-              width: 10, height: 15, borderWidth: 1, borderColor: "#2E619A"
-            }}>
-
-            </View>
-
-          </View>
+              <Icon name="right" size={15} color="black" />
+          </TouchableOpacity>
 
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
               btnText={"Download"}
-              style={{
-                borderRadius: 5,
-                height: 45,
-                padding: 0,
-                width: "49%",
-                borderColor: "white",
-                color: "white",
-                backgroundColor: TColors.bgSecondary
-              }}
-
+              callback={() => Linking.openURL(`${BASE_URL}/public/paper/${props.file}`)}
               icon={"download"}
-            ></ActionButton>
-            <ActionButton
               style={{
                 borderRadius: 5,
                 height: 45,
                 padding: 0,
-                width: "49%",
+                width: "100%",
                 borderColor: "white",
                 color: "white",
                 backgroundColor: TColors.bgSecondary
               }}
-              icon={"reply"}
-              textColor={"white"}
-              btnText={"Reply"}
-
             ></ActionButton>
           </View>
         </Body>
