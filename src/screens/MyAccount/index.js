@@ -64,7 +64,7 @@ class MyAccount extends Component {
                     </CHeading>
 
                     {loading ?
-                        <ActivityIndicator style={{ marginTop: 20 }} size="large" color={TColors.bgSecondary} />
+                        <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
                         : <View style={{ flex: 1 }}>
                             <FlatList
                                 data={ScreenData}

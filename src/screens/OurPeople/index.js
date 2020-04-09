@@ -51,7 +51,8 @@ class OurPeople extends Component {
 
 
     render() {
-        const { loading, data } = this.props.ourPeopleReducer;
+        const { loading, dataKey, data } = this.props;
+        const dataArray = data[dataKey];
         return (
             <Container
                 style={{
@@ -89,21 +90,22 @@ class OurPeople extends Component {
                             },
                         ]}>
                         
-                        {data.map(people =>
+                        {dataArray && dataArray.map(people =>
                             <View>
-                                {people.image.includes('.') ?
+                                {people.image && people.image.includes('.') ?
                                     <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
                                         <Image style={{ width: 180, height: 180, resizeMode: "contain", resizeMethod: "resize", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`, cache: "force-cache" }} ></Image>
                                     </View>
-                                    : null
-                                }
+                                    : null }
                                 <Label
                                     style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
                                         fontSize: 18,
                                     }]}>
                                     {people.name}
                                 </Label>
-                                <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '')} />
+                                {people.description ?
+                                    <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '')} />
+                                    : null }
                             </View>
                         )}
 
@@ -114,6 +116,8 @@ class OurPeople extends Component {
     }
 }
 
-const mapStateToProps = ({ ourPeopleReducer }) => ({ ourPeopleReducer });
+const mapStateToProps = ({ metaDataReducer: { loading, dataKey, data } }) => ({ 
+    loading, dataKey, data
+});
 
 export default connect(mapStateToProps, {})(OurPeople);

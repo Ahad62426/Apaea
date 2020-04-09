@@ -72,7 +72,7 @@ class MasterHeader extends Component {
     }
     _getProfileIcon() {
         const { user, loading, accountMenu, data } = this.props;
-        if (user && !loading) {
+        if (user) {
             return (
                 <Button transparent style={[CommonStyles.backbtn]} onPress={() => {
                     if (!loading && !accountMenu && !Object.keys(data).length) this.props.customisedAction(SET_USER_SESSION, user)

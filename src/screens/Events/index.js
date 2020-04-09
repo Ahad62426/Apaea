@@ -1,41 +1,15 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert, FlatList } from 'react-native';
-import {
-    Container,
-    Drawer,
-    Button,
-    Icon,
-    Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Label,
-    Accordion,
-} from 'native-base';
-import SideBar from '../Sidebar';
+import { View, ActivityIndicator, Alert, FlatList } from 'react-native';
+import { Container } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { CCard } from '../../components/Card';
 
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
-import { LoadingButton, CHeading } from '../../components/Utilities';
 
-import CommonStyles, {
-    DynamicP,
-    DynamicFntW,
-    DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicBDRadius,
-    DynamicBorderPosition,
-
-} from '../../components/Styles';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
+import CommonStyles, { DynamicM } from '../../components/Styles';
 
 const dataArray = [
     {
@@ -97,12 +71,12 @@ class Events extends Component {
 
 
     render() {
+        const { loading, dataKey, data } = this.props
         return (
             <Container
                 style={{
                     backgroundColor: '#E2E9F5',
                 }}>
-
                 <CstHeader
                     isMenuRight={true}
                     OpenMenu={() => {
@@ -137,27 +111,26 @@ class Events extends Component {
                         },
                     ]}
                 >
-
-                    <FlatList
-                        data={this.props.productsListData}
-                        keyExtractor={(item, index) => `${item.id}`}
-                        renderItem={({ item }) => CCard(Object.assign(item, { type: "eventCard" }))}
-                        style={{ marginVertical: 8 }}
-                    >
-                    </FlatList>
-
+                    {loading ?
+                        <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
+                        : <View style={{ flex: 1 }}>
+                            <FlatList
+                                data={data[dataKey]}
+                                keyExtractor={(item, index) => `${item.id}`}
+                                renderItem={({ item }) => CCard(Object.assign(item, { type: "eventCard" }))}
+                                style={{ marginVertical: 8 }}
+                            >
+                            </FlatList>
+                        </View>
+                    }
                 </View>
             </Container >
         );
     }
 }
-Events.defaultProps = {
-    productsListData: dataArray
-}
 
-const mapStateToProps = state => ({
+const mapStateToProps = ({ metaDataReducer: { loading, dataKey, data } }) => ({ 
+    loading, dataKey, data
 });
 
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Events);
+export default connect(mapStateToProps, {})(Events);

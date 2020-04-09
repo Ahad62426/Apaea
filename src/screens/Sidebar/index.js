@@ -107,15 +107,17 @@ class SideBar extends Component {
   }
 
   _renderContent = item => {
+    const { loading, data } = this.props;
     return item.subMenu.map(o => (
       <ListItem
         style={{ marginLeft: 0, borderColor: 'transparent' }}
         key={1}
         onPress={() => {
-          if (o.Navigation === "OurPeople") {
-            this.props.customisedAction(GET_OUR_PEOPLE, o.Text);
-            this.props.navigation.closeDrawer();
-          };
+          if (o.action) this.props.customisedAction(o.action, o.dataKey || o.Text)
+          if (o.metaDataAction) {
+            if (!data[o.dataKey] && !loading) this.props.customisedAction(o.metaDataAction, { dataKey: o.dataKey, sub_url: o.sub_url })
+          }
+          this.props.navigation.closeDrawer();
           this.props.navigation.navigate(o.Navigation, { title: o.Text })
         }}>
         <Body
@@ -256,6 +258,8 @@ class SideBar extends Component {
   }
 }
 
-const mapStateToProps = ({ sessionReducer: { user } }) => ({ user });
+const mapStateToProps = ({ sessionReducer: { user }, metaDataReducer: { loading, data } }) => ({ 
+  user, loading, data
+});
 
 export default connect( mapStateToProps, { customisedAction })(SideBar);
