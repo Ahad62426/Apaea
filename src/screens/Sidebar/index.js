@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Dimensions } from 'react-native';
+import { View, TouchableOpacity, Platform } from 'react-native';
 import {
   Text,
   Container,
@@ -50,7 +50,7 @@ class SideBar extends Component {
       <View
         style={{
           width: '100%',
-          height: 90,
+          height: Platform.OS === "ios" ? 120 : 90,
           flex: 1,
           position: 'absolute',
           top: 0,
@@ -65,17 +65,14 @@ class SideBar extends Component {
             borderRadius: 20,
             position: 'absolute',
             alignSelf: 'flex-start',
-            top: 10,
+            top: Platform.OS === "ios" ? 40 : 10,
             padding: 5,
             margin: 10,
           }}>
           {this._getThumbnail(user)}
         </View>
-        <View style={{ position: 'absolute', alignSelf: 'center', top: 30 }}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate('MyAccount');
-            }}>
+        <View style={{ position: 'absolute', alignSelf: 'center', top: Platform.OS === "ios" ? 60 : 30 }}>
+          <TouchableOpacity>
             <Text
               style={{
                 fontSize: 20,
@@ -171,7 +168,7 @@ class SideBar extends Component {
               flexDirection: 'row',
               position: 'relative',
               zIndex: 10,
-              top: 70,
+              top: Platform.OS === "ios" ? 100 : 70,
             }}>
             <Item
                 fixedLabel

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Image, ActivityIndicator } from 'react-native';
-import { Container, Text, Item, Content, Icon } from 'native-base';
+import { View, Image } from 'react-native';
+import { Container, Text, Item, Icon } from 'native-base';
 
 import CommonStyles, {
   DynamicP,
+  DynamicFntW,
   DynamicM,
   TColors,
 } from '../../components/Styles';
@@ -99,8 +100,6 @@ class SignIn extends Component {
           }
           Screen={''}
         />
-        <Content>
-
           <View
             style={[
               {
@@ -115,70 +114,69 @@ class SignIn extends Component {
               <Image style={[{ width: 300, height: 180, resizeMode: "contain" }]} source={require('../../assets/SliderImages/character.png')} ></Image >
             </View>
 
-            <View style={[{ flex: 9 }, CommonStyles.vthc]}>
-              <Text
-                style={[
-                  CommonStyles.textCenter,
-                  DynamicM(20, 10, 0, 0),
-                  CommonStyles.white,
-                ]}>
-                Login into app
-            </Text>
+            <View style={[{ flex: 9 }, CommonStyles.vhc]}>
+              <View style={[{  }]}>
+                <Text
+                  style={[
+                    CommonStyles.textCenter,
+                    DynamicFntW('700'),
+                    DynamicM(20, 10, 0, 0),
+                    CommonStyles.white,
+                    CommonStyles.uppercase,
+                  ]}>
+                  Login Into App
+                </Text>
+              </View>
+                <Item
+                  fixedLabel
+                  success={this.state.isUserNameValid}
+                  error={this.state.isUserNameInValid}
+                  style={[DynamicM(5, 15, 0, 0), CommonStyles.stdInput ]}>
 
-              <Item
-                fixedLabel
-                success={this.state.isUserNameValid}
-                error={this.state.isUserNameInValid}
-                style={[DynamicM(5, 15, 0, 0), CommonStyles.stdInput,]}>
+                  <CInput
+                    placeholderTextColor={'#A6BCD0'}
+                    placeholder="username"
+                    placeholderTextColor="white"
+                    value={this.state.email}
+                    style={{ color: "white", backgroundColor: TColors.bgSecondary, borderBottomColor: "white", borderBottomWidth: .2 }}
+                    KeyboardCallback={val => this.animateLogo(val)}
+                    onSubmitEditing={email =>
+                      this.setState({ email })
+                    }
 
-                <CInput
-                  placeholderTextColor={'#A6BCD0'}
-                  placeholder="username"
-                  placeholderTextColor="white"
-                  value={this.state.email}
-                  style={{ color: "white", backgroundColor: TColors.bgSecondary, borderBottomColor: "white", borderBottomWidth: .2 }}
-                  KeyboardCallback={val => this.animateLogo(val)}
-                  onSubmitEditing={email =>
-                    this.setState({ email })
-                  }
+                    onChangeText={uname => {
 
-                  onChangeText={uname => {
+                      this.validateUserName(uname);
 
-                    this.validateUserName(uname);
+                    }}
 
-                  }}
+                  />
 
-                />
-
-                {this.state.isUserNameValid ? <Icon name="checkmark-circle" /> : null}
-                {this.state.isUserNameInValid ? <Icon name="close-circle" /> : null}
-              </Item>
-              <Item
-                fixedLabel
-                success={this.state.isPasswordValid}
-                error={this.state.isPasswordInValid}
-                style={[DynamicM(5, 15, 0, 0), CommonStyles.stdInput]}>
-                <CInput
-                  placeholderTextColor={'#A6BCD0'}
-                  placeholder="password"
-                  placeholderTextColor="white"
-                  value={this.state.password}
-                  style={{ backgroundColor: TColors.bgSecondary, color: "white", borderBottomColor: "white", borderBottomWidth: .2 }}
-                  KeyboardCallback={val => this.animateLogo(val)}
-                  onChangeText={pass => {
-                    this.setState({ password: pass }, () => this.validatePassword());
-
-
-                  }}
-                />
-                {this.state.isPasswordValid ? <Icon name="checkmark-circle" /> : null}
-                {this.state.isPasswordInValid ? <Icon name="close-circle" /> : null}
-              </Item>
+                  {this.state.isUserNameValid ? <Icon name="checkmark-circle" /> : null}
+                  {this.state.isUserNameInValid ? <Icon name="close-circle" /> : null}
+                </Item>
+                <Item
+                  fixedLabel
+                  success={this.state.isPasswordValid}
+                  error={this.state.isPasswordInValid}
+                  style={[DynamicM(5, 15, 0, 0), CommonStyles.stdInput]}>
+                  <CInput
+                    placeholderTextColor={'#A6BCD0'}
+                    placeholder="password"
+                    placeholderTextColor="white"
+                    value={this.state.password}
+                    style={{ backgroundColor: TColors.bgSecondary, color: "white", borderBottomColor: "white", borderBottomWidth: .2 }}
+                    KeyboardCallback={val => this.animateLogo(val)}
+                    onChangeText={pass => {
+                      this.setState({ password: pass }, () => this.validatePassword());
 
 
-
-
-            </View>
+                    }}
+                  />
+                  {this.state.isPasswordValid ? <Icon name="checkmark-circle" /> : null}
+                  {this.state.isPasswordInValid ? <Icon name="close-circle" /> : null}
+                </Item>
+              </View>
             <View style={[{ flex: 5, flexDirection: "column", }]}>
               <LoadingButton
                 isBlock={true}
@@ -187,7 +185,7 @@ class SignIn extends Component {
                 loaderColor={TColors.bgSecondary}
                 textColor="black"
                 btnText={'Login'}
-                style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
+                style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white" }]}
                 callback={() => this.submit()}
               />
               <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
@@ -207,9 +205,6 @@ class SignIn extends Component {
               />
             </View>
           </View>
-        </Content>
-
-
       </Container>
     );
   }

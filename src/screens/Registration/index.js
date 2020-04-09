@@ -202,7 +202,7 @@ class Registration extends Component {
                             textColor="white"
                             btnText={'SignUp'}
                             style={[DynamicM(25, 5, 0, 0), {
-                                width: "90%", alignSelf: "center",
+                                lignSelf: "center",
                                 backgroundColor: TColors.bgSecondary,
                                 
                             }]}

@@ -21,25 +21,10 @@ class MasterHeader extends Component {
 
     _getMenuBtnRight() {
         if (this.props.isMenuRight) {
-
             return (
                 <Button transparent style={CommonStyles.backbtn}
                     onPress={this.props.OpenMenu}
                     background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
-                    <Menu size={18} color={'#A6BCD0'} color1={'white'} />
-                </Button>
-
-            )
-        }
-    }
-
-    _getMenuBtn() {
-        if (this.props.isMenu) {
-            return (
-                <Button transparent style={CommonStyles.backbtn}
-                    onPress={this.props.OpenMenu}
-                    background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
-                    {/* <Icon name='menu' /> */}
                     <Menu size={18} color={'#A6BCD0'} color1={'white'} />
                 </Button>
 
@@ -49,10 +34,10 @@ class MasterHeader extends Component {
 
 
     _getBackBtn() {
-        if (Platform.OS == "ios" && !this.props.accountMenu)
+        if (Platform.OS == "ios" && !this.props.accountMenu && !this.props.noBackButton)
             return (
-                <Button transparent style={[CommonStyles.backbtn, { flexDirection: "row" }]} onPress={() => NavigationService.goBack(null)} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
-                    <Icon type="FontAwesome" name='angle-left' style={{ fontSize: 20, fontWeight: 'bold' }} />
+                <Button transparent style={[CommonStyles.backbtn, { marginLeft: 5, top: -1 }]} onPress={() => NavigationService.goBack(null)} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
+                    <Icon name="back" type="AntDesign" style={{ color: "white" }}></Icon>
                 </Button>
             )
     }
@@ -60,7 +45,7 @@ class MasterHeader extends Component {
     _getPowerOffBtn() {
         if (this.props.user && !this.props.accountMenu) {
             return (
-                <Button transparent style={[CommonStyles.backbtn, { marginRight: 5 }]} onPress={async () => {
+                <Button transparent style={[CommonStyles.backbtn, { top: -7 }]} onPress={async () => {
                     await removeItem('@UserAuth');
                     this.props.customisedAction(SIGN_OUT);
                     NavigationService.navigate('Welcome');
@@ -74,7 +59,7 @@ class MasterHeader extends Component {
         const { user, loading, accountMenu, data } = this.props;
         if (user) {
             return (
-                <Button transparent style={[CommonStyles.backbtn]} onPress={() => {
+                <Button transparent style={[CommonStyles.backbtn], { zIndex: 10 }} onPress={() => {
                     if (!loading && !accountMenu && !Object.keys(data).length) this.props.customisedAction(SET_USER_SESSION, user)
                     this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)
                 }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>

@@ -1,8 +1,7 @@
 //references Region
 import React, { Component } from 'react';
-import { View, Modal } from 'react-native';
+import { Modal } from 'react-native';
 import { Container, Content } from 'native-base';
-import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import { LoadingButton } from '../../components/Utilities';
@@ -38,13 +37,6 @@ class MyAccountActions extends Component {
                         OpenMenu={null}
                         Screen={'My Account'}
                     />
-                    <View style={{ height: 0 }}>
-                        <View
-                            style={{
-                                height: 200,
-                                backgroundColor: TColors.bgColorPrimary,
-                            }}></View>
-                    </View>
 
                     <Content
                         contentContainerStyle={{

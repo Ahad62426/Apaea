@@ -41,6 +41,7 @@ class SignIn extends Component {
           }} />
         <CstHeader
           isMenuRight={true}
+          noBackButton={true}
           OpenMenu={() => {
             this.props.navigation.dispatch(DrawerActions.toggleDrawer());
           }}

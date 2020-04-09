@@ -167,7 +167,6 @@ class SignUp extends Component {
           }
           Screen={''}
         />
-
         <View
           style={[
             {
@@ -218,13 +217,11 @@ class SignUp extends Component {
               loaderColor={'white'}
               textColor="black"
               btnText={'Institutional Membership'}
-              style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white", width: "100%" }]}
+              style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white" }]}
               callback={() => this._takeMeTORegistration("Institutional")}
             />
           </View>
         </View>
-
-
       </Container>
     );
   }

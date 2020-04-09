@@ -1,12 +1,14 @@
 //references Region
 import React, {Component} from 'react';
-import {View, Modal, TouchableOpacity } from 'react-native';
+import {View, Modal, TouchableOpacity, Platform } from 'react-native';
 import {
   Container,
   Content,
   Label,
+  Title,
   Text,
-  Icon
+  Icon,
+  Left
 } from 'native-base';
 import {TColors} from '../../components/Styles';
 import {connect} from 'react-redux';
@@ -40,16 +42,26 @@ class DataDisplay extends Component {
                 backgroundColor: TColors.bgColorPrimary
               }}></View>
           </View>
+
+          <TouchableOpacity
+            style={{ 
+              zIndex: 10,
+              position: 'relative',
+              top: Platform.OS === "ios" ? 50 : 20,
+              left: 10
+            }}
+            onPress={() => customisedAction(HIDE_DATA_SCREEN)}
+          >
+            <Icon name="back" type="AntDesign" style={{ color: "white" }}></Icon>
+          </TouchableOpacity>
           <View
               style={{
-                padding: 10,
+                marginTop: Platform.OS === "ios" ? 25 : 0,
+                marginBottom: 15,
+                alignItems: 'center'
               }}>
-              <TouchableOpacity
-                onPress={() => customisedAction(HIDE_DATA_SCREEN)}
-              >
-                <Icon name="back" type="AntDesign" style={{ color: "white" }}></Icon>
-              </TouchableOpacity>
-              </View>
+                {data && <Title>{data.heading}</Title>}
+            </View>
           {data ?
             <Content
               style={[

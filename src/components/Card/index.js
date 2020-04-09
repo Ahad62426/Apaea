@@ -156,7 +156,7 @@ renderCardBody = props => {
               }, DynamicM(3, 10, 0, 0)]}
               onPress={() => 
                 store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
-                  heading: "Abstract", description: props.abstract
+                  heading: "Abstract:", description: props.abstract
                 }})
               }>
               {CactionCardItemHeading("Abstract :")}
