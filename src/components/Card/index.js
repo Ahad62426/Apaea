@@ -120,26 +120,26 @@ renderCardBody = props => {
           {props.mauthor ? CactionCardItemHeading("Main Author :") : null}
           {props.mauthor ? CactionCardItemtext(props.mauthor) : null}
 
-          {props.sub_type ? CactionCardItemHeading("Sub-Type :") : null}
-          {props.sub_type ? CactionCardItemtext(props.sub_type) : null}
+          {props.sub_type && !props.mauthor ? CactionCardItemHeading("Sub-Type :") : null}
+          {props.sub_type && !props.mauthor ? CactionCardItemtext(props.sub_type) : null}
 
-          {props.affilliation ? CactionCardItemHeading("Affilliation :") : null}
-          {props.affilliation ? CactionCardItemtext(props.affilliation) : null}
+          {props.affilliation && !props.mauthor ? CactionCardItemHeading("Affilliation :") : null}
+          {props.affilliation && !props.mauthor ? CactionCardItemtext(props.affilliation) : null}
 
-          {props.email ? CactionCardItemHeading("Email :") : null}
-          {props.email ? CactionCardItemtext(props.email) : null}
+          {props.email && !props.mauthor ? CactionCardItemHeading("Email :") : null}
+          {props.email && !props.mauthor ? CactionCardItemtext(props.email) : null}
 
-          {props.presenter ? CactionCardItemHeading("Presenter :") : null}
-          {props.presenter ? CactionCardItemtext(props.presenter) : null}
+          {props.presenter && !props.mauthor ? CactionCardItemHeading("Presenter :") : null}
+          {props.presenter && !props.mauthor ? CactionCardItemtext(props.presenter) : null}
 
-          {props.preaffiliation ? CactionCardItemHeading("P-Affiliation:") : null}
-          {props.preaffiliation ? CactionCardItemtext(props.preaffiliation) : null}
+          {props.preaffiliation && !props.mauthor ? CactionCardItemHeading("P-Affiliation:") : null}
+          {props.preaffiliation && !props.mauthor ? CactionCardItemtext(props.preaffiliation) : null}
 
-          {props.pre_email ? CactionCardItemHeading("P-Email :") : null}
-          {props.pre_email ? CactionCardItemtext(props.pre_email) : null}
+          {props.pre_email && !props.mauthor ? CactionCardItemHeading("P-Email :") : null}
+          {props.pre_email && !props.mauthor ? CactionCardItemtext(props.pre_email) : null}
 
-          {props.keyword ? CactionCardItemHeading("Keyword :") : null}
-          {props.keyword ? CactionCardItemtext(props.keyword) : null}
+          {props.keyword && !props.mauthor ? CactionCardItemHeading("Keyword :") : null}
+          {props.keyword && !props.mauthor ? CactionCardItemtext(props.keyword) : null}
 
           {props.abstract ?
             <TouchableOpacity
