@@ -18,7 +18,6 @@ import { DynamicM } from '../../components/Styles';
 import UserImg from '../ThumbNail';
 import { CSvg } from '../../components/SVGassets';
 import { customisedAction } from '../../redux/actions';
-import { GET_OUR_PEOPLE } from '../../constants'
 
 class SideBar extends Component {
   constructor(props) {
