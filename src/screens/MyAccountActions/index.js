@@ -190,7 +190,10 @@ class MyAccountActions extends Component {
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
-                                this._takeMeTOSignUp()
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Assigned Conference Paper",
+                                    dataKey: "conferencehistory1"
+                                })
                             }}
                         />
                         <LoadingButton
@@ -205,7 +208,10 @@ class MyAccountActions extends Component {
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
-                                this._takeMeTOSignUp()
+                                NavigationService.navigate('MyAccount', {
+                                    heading: "Conference Paper Submission",
+                                    dataKey: "conference"
+                                })
                             }}
                         />
                     </Content>

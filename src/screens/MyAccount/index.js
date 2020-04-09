@@ -20,6 +20,8 @@ class MyAccount extends Component {
     render() {
         const { dataKey, heading } = this.props.navigation.state.params;
         const { loading, data } = this.props;
+        let ScreenData = data[dataKey];
+        if (heading === "Conference Paper Submission") ScreenData = ScreenData.data;
         return (
             <Container
                 style={{
@@ -65,9 +67,9 @@ class MyAccount extends Component {
                         <ActivityIndicator style={{ marginTop: 20 }} size="large" color={TColors.bgSecondary} />
                         : <View style={{ flex: 1 }}>
                             <FlatList
-                                data={data[dataKey]}
+                                data={ScreenData}
                                 keyExtractor={item => `${item.id}`}
-                                renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard", screen: 'My Account' }))}
+                                renderItem={({ item }) => CCard(Object.assign(item, { type: "actionCard" }))}
                             >
                             </FlatList>
                         </View>

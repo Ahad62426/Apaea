@@ -117,30 +117,53 @@ renderCardBody = props => {
           {CactionCardItemHeading("Title :")}
           {CactionCardItemtext(props.title)}
 
+          {props.mauthor ? CactionCardItemHeading("Main Author :") : null}
+          {props.mauthor ? CactionCardItemtext(props.mauthor) : null}
 
-          {CactionCardItemHeading("Main Author :")}
-          {CactionCardItemtext(props.mauthor)}
+          {props.sub_type ? CactionCardItemHeading("Sub-Type :") : null}
+          {props.sub_type ? CactionCardItemtext(props.sub_type) : null}
 
-          <TouchableOpacity
-            style={[{
-              flexDirection: 'row',
-              paddingHorizontal: 8,
-              paddingVertical: 12,
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              borderColor: '#707070',
-              borderWidth: .5,
-              borderRadius: 8,
-              width: "100%"
-            }, DynamicM(3, 10, 0, 0)]}
-            onPress={() => 
-              store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
-                heading: "Abstract", description: props.abstract
-              }})
-            }>
-            {CactionCardItemHeading("Abstract :")}
-              <Icon name="right" size={15} color="black" />
-          </TouchableOpacity>
+          {props.affilliation ? CactionCardItemHeading("Affilliation :") : null}
+          {props.affilliation ? CactionCardItemtext(props.affilliation) : null}
+
+          {props.email ? CactionCardItemHeading("Email :") : null}
+          {props.email ? CactionCardItemtext(props.email) : null}
+
+          {props.presenter ? CactionCardItemHeading("Presenter :") : null}
+          {props.presenter ? CactionCardItemtext(props.presenter) : null}
+
+          {props.preaffiliation ? CactionCardItemHeading("P-Affiliation:") : null}
+          {props.preaffiliation ? CactionCardItemtext(props.preaffiliation) : null}
+
+          {props.pre_email ? CactionCardItemHeading("P-Email :") : null}
+          {props.pre_email ? CactionCardItemtext(props.pre_email) : null}
+
+          {props.keyword ? CactionCardItemHeading("Keyword :") : null}
+          {props.keyword ? CactionCardItemtext(props.keyword) : null}
+
+          {props.abstract ?
+            <TouchableOpacity
+              style={[{
+                flexDirection: 'row',
+                paddingHorizontal: 8,
+                paddingVertical: 12,
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderColor: '#707070',
+                borderWidth: .5,
+                borderRadius: 8,
+                width: "100%"
+              }, DynamicM(3, 10, 0, 0)]}
+              onPress={() => 
+                store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
+                  heading: "Abstract", description: props.abstract
+                }})
+              }>
+              {CactionCardItemHeading("Abstract :")}
+                <Icon name="right" size={15} color="black" />
+            </TouchableOpacity>
+            : null
+          }
 
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
