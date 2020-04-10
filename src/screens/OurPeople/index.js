@@ -85,7 +85,7 @@ class OurPeople extends Component {
                                         {people.name}
                                     </Label>
                                     {people.description ?
-                                        <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '').replace('&nbsp;', ' ')} />
+                                        <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '').replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')} />
                                         : null }
                                 </View>)
                             

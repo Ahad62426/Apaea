@@ -44,7 +44,7 @@ const CCarousel = props => {
           <View style={[{ flex: 1, width: "90%", alignSelf: "center" }]}>
             <Text style={[{ color: "white" }, DynamicFntSize(18)]}>{item.title}</Text>
             <View style={[{ width: "100%", borderBottomColor: "white", borderBottomWidth: 1 }, DynamicM(10, 10, 0, 0)]}></View>
-            <Text style={[{ color: "white" }, DynamicFntSize(15)]}>{item.description.replace('&nbsp;', ' ').trim()}</Text>
+            <Text style={[{ color: "white" }, DynamicFntSize(15)]}>{item.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ').trim()}</Text>
           </View>
         ))}
       </Carousel>

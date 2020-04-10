@@ -79,7 +79,7 @@ class AboutUs extends Component {
             : data ?
               <View>
                 <Text style={{fontSize:13,lineHeight:20}}>
-                  {data.description.replace('&nbsp;', ' ').replace('About Asia-Pacific AppliedEconomics Association ', '').replace(' contact.apaea@gmail.com', ':').trim()}
+                  {data.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ').replace('About Asia-Pacific AppliedEconomics Association ', '').replace(' contact.apaea@gmail.com', ':').trim()}
                 </Text>
                 {dataKey === 'editorial_services' ?
                   <TouchableOpacity

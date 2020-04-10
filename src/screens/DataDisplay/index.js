@@ -105,7 +105,7 @@ class DataDisplay extends Component {
               }
               <View>
                 <Text style={{fontSize:13,lineHeight:20}}>
-                  {data.description}
+                  {data.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
                 </Text>
               </View>
             </Content>
