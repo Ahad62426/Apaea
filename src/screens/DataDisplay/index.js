@@ -93,7 +93,7 @@ class DataDisplay extends Component {
                     Excerpt
                   </Label>
                   <Text style={{fontSize:13,lineHeight:20}}>
-                    {data.excerpt}
+                    {data.excerpt.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
                   </Text>
                   <Text style={{fontSize:13,lineHeight:20}}>
                   </Text>
