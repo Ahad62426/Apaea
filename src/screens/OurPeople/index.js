@@ -51,7 +51,7 @@ class OurPeople extends Component {
 
 
     render() {
-        const { loading, dataKey, data } = this.props;
+        const { loading, dataKey, data, navigation } = this.props;
         const dataArray = data[dataKey];
         return (
             <Container
@@ -63,7 +63,7 @@ class OurPeople extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={this.props.navigation.state.params.title}
+                    Screen={navigation.state.params.title}
                 />
                 <View style={{ height: 0 }}>
                     <View

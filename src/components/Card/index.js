@@ -18,51 +18,6 @@ import CommonStyles, { DynamicM, DynamicP, TColors, DynamicFntW, DynamicFntSize 
 import { BASE_URL } from '../../constants/Apis';
 import { DISPLAY_DATA_SCREEN } from '../../constants';
 
-renderPartnerCardLogo = props => {
-  switch (props) {
-    case "partner-1":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-1.png')}></Image>
-      )
-      break;
-    case "partner-2":
-      return (
-
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-2.png')}></Image>
-      )
-
-      break;
-    case "partner-3":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-3.png')}></Image>
-      )
-
-      break;
-    case "partner-4":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-4.png')}></Image>
-      )
-
-      break;
-    case "partner-5":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-5.png')}></Image>
-      )
-
-      break;
-    case "partner-6":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-6.png')}></Image>
-      )
-
-      break;
-
-    default:
-      break;
-  }
-
-}
-
 CactionCardItemHeading = text => {
   return (
     <Text style={{ color: '#2E619A', fontWeight: '700' }}>
@@ -210,7 +165,6 @@ renderCardBody = props => {
         </Body>
       )
       break;
-
     case 'blogPostCard':
       return (
         <Body>

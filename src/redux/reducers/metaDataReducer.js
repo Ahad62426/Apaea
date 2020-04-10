@@ -13,6 +13,7 @@ export default (state = { dataKey: null, data: {
   workshop: null,
   partner: null,
   faq: null,
+  news: null,
 }}, { type, payload }) => {
   switch (type) {
     case SET_DATA_KEY:

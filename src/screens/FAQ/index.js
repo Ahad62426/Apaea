@@ -40,25 +40,29 @@ class FAQ extends Component {
               backgroundColor: TColors.bgColorPrimary,
             }}></View>
         </View>
-        <Content
-          style={[
-            DynamicM(0, 0, 10, 10),
-            CommonStyles.BoxShadow,
-            {
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
-              paddingLeft: 10,
-              paddingRight: 10,
-              backgroundColor: 'white',
-            },
-          ]}>
+                <View
+                    style={[
+                        DynamicM(0, 0, 10, 10),
+                        CommonStyles.BoxShadow,
+                        {
+                            borderTopLeftRadius: 10,
+                            borderTopRightRadius: 10,
+                            paddingLeft: 10,
+                            paddingRight: 10,
+                            marginVertical: 20,
+                            backgroundColor: 'white',
+                            height: "100%",
+                            flex: 1,
+                        },
+                    ]}
+                >
             {loading ?
               <View style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}>
                 <ActivityIndicator size="large" color={TColors.bgSecondary} />
               </View>
                 : <CAccordian dataArray={data[dataKey]} />
             }
-        </Content>
+        </View>
       </Container>
     );
   }
