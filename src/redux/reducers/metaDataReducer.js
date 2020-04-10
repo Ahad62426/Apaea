@@ -16,6 +16,7 @@ export default (state = { dataKey: null, data: {
   working_paper_series: null,
   conference: null,
   new_dataSets: null,
+  conference_paper: null,
   partner: null,
   faq: null,
   news: null,
@@ -27,7 +28,7 @@ export default (state = { dataKey: null, data: {
       return { ...state, loading: true };
     case META_DATA_SUCCESS: {
       const { data } = state;
-      data[payload.dataKey] = payload.resObj;
+      data[payload.dataKey] = payload.data;
       return { ...state, data, loading: false };
     }
     case META_DATA_FAILURE: {

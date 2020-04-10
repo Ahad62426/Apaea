@@ -168,23 +168,24 @@ renderCardBody = props => {
     case 'blogPostCard':
       return (
         <Body>
-          {this.CBlogPostTitle(props.title)}
+          {this.CBlogPostTitle(props.title || props.heading || props.name)}
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
-              btnText={"Read More"}
+              btnText={props.is_active ? "Register" : "Read More"}
               style={{
                 borderRadius: 5,
                 height: 45,
                 padding: 10,
-                width: 120,
+                width: '50%',
                 borderColor: "white",
                 color: "white",
                 backgroundColor: TColors.bgSecondary
               }}
-              callback={() => 
+              callback={() => {
+                if (!props.is_active)
                 store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })
-              }></ActionButton>
+              }}></ActionButton>
           </View>
         </Body>
       )

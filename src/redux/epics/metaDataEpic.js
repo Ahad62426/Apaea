@@ -19,13 +19,16 @@ export class metaDataEpic {
     action$.pipe(
       ofType(GET_META_DATA),
       switchMap(
-        async ({ payload: { dataKey, sub_url } }) => {
+        async ({ payload: { dataKey, sub_url, extraKey } }) => {
           try {
             let URL = sub_url ? `${sub_url}/${dataKey}` : dataKey;
-            const response = await RestClient.get(URL.replace('_', '-'));
+            const response = await RestClient.get(URL.replace(/_/g, '-'));
             const { status, data: resObj, problem } = response;
+            console.log(response);
             if (status && status === 200) {
-              return customisedAction(META_DATA_SUCCESS, { resObj, dataKey });
+              let data = resObj;
+              if (extraKey) data = resObj[extraKey];
+              return customisedAction(META_DATA_SUCCESS, { data, dataKey });
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               Alert.alert(resObj.message);

@@ -125,7 +125,11 @@ export default [
     subMenu: [
       {
         Text: 'Conference Proceedings',
-        Navigation: '',
+        Navigation: 'Publications',
+        metaDataAction: GET_META_DATA,
+        action: SET_DATA_KEY,
+        dataKey: 'conferenceproceeding',
+        extraKey: 'conference_procedding',
         color: '#545454',
         cstmClass: '',
       },
@@ -144,7 +148,11 @@ export default [
       },
       {
         Text: 'Working Paper Series',
-        Navigation: '',
+        Navigation: 'Publications',
+        metaDataAction: GET_META_DATA,
+        action: SET_DATA_KEY,
+        dataKey: 'working_paper_series',
+        extraKey: 'records',
         color: '#545454',
         cstmClass: '',
       },
@@ -193,7 +201,11 @@ export default [
       },
       {
         Text: 'Conference Paper Submission',
-        Navigation: '',
+        Navigation: 'Publications',
+        metaDataAction: GET_META_DATA,
+        action: SET_DATA_KEY,
+        dataKey: 'conference_paper',
+        extraKey: 'conference_papers',
         authRequired: true,
         color: '#545454',
         cstmClass: '',

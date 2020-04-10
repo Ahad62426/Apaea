@@ -113,7 +113,7 @@ class SideBar extends Component {
             return this.props.navigation.navigate('Welcome')
           if (o.action) this.props.customisedAction(o.action, o.dataKey || o.Text)
           if (o.metaDataAction) {
-            if (!data[o.dataKey] && !loading) this.props.customisedAction(o.metaDataAction, { dataKey: o.dataKey, sub_url: o.sub_url })
+            if (!data[o.dataKey] && !loading) this.props.customisedAction(o.metaDataAction, { dataKey: o.dataKey, sub_url: o.sub_url, extraKey: o.extraKey })
           }
           if (o.Navigation) this.props.navigation.closeDrawer();
           this.props.navigation.navigate(o.Navigation, { title: o.Text, dataKey: o.dataKey })
