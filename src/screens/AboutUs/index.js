@@ -1,6 +1,6 @@
 //references Region
 import React, {Component} from 'react';
-import {View, ActivityIndicator } from 'react-native';
+import {View, ActivityIndicator, TouchableOpacity, Linking } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import {
   Container,
@@ -60,6 +60,7 @@ class AboutUs extends Component {
             {
               borderTopLeftRadius: 10,
               borderTopRightRadius: 10,
+              paddingTop: 10,
               paddingLeft: 10,
               paddingRight: 10,
               backgroundColor: 'white',
@@ -76,9 +77,20 @@ class AboutUs extends Component {
               <ActivityIndicator style={{ marginTop: 20 }} size="large" color={TColors.bgSecondary} />
             </View>
             : data ?
-              <Text style={{fontSize:13,lineHeight:20}}>
-                {data.description.replace('About Asia-Pacific AppliedEconomics Association ', '').trim()}
-              </Text>
+              <View>
+                <Text style={{fontSize:13,lineHeight:20}}>
+                  {data.description.replace('&nbsp;', ' ').replace('About Asia-Pacific AppliedEconomics Association ', '').replace(' contact.apaea@gmail.com', ':').trim()}
+                </Text>
+                {dataKey === 'editorial_services' ?
+                  <TouchableOpacity
+                    onPress={() => Linking.openURL('mailto:support@example.com')}
+                  >
+                    <Text style={{ color: TColors.bgSecondary, fontSize:13, lineHeight:20 }}>
+                      contact.apaea@gmail.com
+                    </Text>
+                  </TouchableOpacity> : null
+                }
+              </View>
             : <View><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>Data Not Available!</Title></View>
           }
         </Content>
