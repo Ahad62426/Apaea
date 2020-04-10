@@ -21,7 +21,7 @@ class MyAccount extends Component {
         const { dataKey, heading } = this.props.navigation.state.params;
         const { loading, data } = this.props;
         let ScreenData = data[dataKey];
-        if (heading === "Conference Paper Submission") ScreenData = ScreenData.data;
+        if (heading === "Conference Paper Submission" && ScreenData.data) ScreenData = ScreenData.data;
         return (
             <Container
                 style={{

@@ -97,20 +97,17 @@ class DataDisplay extends Component {
                   </Text>
                   <Text style={{fontSize:13,lineHeight:20}}>
                   </Text>
-                </View>
-              }
-
-              {data.description && 
-                <View>
                   <Label
                     style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
                     Description
                   </Label>
-                  <Text style={{fontSize:13,lineHeight:20}}>
-                    {data.description.replace('&nbsp;', ' ')}
-                  </Text>
                 </View>
               }
+              <View>
+                <Text style={{fontSize:13,lineHeight:20}}>
+                  {data.description}
+                </Text>
+              </View>
             </Content>
             : null
           }
