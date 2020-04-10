@@ -26,7 +26,10 @@ class AboutUs extends Component {
   }
 
   render() {
-    const { loadingData, aboutUs, customisedAction } = this.props;
+    const { boardingDataReducer, customisedAction } = this.props;
+    const { loadingData } = this.props.boardingDataReducer;
+    const { title, dataKey } = this.props.navigation.state.params;
+    const data = boardingDataReducer[dataKey];
     return (
       <Container
         style={{
@@ -34,14 +37,14 @@ class AboutUs extends Component {
         }}>
 
         <NavigationEvents onDidFocus={() => {
-          if (!loadingData && !aboutUs) customisedAction(GET_BOARDING_DATA);
+          if (!loadingData && boardingDataReducer[dataKey]) customisedAction(GET_BOARDING_DATA);
         }} />
         <CstHeader
           isMenuRight={true}
           OpenMenu={() => {
             this.props.navigation.dispatch(DrawerActions.toggleDrawer());
           }}
-          Screen={'About Us'}
+          Screen={title}
         />
         <View style={{height: 0}}>
           <View
@@ -62,17 +65,19 @@ class AboutUs extends Component {
               backgroundColor: 'white',
             },
           ]}>
-          <Label
-            style={[DynamicP(10, 10, 0, 0), {fontSize: 14, fontWeight: '700'}]}>
-            About Asia-Pacific Applied Economics Association
-          </Label>
+          {dataKey === 'aboutUs' ?
+            <Label
+              style={[DynamicP(10, 10, 0, 0), {fontSize: 14, fontWeight: '700'}]}>
+              About Asia-Pacific Applied Economics Association
+            </Label> : null
+          }
           {loadingData ? 
             <View style={[{ flex: 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
               <ActivityIndicator style={{ marginTop: 20 }} size="large" color={TColors.bgSecondary} />
             </View>
-            : aboutUs ?
+            : data ?
               <Text style={{fontSize:13,lineHeight:20}}>
-                {aboutUs.description.replace('About Asia-Pacific AppliedEconomics Association ', '').trim()}
+                {data.description.replace('About Asia-Pacific AppliedEconomics Association ', '').trim()}
               </Text>
             : <View><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>Data Not Available!</Title></View>
           }
@@ -82,8 +87,8 @@ class AboutUs extends Component {
   }
 }
 
-const mapStateToProps = ({ boardingDataReducer: { loadingData, aboutUs } }) => ({
-  loadingData, aboutUs
+const mapStateToProps = ({ boardingDataReducer }) => ({
+  boardingDataReducer
 });
 
 export default connect(mapStateToProps, { customisedAction })(AboutUs);

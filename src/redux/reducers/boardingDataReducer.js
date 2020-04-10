@@ -21,6 +21,7 @@ export default (state = {}, { type, payload }) => {
       return {
         ...state, loadingData: false,
         aboutUs: payload[0],
+        editorial_services: payload[5],
         sliderData: newSlider,
       };
     }

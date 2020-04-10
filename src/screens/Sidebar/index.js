@@ -103,18 +103,20 @@ class SideBar extends Component {
   }
 
   _renderContent = item => {
-    const { loading, data } = this.props;
+    const { loading, data, user } = this.props;
     return item.subMenu.map(o => (
       <ListItem
         style={{ marginLeft: 0, borderColor: 'transparent' }}
         key={1}
         onPress={() => {
+          if (o.authRequired && !user)
+            return this.props.navigation.navigate('Welcome')
           if (o.action) this.props.customisedAction(o.action, o.dataKey || o.Text)
           if (o.metaDataAction) {
             if (!data[o.dataKey] && !loading) this.props.customisedAction(o.metaDataAction, { dataKey: o.dataKey, sub_url: o.sub_url })
           }
-          this.props.navigation.closeDrawer();
-          this.props.navigation.navigate(o.Navigation, { title: o.Text })
+          if (o.Navigation) this.props.navigation.closeDrawer();
+          this.props.navigation.navigate(o.Navigation, { title: o.Text, dataKey: o.dataKey })
         }}>
         <Body
           style={{
@@ -229,7 +231,7 @@ class SideBar extends Component {
                       if (!data[Obje.dataKey] && !loading) this.props.customisedAction(Obje.metaDataAction, { dataKey: Obje.dataKey, sub_url: Obje.sub_url })
                     }
                     this.props.navigation.closeDrawer();
-                    this.props.navigation.navigate(Obje.Navigation, { title: Obje.Text })
+                    this.props.navigation.navigate(Obje.Navigation, { title: Obje.Text, dataKey: Obje.dataKey })
                   }}>
                   <Body style={{ flex: 10 }}>
                     <Text
