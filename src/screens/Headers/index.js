@@ -36,7 +36,7 @@ class MasterHeader extends Component {
     _getBackBtn() {
         if (Platform.OS == "ios" && !this.props.accountMenu && !this.props.noBackButton)
             return (
-                <Button transparent style={[CommonStyles.backbtn, { marginLeft: 5, top: -1 }]} onPress={() => NavigationService.goBack(null)} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
+                <Button transparent style={[CommonStyles.backbtn, { marginLeft: 0, paddingRight: 5, top: -1 }]} onPress={() => NavigationService.goBack(null)} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     <Icon name="back" type="AntDesign" style={{ color: "white" }}></Icon>
                 </Button>
             )
@@ -45,7 +45,7 @@ class MasterHeader extends Component {
     _getPowerOffBtn() {
         if (this.props.user && !this.props.accountMenu) {
             return (
-                <Button transparent style={[CommonStyles.backbtn, { top: -7, left: 7 }]} onPress={async () => {
+                <Button transparent style={[CommonStyles.backbtn, { top: -7, paddingLeft: 5, left: 7 }]} onPress={async () => {
                     await removeItem('@UserAuth');
                     this.props.customisedAction(SIGN_OUT);
                     NavigationService.navigate('Welcome');
