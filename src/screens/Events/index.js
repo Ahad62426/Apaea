@@ -59,7 +59,7 @@ class Events extends Component {
                 >
                     {loading ?
                         <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
-                        : data[dataKey] && data[dataKey].length ?
+                        : data[dataKey] ? data[dataKey].length ?
                             <FlatList
                                 data={data[dataKey]}
                                 keyExtractor={(item, index) => `${item.id}`}
@@ -68,9 +68,12 @@ class Events extends Component {
                             >
                             </FlatList>
                         :   <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                            <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No {navigation.state.params.title}s Posted yet.</Text>
-                            <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
-                        </View>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No {navigation.state.params.title} Posted yet.</Text>
+                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                            </View> 
+                        :   <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
+                            </View>
                     }
                 </View>
             </Container >

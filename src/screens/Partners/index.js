@@ -59,7 +59,7 @@ class Partners extends Component {
                 >
                     {loading ?
                         <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
-                        : data[dataKey] && data[dataKey].length ?
+                        : data[dataKey] ? data[dataKey].length ?
                             <View style={{ flex: 1 }}>
                                 <FlatList
                                     data={data[dataKey]}
@@ -74,6 +74,9 @@ class Partners extends Component {
                         : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
                             <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No Data available For {navigation.state.params.title}.</Text>
                             <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                        </View> 
+                        : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
+                            <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
                         </View>
                     }
                 </View>

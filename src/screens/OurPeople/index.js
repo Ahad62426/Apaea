@@ -70,7 +70,7 @@ class OurPeople extends Component {
                             },
                         ]}>
                         
-                        {dataArray && dataArray.length ? 
+                        {dataArray ? dataArray.length ? 
                             dataArray.map(people =>
                                 <View>
                                     {people.image && people.image.includes('.') ?
@@ -92,6 +92,9 @@ class OurPeople extends Component {
                             : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
                                 <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No Data available For {navigation.state.params.title}.</Text>
                                 <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                            </View> 
+                            : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
                             </View>
                         }
 
