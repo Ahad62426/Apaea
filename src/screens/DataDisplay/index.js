@@ -60,7 +60,7 @@ class DataDisplay extends Component {
                 marginBottom: 15,
                 alignItems: 'center'
               }}>
-                {data && <Title>{data.heading}</Title>}
+                {data && <Title>{data.header}</Title>}
             </View>
           {data ?
             <Content
@@ -70,19 +70,47 @@ class DataDisplay extends Component {
                 {
                   borderTopLeftRadius: 10,
                   borderTopRightRadius: 10,
+                  paddingTop: 10,
                   paddingLeft: 10,
                   paddingRight: 10,
                   backgroundColor: 'white',
                 },
               ]}>
-              <Label
-                style={[DynamicP(10, 10, 0, 0), {fontSize: 14, fontWeight: '700'}]}>
-                {data.heading}
-              </Label>
+              {data.title && <Label
+                style={[DynamicP(10, 10, 0, 0), {fontSize: 18, fontWeight: '700'}]}>
+                {data.title}
+              </Label>}
 
-              <Text style={{fontSize:13,lineHeight:20}}>
-                {data.description}
-              </Text>
+              {data.heading && <Label
+                style={[DynamicP(10, 10, 0, 0), {fontSize: 18, fontWeight: '700'}]}>
+                {data.heading}
+              </Label>}
+
+              {data.excerpt && 
+                <View>
+                  <Label
+                    style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
+                    Excerpt
+                  </Label>
+                  <Text style={{fontSize:13,lineHeight:20}}>
+                    {data.excerpt}
+                  </Text>
+                  <Text style={{fontSize:13,lineHeight:20}}>
+                  </Text>
+                </View>
+              }
+
+              {data.description && 
+                <View>
+                  <Label
+                    style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
+                    Description
+                  </Label>
+                  <Text style={{fontSize:13,lineHeight:20}}>
+                    {data.description}
+                  </Text>
+                </View>
+              }
             </Content>
             : null
           }

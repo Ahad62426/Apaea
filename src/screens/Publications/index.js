@@ -61,19 +61,18 @@ class Publications extends Component {
                 >
                     {loading ?
                         <ActivityIndicator style={{ flex: 1, flexDirection: "column", justifyContent: "center" }} size="large" color={TColors.bgSecondary} />
-                        : data[dataKey] ?
+                        : data[dataKey] && data[dataKey].length ?
                             <FlatList
                                 data={data[dataKey]}
                                 keyExtractor={(item, index) => `${item.id}`}
-                                renderItem={({ item }) => CCard(Object.assign(item, { type: "blogPostCard" }))}
+                                renderItem={({ item }) => CCard(Object.assign(item, { type: "blogPostCard", header: navigation.state.params.title }))}
                                 style={{ marginVertical: 8 }}
 
                             >
                             </FlatList>
                         :   <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No {navigation.state.params.title} Posted yet.</Text>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No {navigation.state.params.title}s Posted yet.</Text>
                                 <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
-
                             </View>
                     }
                 </View>

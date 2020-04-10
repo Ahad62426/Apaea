@@ -109,7 +109,7 @@ renderCardBody = props => {
               }, DynamicM(3, 10, 0, 0)]}
               onPress={() => 
                 store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
-                  heading: "Abstract:", description: props.abstract
+                  header: "Abstract", description: props.abstract
                 }})
               }>
               {CactionCardItemHeading("Abstract :")}
@@ -175,15 +175,16 @@ renderCardBody = props => {
               btnText={"Read More"}
               style={{
                 borderRadius: 5,
-                height: 30,
+                height: 45,
                 padding: 10,
                 width: 120,
                 borderColor: "white",
                 color: "white",
                 backgroundColor: TColors.bgSecondary
               }}
-            ></ActionButton>
-
+              callback={() => 
+                store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })
+              }></ActionButton>
           </View>
         </Body>
       )

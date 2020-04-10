@@ -1,38 +1,18 @@
 //references Region
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Image } from 'react-native';
-import {
-    Container,
-    Drawer,
-    Button,
-    Icon,
-    Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Label,
-    Text,
-} from 'native-base';
+import { Container, Content, Label, Text } from 'native-base';
 import HTML from 'react-native-render-html';
-import SideBar from '../Sidebar';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
-import { LoadingButton, RenderOurPeopleDP } from '../../components/Utilities';
-import IonIcons from 'react-native-vector-icons/Entypo';
-import Peoples from '../../i18n/en/en.ourPeople';
 
 import CommonStyles, {
     DynamicP,
     DynamicFntW,
+    DynamicFntSize,
     DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicBDRadius,
-    DynamicBorderPosition,
 } from '../../components/Styles';
 import { BASE_URL } from '../../constants';
 
@@ -90,24 +70,30 @@ class OurPeople extends Component {
                             },
                         ]}>
                         
-                        {dataArray && dataArray.map(people =>
-                            <View>
-                                {people.image && people.image.includes('.') ?
-                                    <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
-                                        <Image style={{ width: 180, height: 180, resizeMode: "contain", resizeMethod: "resize", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`, cache: "force-cache" }} ></Image>
-                                    </View>
-                                    : null }
-                                <Label
-                                    style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
-                                        fontSize: 18,
-                                    }]}>
-                                    {people.name}
-                                </Label>
-                                {people.description ?
-                                    <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '')} />
-                                    : null }
+                        {dataArray && dataArray.length ? 
+                            dataArray.map(people =>
+                                <View>
+                                    {people.image && people.image.includes('.') ?
+                                        <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
+                                            <Image style={{ width: 180, height: 180, resizeMode: "contain", resizeMethod: "resize", borderRadius: 50 }} source={{ uri: `${BASE_URL}/dev/${people.image}`, cache: "force-cache" }} ></Image>
+                                        </View>
+                                        : null }
+                                    <Label
+                                        style={[DynamicP(10, 10, 0, 0), CommonStyles.textCenter, {
+                                            fontSize: 18,
+                                        }]}>
+                                        {people.name}
+                                    </Label>
+                                    {people.description ?
+                                        <HTML html={people.description.replace(/\s+/g,' ').replace(/\n/ig, '')} />
+                                        : null }
+                                </View>)
+                            
+                            : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No Data available For {navigation.state.params.title}.</Text>
+                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
                             </View>
-                        )}
+                        }
 
                     </Content>
                 }
