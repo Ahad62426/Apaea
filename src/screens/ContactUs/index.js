@@ -1,45 +1,14 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
-import {
-    Container,
-    Drawer,
-    Button,
-    Icon,
-    Content,
-    Footer,
-    FooterTab,
-    Left,
-    Right,
-    Form,
-    Item,
-    Input,
-    Label,
-    Textarea,
-    Text,
-} from 'native-base';
-import SideBar from '../Sidebar';
+import { View } from 'react-native';
+import { Container, Form, Item, Content, Input, Textarea } from 'native-base';
 import { TColors, DynamicWidth } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
-import ChatIcon from '../../assets/Icons/chatSVG';
 import { LoadingButton } from '../../components/Utilities';
-import IonIcons from 'react-native-vector-icons/Entypo';
 
-import CommonStyles, {
-    DynamicP,
-    DynamicFntW,
-    DynamicM,
-    DynamicBgColor,
-    DynamicHeight,
-    DynamicFntSize,
-    DynamicBDRadius,
-    DynamicBorderPosition,
-} from '../../components/Styles';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
-
+import CommonStyles, { DynamicP, DynamicM, DynamicFntSize } from '../../components/Styles';
 //endregion
 
 class ContactUs extends Component {
@@ -48,16 +17,6 @@ class ContactUs extends Component {
         this.state = {
             submitting: false,
         };
-    }
-
-    _takeMeTOWelcome = () => {
-        this.props.navigation.navigate('Welcome');
-    };
-
-    _showAlert(title, msg, btn) {
-        Alert.alert(title, msg, [
-            { text: btn == null ? 'Okay' : btn, onPress: () => { } },
-        ]);
     }
 
     render() {
@@ -129,8 +88,4 @@ class ContactUs extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ContactUs);
+export default connect(null, {})(ContactUs);
