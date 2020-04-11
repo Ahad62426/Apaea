@@ -90,7 +90,7 @@ class DataDisplay extends Component {
                 <View>
                   <Label
                     style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
-                    Excerpt
+                    Excerpt:
                   </Label>
                   <Text style={{fontSize:13,lineHeight:20}}>
                     {data.excerpt.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
@@ -99,14 +99,16 @@ class DataDisplay extends Component {
                   </Text>
                   <Label
                     style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
-                    Description
+                    Description:
                   </Label>
                 </View>
               }
               <View>
-                <Text style={{fontSize:13,lineHeight:20}}>
-                  {data.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
-                </Text>
+                {data.description ?
+                  <Text style={{fontSize:13,lineHeight:20}}>
+                    {data.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
+                  </Text> : null
+                }
               </View>
             </Content>
             : null

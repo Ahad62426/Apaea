@@ -12,14 +12,14 @@ export default (state = { dataKey: null, data: {
   upconferences: null,
   workshop: null,
   conferenceproceeding: null,
-  journals: null,
+  journal: null,
   working_paper_series: null,
   conference: null,
-  new_dataSets: null,
+  new_datasets: null,
   conference_paper: null,
+  news: null,
   partner: null,
   faq: null,
-  news: null,
 }}, { type, payload }) => {
   switch (type) {
     case SET_DATA_KEY:

@@ -60,7 +60,7 @@ class ContactUs extends Component {
             message,
             dataKey: navigation.state.params.dataKey
         }
-        if (this.props.navigation.state.params.dataKey !== "contactus") {
+        if (navigation.state.params.dataKey !== "constact-us-form") {
             data = {
                 title,
                 author,
@@ -114,7 +114,7 @@ class ContactUs extends Component {
                     ]}>
 
                     <Form style={[DynamicM(0, 10, 0, 0), DynamicP(10, 5, 5, 5)]}>
-                        {dataKey === "contactus" ?
+                        {dataKey === "constact-us-form" ?
                             <View>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                                     <Input placeholder="Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
@@ -201,11 +201,11 @@ class ContactUs extends Component {
                         <LoadingButton
                             isBlock={true}
                             submitting={loading}
-                            submittingText={dataKey === "contactus" ? "Sending" : "Submitting"}
+                            submittingText={dataKey === "constact-us-form" ? "Sending" : "Submitting"}
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={dataKey === "contactus" ? "Send message" : "Submit Paper"}
+                            btnText={dataKey === "constact-us-form" ? "Send message" : "Submit Paper"}
                             style={[DynamicM(25, 5, 0, 0), {
                                 width: "90%", alignSelf: "center",
                                 backgroundColor: TColors.bgSecondary,

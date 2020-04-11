@@ -117,24 +117,25 @@ renderCardBody = props => {
             </TouchableOpacity>
             : null
           }
-
-          <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
-            <ActionButton
-              textColor={"white"}
-              btnText={"Download"}
-              callback={() => Linking.openURL(`${BASE_URL}/public/paper/${props.file}`)}
-              icon={"download"}
-              style={{
-                borderRadius: 5,
-                height: 45,
-                padding: 0,
-                width: "100%",
-                borderColor: "white",
-                color: "white",
-                backgroundColor: TColors.bgSecondary
-              }}
-            ></ActionButton>
-          </View>
+          {props.file && props.file.includes('.') ?
+            <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+              <ActionButton
+                textColor={"white"}
+                btnText={"Download"}
+                callback={() => Linking.openURL(`${BASE_URL}/public/paper/${props.file}`)}
+                icon={"download"}
+                style={{
+                  borderRadius: 5,
+                  height: 45,
+                  padding: 0,
+                  width: "100%",
+                  borderColor: "white",
+                  color: "white",
+                  backgroundColor: TColors.bgSecondary
+                }}
+              ></ActionButton>
+            </View> : null
+          }
         </Body>
       )
       break;
