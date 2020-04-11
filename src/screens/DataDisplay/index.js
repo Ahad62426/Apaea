@@ -37,7 +37,7 @@ class DataDisplay extends Component {
           <View style={{height: 0}}>
             <View
               style={{
-                height: 200,
+                height: Platform.OS === "ios" ? 290 : 255,
                 padding: 10,
                 backgroundColor: TColors.bgColorPrimary
               }}></View>

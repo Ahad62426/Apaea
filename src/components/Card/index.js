@@ -171,22 +171,41 @@ renderCardBody = props => {
         <Body>
           {this.CBlogPostTitle(props.title || props.heading || props.name)}
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
-            <ActionButton
-              textColor={"white"}
-              btnText={props.is_active ? "Register" : "Read More"}
-              style={{
-                borderRadius: 5,
-                height: 45,
-                padding: 10,
-                width: '50%',
-                borderColor: "white",
-                color: "white",
-                backgroundColor: TColors.bgSecondary
-              }}
-              callback={() => {
-                if (!props.is_active)
-                store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })
-              }}></ActionButton>
+          {/* {props.description || props.excerpt ? */}
+              <ActionButton
+                textColor={"white"}
+                btnText={props.is_active ? "Register" : "Read More"}
+                style={{
+                  borderRadius: 5,
+                  height: 45,
+                  padding: 10,
+                  width: '48%',
+                  borderColor: "white",
+                  color: "white",
+                  backgroundColor: TColors.bgSecondary
+                }}
+                callback={() => {
+                  if (!props.is_active)
+                  store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })
+                }}></ActionButton>
+            {/* } */}
+            {props.file && props.file.includes('.') ?
+              <ActionButton
+                textColor={"white"}
+                btnText={"Download"}
+                icon={"download"}
+                style={{
+                  borderRadius: 5,
+                  height: 45,
+                  padding: 10,
+                  width: '48%',
+                  borderColor: "white",
+                  color: "white",
+                  backgroundColor: TColors.bgSecondary
+                }}
+                callback={() => Linking.openURL(`${BASE_URL}/${props.file}`)}
+              ></ActionButton> : null
+            }
           </View>
         </Body>
       )
