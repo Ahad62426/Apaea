@@ -102,7 +102,6 @@ class Registration extends Component {
                             backgroundColor: 'white',
                         },
                     ]}
-                    contentContainerStyle={CommonStyles.hc}
                 >
 
                     <Form style={[DynamicM(0, 10, 0, 0), DynamicP(10, 5, 5, 5)]}>
