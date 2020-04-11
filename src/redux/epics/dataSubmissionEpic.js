@@ -5,46 +5,43 @@ import { ofType } from 'redux-observable';
 
 import { customisedAction } from '../actions';
 import {
-  GET_META_DATA,
-  META_DATA_SUCCESS,
-  META_DATA_FAILURE,
+  SUBMIT_DATA,
+  DATA_SUBMISSION_SUCCESS,
+  DATA_SUBMISSION_FAILURE,
+  API_ENDPOINTS,
   NETWORK_ERROR_MSG,
   ERROR_MSG,
-  UNKNOWN_ERROR_MSG
+  UNKNOWN_ERROR_MSG,
 } from '../../constants';
 import { RestClient } from '../../network/RestClient';
 
-export class metaDataEpic {
-  static getData = action$ =>
+export class dataSubmissionEpic {
+  static dataSubmission = action$ =>
     action$.pipe(
-      ofType(GET_META_DATA),
+      ofType(SUBMIT_DATA),
       switchMap(
-        async ({ payload: { dataKey, sub_url, extraKey } }) => {
+        async ({ payload }) => {
           try {
-            let URL = sub_url ? `${sub_url}/${dataKey}` : dataKey;
-            const response = await RestClient.get(URL.replace(/_/g, '-'));
+            const response = await RestClient.post(payload.dataKey, payload);
             const { status, data: resObj, problem } = response;
-            console.log(response);
             if (status && status === 200) {
-              let data = resObj;
-              if (extraKey) data = resObj[extraKey];
-              return customisedAction(META_DATA_SUCCESS, { data, dataKey });
+              Alert.alert(resObj.msg)
+              return customisedAction(DATA_SUBMISSION_SUCCESS);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               Alert.alert(resObj.message);
-              return customisedAction(META_DATA_FAILURE);
+              return customisedAction(DATA_SUBMISSION_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
-              return customisedAction(META_DATA_FAILURE);
+              return customisedAction(DATA_SUBMISSION_FAILURE);
             }
             Alert.alert(ERROR_MSG);
-            return customisedAction(META_DATA_FAILURE);
+            return customisedAction(DATA_SUBMISSION_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
-            console.log('MetaData Unknown Error', error);
+            console.log('DataSubmission Unknown Error', error);
             Alert.alert(UNKNOWN_ERROR_MSG);
-            return customisedAction(META_DATA_FAILURE);
+            return customisedAction(DATA_SUBMISSION_FAILURE);
           }
         }
       )

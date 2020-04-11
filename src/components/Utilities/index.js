@@ -100,7 +100,7 @@ const LoadingButton = props => {
       style={props.style}
       onPress={!props.submitting ? props.callback : null}>
       <Text style={[CommonStyles.BtnTxt, { color: props.textColor }, props.textStyle ]}>
-        {props.submitting ? `Submitting` : `${props.btnText}`}
+        {props.submitting ? props.submittingText || `Submitting` : `${props.btnText}`}
       </Text>
       {props.submitting ? (
         <ActivityIndicator size="small" color={props.loaderColor} />

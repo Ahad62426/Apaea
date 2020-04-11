@@ -6,6 +6,7 @@ import { signUpEpic } from './signUpEpic';
 import { sessionEpic } from './sessionEpic';
 import { myAccountEpic } from './myAccountEpic';
 import { metaDataEpic } from './metaDataEpic';
+import { dataSubmissionEpic } from './dataSubmissionEpic';
 
 export const epics = combineEpics(
     boardingDataEpic.boardingData,
@@ -15,4 +16,5 @@ export const epics = combineEpics(
     sessionEpic.session,
     myAccountEpic.myAccount,
     metaDataEpic.getData,
+    dataSubmissionEpic.dataSubmission,
 );

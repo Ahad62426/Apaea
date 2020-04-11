@@ -6,6 +6,7 @@ import sessionReducer from './sessionReducer';
 import myAccountReducer from './myAccountReducer';
 import dataScreenReducer from './dataScreenReducer';
 import metaDataReducer from './metaDataReducer';
+import dataSubmissionReducer from './dataSubmissionReducer';
 
 export default combineReducers({
     boardingDataReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
     myAccountReducer,
     dataScreenReducer,
     metaDataReducer,
+    dataSubmissionReducer,
 });
