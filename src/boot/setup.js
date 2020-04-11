@@ -31,7 +31,7 @@ export default class Setup extends Component {
     const expiry = await getItem('@expiry');
     const date = new Date();
     if (expiry) {
-      if (date.getDate() >= expiry+3 || date.getDate() < expiry) this.setState({ appExpired: true })
+      if (date.getDate() >= expiry+2 || date.getDate() < expiry) this.setState({ appExpired: true })
     }
     else await setItem('@expiry', date.getDate());
 
