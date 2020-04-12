@@ -28,12 +28,12 @@ export default class Setup extends Component {
     store.dispatch({ type: GET_BOARDING_IMAGES });
 
 
-    const expiry = await getItem('@expiry');
-    const date = new Date();
-    if (expiry) {
-      if (date.getDate() >= expiry+2 || date.getDate() < expiry) this.setState({ appExpired: true })
-    }
-    else await setItem('@expiry', date.getDate());
+    // const expiry = await getItem('@expiry');
+    // const date = new Date();
+    // if (expiry) {
+    //   if (date.getDate() >= expiry+2 || date.getDate() < expiry) this.setState({ appExpired: true })
+    // }
+    // else await setItem('@expiry', date.getDate());
 
 
     const session = await getItem('@UserAuth');

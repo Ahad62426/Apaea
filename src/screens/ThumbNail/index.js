@@ -33,7 +33,7 @@ class Thumbs extends Component {
             fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 20,
           }]}
         >
-          {`${this.props.UserInfo.FirstName[0]}${this.props.UserInfo.LastName[0]}`}
+          {`${this.props.UserInfo.FirstName[0] || ''}${this.props.UserInfo.LastName[0] || ''}`}
         </Text>
       </View>
     );
