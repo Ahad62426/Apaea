@@ -24,7 +24,6 @@ export class metaDataEpic {
             let URL = sub_url ? `${sub_url}/${dataKey}` : dataKey;
             const response = await RestClient.get(URL.replace(/_/g, '-'));
             const { status, data: resObj, problem } = response;
-            console.log(response);
             if (status && status === 200) {
               let data = resObj;
               if (extraKey) data = resObj[extraKey];
