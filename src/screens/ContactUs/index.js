@@ -1,8 +1,8 @@
 //references Region
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { Container, Form, Item, Content, Input, Textarea } from 'native-base';
-import { NavigationEvents } from 'react-navigation';
+import DocumentPicker from 'react-native-document-picker';
 import { TColors, DynamicWidth } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
@@ -33,7 +33,7 @@ class ContactUs extends Component {
         };
     }
 
-    componentWillReceiveProps() {
+    UNSAFE_componentWillReceiveProps() {
         this.setState({
             name: null,
             email: null,
@@ -75,6 +75,16 @@ class ContactUs extends Component {
             }
         }
         customisedAction(SUBMIT_DATA, data);
+    }
+
+    async _selectFile() {
+        try {
+            const res = await DocumentPicker.pick();
+            // this.setState({ file: res })
+            console.log(res);
+        } catch (err) {
+            throw err;
+        }
     }
 
     render() {
@@ -185,10 +195,12 @@ class ContactUs extends Component {
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Full Paper" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
-                                        value={file}
-                                        onChangeText={value => this.setState({ file: value })}
-                                    />
+                                    <TouchableOpacity
+                                        style={[CommonStyles.inputRadius, DynamicP(15, 15, 10, 10), DynamicWidth("100%")]}
+                                        onPress={() => this._selectFile()}
+                                    >
+                                        <Text style={[DynamicFntSize(15), { color: 'rgba(0, 0, 0, 0.7)'} ]}>Choose file</Text>
+                                    </TouchableOpacity>
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                                     <Input placeholder="Total No of Pages" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
