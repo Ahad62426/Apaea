@@ -56,11 +56,11 @@ class MasterHeader extends Component {
         }
     }
     _getProfileIcon() {
-        const { user, loading, accountMenu, data } = this.props;
+        const { user, loading, accountMenu, data, upToDate } = this.props;
         if (user) {
             return (
                 <Button transparent style={[CommonStyles.backbtn], { zIndex: 10, left: 7 }} onPress={() => {
-                    if (!loading && !accountMenu && !Object.keys(data).length) this.props.customisedAction(SET_USER_SESSION, user)
+                    if (!loading && !accountMenu && (!Object.keys(data).length || !upToDate)) this.props.customisedAction(SET_USER_SESSION, user)
                     this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)
                 }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     {!accountMenu ?
@@ -93,8 +93,8 @@ class MasterHeader extends Component {
     }
 }
 
-const mapStateToProps = ({ sessionReducer: { user }, myAccountReducer: { loading, accountMenu, data } }) => ({
-    user, loading, accountMenu, data
+const mapStateToProps = ({ sessionReducer: { user }, myAccountReducer: { loading, accountMenu, upToDate, data } }) => ({
+    user, loading, accountMenu, upToDate, data
 });
 
 export default connect(mapStateToProps, { customisedAction })(MasterHeader);

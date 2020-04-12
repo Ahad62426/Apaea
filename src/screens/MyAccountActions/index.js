@@ -71,7 +71,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Assigned Working Paper",
-                                    dataKey: "workingpaper"
+                                    dataKey: "workinhistory"
                                 })
                             }}
                         />
@@ -90,7 +90,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Submitted Working Paper",
-                                    dataKey: "workinhistory"
+                                    dataKey: "workingpaper"
                                 })
                             }}
                         />
@@ -109,7 +109,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Assigned Review Paper",
-                                    dataKey: "reviewpaper"
+                                    dataKey: "reviewhistory"
                                 })
                             }}
                         />
@@ -128,7 +128,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Submitted Review Paper",
-                                    dataKey: "reviewhistory"
+                                    dataKey: "reviewpaper"
                                 })
                             }}
                         />
@@ -147,7 +147,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Assigned Proof Reading Scripts",
-                                    dataKey: "proofreading"
+                                    dataKey: "proofpaper"
                                 })
                             }}
                         />
@@ -166,7 +166,7 @@ class MyAccountActions extends Component {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
                                     heading: "Submitted Proof Reading Scripts",
-                                    dataKey: "proofpaper"
+                                    dataKey: "proofreading"
                                 })
                             }}
                         />
