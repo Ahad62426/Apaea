@@ -23,18 +23,18 @@ export default class Setup extends Component {
 
   async componentDidMount() {
     console.disableYellowBox = true;
-    SplashScreen.hide();
     store.dispatch({ type: GET_BOARDING_DATA });
     store.dispatch({ type: GET_BOARDING_IMAGES });
 
 
-    // const expiry = await getItem('@expiry');
-    // const date = new Date();
-    // if (expiry) {
-    //   if (date.getDate() >= expiry+2 || date.getDate() < expiry) this.setState({ appExpired: true })
-    // }
-    // else await setItem('@expiry', date.getDate());
+    const expired = await getItem('@expired');
+    if (expired) this.setState({ appExpired: true });
+    else {
+      const date = new Date();
+      if (date.getDate() >= 14) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
+    }
 
+    SplashScreen.hide();
 
     const session = await getItem('@UserAuth');
     if (session) store.dispatch({ type: SET_USER_SESSION, payload: session });
