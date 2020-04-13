@@ -79,9 +79,8 @@ class ContactUs extends Component {
 
     async _selectFile() {
         try {
-            const res = await DocumentPicker.pick();
-            // this.setState({ file: res })
-            console.log(res);
+            const file = await DocumentPicker.pick();
+            this.setState({ file: file.name })
         } catch (err) {
             throw err;
         }
@@ -199,7 +198,9 @@ class ContactUs extends Component {
                                         style={[CommonStyles.inputRadius, DynamicP(15, 15, 10, 10), DynamicWidth("100%")]}
                                         onPress={() => this._selectFile()}
                                     >
-                                        <Text style={[DynamicFntSize(15), { color: 'rgba(0, 0, 0, 0.7)'} ]}>Choose file</Text>
+                                        <Text style={[DynamicFntSize(15), { color: 'rgba(0, 0, 0, 0.7)'} ]}>
+                                            {file || 'Choose file'}
+                                        </Text>
                                     </TouchableOpacity>
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >

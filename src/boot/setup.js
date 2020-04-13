@@ -23,13 +23,7 @@ export default class Setup extends Component {
 
   async componentDidMount() {
     console.disableYellowBox = true;
-    const expired = await getItem('@expired');
-    if (expired) this.setState({ appExpired: true });
-    else {
-      const date = new Date();
-      if (date.getDate() >= 20) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
-    }
-
+    
     const session = await getItem('@UserAuth');
     if (session) store.dispatch({ type: SET_USER_SESSION, payload: session });
 

@@ -23,19 +23,19 @@ class Registration extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: 'usamaali',
-            lastName: 'shah',
-            email: 'check@gmail.com',
-            password: 'password',
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
             memtype: '',
-            address: 'Karachi',
-            title: 'Research',
-            website: 'http://technexpaksolution.com/',
-            city: 'Karachi',
-            state: 'Pakistan',
-            zipcode: '610000',
-            phone: '03133245587',
-            insitute: 'Mehran',
+            address: '',
+            title: '',
+            website: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            phone: '',
+            insitute: '',
         };
     }
     
