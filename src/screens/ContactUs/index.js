@@ -1,6 +1,6 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { Container, Form, Item, Content, Input, Textarea } from 'native-base';
 import DocumentPicker from 'react-native-document-picker';
 import { TColors, DynamicWidth } from '../../components/Styles';
@@ -34,33 +34,32 @@ class ContactUs extends Component {
     }
 
     UNSAFE_componentWillReceiveProps() {
-        this.setState({
-            name: null,
-            email: null,
-            subject: null,
-            message: null,
-            title: null,
-            author: null,
-            affiliation: null,
-            presenter: null,
-            abstract: null,
-            keyword: null,
-            file: null,
-            pages: null
-        });
+        if (!this.props.loading) {
+            this.setState({
+                name: null,
+                email: null,
+                subject: null,
+                message: null,
+                title: null,
+                author: null,
+                affiliation: null,
+                presenter: null,
+                abstract: null,
+                keyword: null,
+                file: null,
+                pages: null
+            });
+        }
     }
 
     _submitForm = () => {
         const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, file, pages } = this.state;
         const { user, navigation, customisedAction } = this.props;
-        let data = {
-            name,
-            email,
-            subject,
-            message,
-            dataKey: navigation.state.params.dataKey
-        }
+        let data = {}
         if (navigation.state.params.dataKey !== "constact-us-form") {
+            if (!title) return Alert.alert("Title is required");
+            if (!author) return Alert.alert("Author is required");
+            if (!presenter) return Alert.alert("Presenter is required");
             data = {
                 title,
                 author,
@@ -71,6 +70,18 @@ class ContactUs extends Component {
                 file,
                 pages,
                 user_id: user.id,
+                dataKey: navigation.state.params.dataKey
+            }
+        } else {
+            if (!name) return Alert.alert("Name is required");
+            if (!email) return Alert.alert("Email is required");
+            if (!subject) return Alert.alert("Subject is required");
+            if (!message) return Alert.alert("Message is required");
+            data = {
+                name,
+                email,
+                subject,
+                message,
                 dataKey: navigation.state.params.dataKey
             }
         }

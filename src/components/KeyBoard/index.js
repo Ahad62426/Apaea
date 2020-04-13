@@ -47,10 +47,10 @@ export default class CInput extends Component {
     return (
       <Input
         style={this.props.style != undefined ? this.props.style : {}}
+        secureTextEntry={this.props.secureTextEntry || false}
         placeholder={this.props.placeholder}
         keyboardType={this.props.keyboardType !== undefined ? this.props.keyboardType : "default"}
         placeholderTextColor={this.props.placeholderTextColor !== undefined ? this.props.placeholderTextColor : {}}
-        secureTextEntry={this.props.security !== undefined ? true : false}
         value={this.props.value}
         onChangeText={val => this.props.onChangeText(val)}
         onSubmitEditing={() => {

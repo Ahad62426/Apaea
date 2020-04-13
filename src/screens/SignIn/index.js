@@ -164,6 +164,7 @@ class SignIn extends Component {
                     placeholderTextColor={'#A6BCD0'}
                     placeholder="password"
                     placeholderTextColor="white"
+                    secureTextEntry={true}
                     value={this.state.password}
                     style={{ backgroundColor: TColors.bgSecondary, color: "white", borderBottomColor: "white", borderBottomWidth: .2 }}
                     KeyboardCallback={val => this.animateLogo(val)}

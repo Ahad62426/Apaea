@@ -189,6 +189,7 @@ class Registration extends Component {
                                 CommonStyles.inputBgColor,
                                 DynamicFntSize(15)
                             ]} 
+                            secureTextEntry={true}
                             value={password}
                             onChangeText={value => this.setState({ password: value })}
                             placeholder="Password"/>
