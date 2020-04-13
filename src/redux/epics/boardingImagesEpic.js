@@ -24,8 +24,9 @@ export class boardingImagesEpic {
           try {
             const response = await RestClient.get(API_ENDPOINTS.boardingImages);
             const { status, data: resObj, problem } = response;
+            const parsedData = parseData(resObj)
             if (status && status === 200) {
-              return customisedAction(BOARDING_IMAGES_SUCCESS, resObj);
+              return customisedAction(BOARDING_IMAGES_SUCCESS, parsedData);
             }
             if (status && (status === 401 || status === 422 || status === 512)) {
               Alert.alert(resObj.message);
@@ -46,3 +47,16 @@ export class boardingImagesEpic {
       )
     );
 }
+
+const parseData = data => {
+  const uniqueKeys = [];
+  const parseDataArray = [];
+  for (var i=0; i<data.length; i++) {
+    if (uniqueKeys.indexOf(data[i].album_id) <= -1) {
+      uniqueKeys.push(data[i].album_id);
+      parseDataArray.push({ subData: [] });
+    }
+    parseDataArray[uniqueKeys.indexOf(data[i].album_id)].subData.push(data[i]);
+  }
+  return parseDataArray;
+};

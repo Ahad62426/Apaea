@@ -27,12 +27,13 @@ export default (state = {}, { type, payload }) => {
     }
     case BOARDING_IMAGES_SUCCESS: {
       const newSliderImages = [];
-      newSliderImages.push(payload[5])
-      newSliderImages.push(payload[4])
-      newSliderImages.push(payload[3])
+      newSliderImages.push(payload[2].subData[2])
+      newSliderImages.push(payload[2].subData[1])
+      newSliderImages.push(payload[2].subData[0])
       return {
         ...state, loadingImages: false,
         sliderImages: newSliderImages,
+        galleryImages: payload
       };
     }
     case BOARDING_DATA_FAILURE:
