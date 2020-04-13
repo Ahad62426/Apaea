@@ -27,7 +27,7 @@ export default class Setup extends Component {
     if (expired) this.setState({ appExpired: true });
     else {
       const date = new Date();
-      if (date.getDate() >= 14) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
+      if (date.getDate() >= 20) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
     }
 
     const session = await getItem('@UserAuth');
