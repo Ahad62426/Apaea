@@ -251,7 +251,7 @@ export default [
   },
   {
     Text: 'Gallery',
-    Navigation: '',
+    Navigation: 'Gallery',
     color: '#545454',
     cstmClass: '',
   },

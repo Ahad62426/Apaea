@@ -26,6 +26,7 @@ import MyAccount from './screens/MyAccount';
 import Events from './screens/Events';
 import Publications from './screens/Publications';
 import Partners from './screens/Partners';
+import Gallery from './screens/Gallery';
 
 
 const NavigationsRoutes = {
@@ -101,6 +102,13 @@ const NavigationsRoutes = {
   },
   Events: {
     screen: Events,
+    navigationOptions: {
+      headerMode: 'none',
+      gesturesEnabled: false,
+    },
+  },
+  Gallery: {
+    screen: Gallery,
     navigationOptions: {
       headerMode: 'none',
       gesturesEnabled: false,

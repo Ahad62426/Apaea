@@ -1,6 +1,6 @@
 //references Region
 import React, { Component } from 'react';
-import { View, Alert, FlatList, ActivityIndicator } from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
 import { Container } from 'native-base';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';

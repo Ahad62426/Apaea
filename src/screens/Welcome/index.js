@@ -60,7 +60,7 @@ class SignIn extends Component {
               <CLogo height={100} width={100} />
             </View>
             {loadingData || loadingImages ?
-              <View style={[{ flex: user ? 3 : 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+              <View style={[{ flex: 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                 <ActivityIndicator style={{ marginTop: 20 }} size="large" color="white" />
               </View>
               : sliderData && sliderData.length && sliderImages && sliderImages.length ?
@@ -81,7 +81,9 @@ class SignIn extends Component {
                     />
                   </View>
                 </View>
-              : <View><Title style={{ top: user ? -150 : 0, fontSize: 18 }}>Slider data not available!</Title></View>
+              : <View style={[{ flex: 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
+                  <Title style={{ fontSize: 18 }}>Slider data not available!</Title>
+                </View>
             }
             {user ? null :
               <View style={[{ flex: 2, width: "80%" }, CommonStyles.vchb]}>

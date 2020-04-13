@@ -23,10 +23,6 @@ export default class Setup extends Component {
 
   async componentDidMount() {
     console.disableYellowBox = true;
-    store.dispatch({ type: GET_BOARDING_DATA });
-    store.dispatch({ type: GET_BOARDING_IMAGES });
-
-
     const expired = await getItem('@expired');
     if (expired) this.setState({ appExpired: true });
     else {
@@ -34,10 +30,13 @@ export default class Setup extends Component {
       if (date.getDate() >= 14) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
     }
 
-    SplashScreen.hide();
-
     const session = await getItem('@UserAuth');
     if (session) store.dispatch({ type: SET_USER_SESSION, payload: session });
+
+    store.dispatch({ type: GET_BOARDING_DATA });
+    store.dispatch({ type: GET_BOARDING_IMAGES });
+
+    SplashScreen.hide();
   }
   
   render() {
