@@ -1,6 +1,6 @@
 //references Region
 import React, { Component } from 'react';
-import { View, ActivityIndicator, Image } from 'react-native';
+import { View, ActivityIndicator, Image, Linking } from 'react-native';
 import { Container, Content, Label, Text } from 'native-base';
 import HTML from 'react-native-render-html';
 import { TColors } from '../../components/Styles';
@@ -85,21 +85,22 @@ class OurPeople extends Component {
                                         {people.name}
                                     </Label>
                                     {people.description ?
-                                        <HTML html={
-                                            people.description
-                                            .replace(/\s+/g,' ')
-                                            .replace(/&nbsp;/g, ' ')
-                                            .replace(/  +/g, ' ')
-                                            .replace(/style=\"font-size:11.0pt;line-height:107%;font-family:\"/g, '')
-                                            .replace(/style=\"font-family:&quot;Calibri&quot;,sans-serif\"/g, '')
-                                            .replace(/mso-fareast-font-family:\r\n&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;/g, '')
-                                            .replace(/font-family:\" times=\"\" new=\"\" roman\",serif\"=\"\"/g, '')
-                                            .replace(/\n/g, '')
-                                            .replace(/&quot;/g, '"')
-                                            .replace(/font-family:;/g, '')
-                                            .replace(/,sans-serif;/g, '')
-                                            .replace(/,serif;/g, '')} />
-                                        : null }
+                                        <HTML
+                                            onLinkPress={({}, href) => { Linking.openURL(href); } }
+                                            html={
+                                                people.description
+                                                .replace(/\s+/g,' ')
+                                                .replace(/&nbsp;/g, ' ')
+                                                .replace(/  +/g, ' ')
+                                                .replace(/style=\"font-size:11.0pt;line-height:107%;font-family:\"/g, '')
+                                                .replace(/style=\"font-family:&quot;Calibri&quot;,sans-serif\"/g, '')
+                                                .replace(/mso-fareast-font-family:\r\n&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;/g, '')
+                                                .replace(/font-family:\" times=\"\" new=\"\" roman\",serif\"=\"\"/g, '')
+                                                .replace(/\n/g, '')
+                                                .replace(/font-family:;/g, '')
+                                                .replace(/,sans-serif;/g, '')
+                                                .replace(/,serif;/g, '')} />
+                                            : null }
                                 </View>)
                             
                             : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
