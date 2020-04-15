@@ -29,6 +29,7 @@ class ContactUs extends Component {
             abstract: null,
             keyword: null,
             file: null,
+            fileNmae: null,
             pages: null
         };
     }
@@ -91,14 +92,30 @@ class ContactUs extends Component {
     async _selectFile() {
         try {
             const file = await DocumentPicker.pick();
-            this.setState({ file: file.name })
+            console.log("file", file);
+            
+            const encodedFile = await this.fileToBase64(file.name, file.uri)
+            this.setState({ file: encodedFile, fileNmae: file.name })
+            console.log("encodedFile", encodedFile);
+            
         } catch (err) {
-            throw err;
+            console.log("Error", err)
         }
     }
 
+    fileToBase64 = (filename, filepath) => {
+        return new Promise(resolve => {
+          var file = new File([filename], filepath);
+          var reader = new FileReader();
+          reader.onload = function(event) {
+            resolve(event.target.result);
+          };
+          reader.readAsDataURL(file);
+        });
+      };
+
     render() {
-        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, file, pages } = this.state;
+        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, fileNmae, pages } = this.state;
         const { dataKey } = this.props.navigation.state.params;
         const { loading } = this.props;
         return (
@@ -210,7 +227,7 @@ class ContactUs extends Component {
                                         onPress={() => this._selectFile()}
                                     >
                                         <Text style={[DynamicFntSize(15), { color: 'rgba(0, 0, 0, 0.7)'} ]}>
-                                            {file || 'Choose file'}
+                                            {fileNmae || 'Choose file'}
                                         </Text>
                                     </TouchableOpacity>
                                 </Item>
