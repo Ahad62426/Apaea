@@ -1,9 +1,8 @@
 //references Region
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image, Modal, TouchableNativeFeedback } from 'react-native';
-import { Container, Title, Icon, Button } from 'native-base';
+import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image } from 'react-native';
+import { Container, Title } from 'native-base';
 import { NavigationEvents } from 'react-navigation';
-import ImageViewer from 'react-native-image-zoom-viewer';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
 
@@ -19,10 +18,6 @@ const textArray = ['Universitas Airlangga', 'Home Page Slider']
 class Gallery extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            showImages: false,
-            imagesList: []
-        }
     }
 
     renderImages({ item, index }) {
@@ -43,14 +38,8 @@ class Gallery extends Component {
         );
     }
 
-    showImages(data) {
-        const imagesList = data.map(image => { return { url: `${BASE_URL}/dev/${image.path}` }})
-        this.setState({ showImages: true, imagesList })
-    }
-
     render() {
         const { loadingImages, galleryImages, customisedAction } = this.props;
-        const { showImages, imagesList } = this.state;
         return (
             <Container
                 style={{
@@ -59,13 +48,6 @@ class Gallery extends Component {
                 <NavigationEvents onDidFocus={() => {
                     if (!loadingImages && !galleryImages) customisedAction(GET_BOARDING_IMAGES);
                 }} />
-                <Modal visible={showImages}
-                    transparent={true}>
-                    <ImageViewer imageUrls={imagesList}
-                        enableSwipeDown={true}
-                        onSwipeDown={() => this.setState({ showImages: false })}
-                        enablePreload={true} />
-                </Modal>
                 <CstHeader
                     isMenuRight={true}
                     isProfile={true}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TouchableOpacity, Alert, View, Image, ActivityIndicator } from 'react-native';
 import { Button, Text, Item, Label, Input, Content } from 'native-base';
 import CommonStyles, {
@@ -10,12 +10,9 @@ import CommonStyles, {
   DynamicHeight,
   DynamicBorderColor,
   DynamicBDRadius,
-  TColors,
   DynamicFntSize
 } from '../Styles';
 import { CGradient } from '../Gradient';
-import LogoSvg from '../../assets/logo/logoSVG';
-import EmailSVG from '../../assets/Icons/emailSVG';
 
 
 
@@ -79,7 +76,6 @@ const CHeading = props => {
 };
 
 const CLogo = props => (
-  // <LogoSvg width={props.width} height={props.height} ></LogoSvg>
   <Image style={[{ width: props.width, height: props.height, resizeMode: "contain" }]} source={require('../../assets/logo/logoPNG.png')} ></Image >
 );
 
@@ -109,51 +105,6 @@ const LoadingButton = props => {
   );
 };
 
-const RenderOurPeopleDP = props => {
-  
-  switch (props) {
-    case "president":
-      return (
-        <Image style={{ width: 240, height: 240, resizeMode: "contain" }} source={require('../../assets/images/OurPeople/president.jpg')} ></Image>
-      )
-      break;
-    case "partner-2":
-      return (
-
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-2.png')}></Image>
-      )
-
-      break;
-    case "partner-3":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-3.png')}></Image>
-      )
-
-      break;
-    case "partner-4":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-4.png')}></Image>
-      )
-
-      break;
-    case "partner-5":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-5.png')}></Image>
-      )
-
-      break;
-    case "partner-6":
-      return (
-        <Image style={{ width: 117, height: 90, resizeMode: "contain" }} source={require('../../assets/images/partner-6.png')}></Image>
-      )
-
-      break;
-
-    default:
-      break;
-  }
-
-}
 const ActionButton = props => {
   return (
     <TouchableOpacity
@@ -206,5 +157,5 @@ const CAlert = props =>
 
 export {
   GradientBtn, CButton, CAlert, CLogo, validateEmail, CFItem, LoadingButton,
-  ActionButton, CHeading, RenderOurPeopleDP
+  ActionButton, CHeading
 };

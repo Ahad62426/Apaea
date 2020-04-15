@@ -18,10 +18,6 @@ class MyAccountActions extends Component {
         };
     }
 
-    _takeMeTOSignUp = () => {
-        NavigationService.navigate('Welcome');
-    };
-
     render() {
         const { accountMenu } = this.props;
         return (

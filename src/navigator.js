@@ -1,21 +1,14 @@
 //region References
 import React from 'react';
-import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
-import Dashboard from './screens/Dashboard';
 import SideBar from './screens/Sidebar';
 import Welcome from './screens/Welcome';
 import AboutUs from './screens/AboutUs';
-import test from './screens/test';
 
 
 import OurPeople from './screens/OurPeople';
 
-import Agreement from './screens/Agreement';
-import AssitantScreen1 from './screens/Assistant/Screen1';
-import AssitantScreen2 from './screens/Assistant/Screen2';
-import Profile from './screens/Profile';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import FAQ from './screens/FAQ';
@@ -121,21 +114,6 @@ const NavigationsRoutes = {
       gesturesEnabled: false,
     },
   },
-  Dashboard: {
-    screen: Dashboard,
-    navigationOptions: {
-      header: null,
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
-  Profile: {
-    screen: Profile,
-    navigationOptions: {
-      headerMode: 'none',
-      gesturesEnabled: false,
-    },
-  },
 };
 
 
@@ -148,47 +126,9 @@ Drawer.navigationOptions = {
   header: null,
 };
 
-export const AuthStack = createStackNavigator(
-  {
-    Agreement: {
-      screen: Agreement,
-      navigationOptions: {
-        headerMode: 'none',
-        gesturesEnabled: false,
-      },
-    },
-    AssitantScreen1: {
-      screen: AssitantScreen1,
-      navigationOptions: {
-        header: null,
-        gesturesEnabled: false,
-      },
-    },
-    AssitantScreen2: {
-      screen: AssitantScreen2,
-      navigationOptions: {
-        header: null,
-        gesturesEnabled: false,
-      },
-    },
-    Profile: {
-      screen: Profile,
-      navigationOptions: {
-        headerMode: 'none',
-        gesturesEnabled: false,
-      },
-    },
-  },
-  {
-    headerMode: 'none',
-    gesturesEnabled: false,
-  },
-);
-
 export const AppNavigator = createSwitchNavigator(
   {
     App: Drawer,
-    Auth: AuthStack,
   },
   {
     initialRouteName: 'App',
