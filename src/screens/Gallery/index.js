@@ -10,7 +10,7 @@ import CstHeader from '../Headers';
 import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
 import { customisedAction } from '../../redux/actions';
-import { GET_BOARDING_IMAGES, BASE_URL } from '../../constants';
+import { GET_BOARDING_IMAGES, BASE_URL, DISPLAY_IMAGES_SCREEN } from '../../constants';
 
 import CommonStyles, { DynamicM } from '../../components/Styles';
 
@@ -35,7 +35,7 @@ class Gallery extends Component {
                     borderRadius: 10,
                     borderWidth: 1
                 }}
-                onPress={() => this.showImages(item.subData)}>
+                onPress={() => this.props.customisedAction(DISPLAY_IMAGES_SCREEN, { title: "Images", images: item.subData })} >
                 <Image style={{ height: 160, width: 200, resizeMode: "cover", borderRadius: 10 }} 
                     source={{ uri: `${BASE_URL}/dev/${item.subData[0].path}`, cache: "force-cache" }} />
                 <Text style={{ marginTop: 10 }}>{textArray[index]}</Text>

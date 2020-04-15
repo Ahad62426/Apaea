@@ -5,6 +5,7 @@ import signUpReducer from './signUpReducer';
 import sessionReducer from './sessionReducer';
 import myAccountReducer from './myAccountReducer';
 import dataScreenReducer from './dataScreenReducer';
+import imagesScreenReducer from './imagesScreenReducer';
 import metaDataReducer from './metaDataReducer';
 import dataSubmissionReducer from './dataSubmissionReducer';
 
@@ -15,6 +16,7 @@ export default combineReducers({
     sessionReducer,
     myAccountReducer,
     dataScreenReducer,
+    imagesScreenReducer,
     metaDataReducer,
     dataSubmissionReducer,
 });
