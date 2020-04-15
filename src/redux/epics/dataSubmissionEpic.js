@@ -8,7 +8,6 @@ import {
   SUBMIT_DATA,
   DATA_SUBMISSION_SUCCESS,
   DATA_SUBMISSION_FAILURE,
-  API_ENDPOINTS,
   NETWORK_ERROR_MSG,
   ERROR_MSG,
   UNKNOWN_ERROR_MSG,
@@ -22,10 +21,8 @@ export class dataSubmissionEpic {
       switchMap(
         async ({ payload }) => {
           try {
-            console.log("data", payload);
             const response = await RestClient.post(payload.dataKey, payload);
             const { status, data: resObj, problem } = response;
-            console.log("response", response);
             if (status && status === 200) {
               Alert.alert(resObj.msg)
               return customisedAction(DATA_SUBMISSION_SUCCESS);

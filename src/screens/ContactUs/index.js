@@ -92,11 +92,9 @@ class ContactUs extends Component {
     async _selectFile() {
         try {
             const file = await DocumentPicker.pick();
-            console.log("file", file);
             
             const encodedFile = await this.fileToBase64(file.name, file.uri)
             this.setState({ file: encodedFile, fileNmae: file.name })
-            console.log("encodedFile", encodedFile);
             
         } catch (err) {
             console.log("Error", err)
