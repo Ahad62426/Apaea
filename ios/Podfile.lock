@@ -188,6 +188,9 @@ PODS:
     - React
   - react-native-safe-area-context (0.6.4):
     - React
+  - react-native-simple-toast (1.1.1):
+    - React
+    - Toast (~> 4.0.0)
   - react-native-splash-screen (3.2.0):
     - React
   - react-native-webview (9.0.2):
@@ -243,6 +246,7 @@ PODS:
     - React
   - RNVectorIcons (6.6.0):
     - React
+  - Toast (4.0.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -265,6 +269,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - react-native-simple-toast (from `../node_modules/react-native-simple-toast`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -291,6 +296,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - Toast
 
 EXTERNAL SOURCES:
   BVLinearGradient:
@@ -327,6 +333,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-document-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-simple-toast:
+    :path: "../node_modules/react-native-simple-toast"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   react-native-webview:
@@ -389,6 +397,7 @@ SPEC CHECKSUMS:
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-document-picker: dd96ce05bf1453b110d7a3912097bf6d298d2cb6
   react-native-safe-area-context: 52342d2d80ea8faadd0ffa76d83b6051f20c5329
+  react-native-simple-toast: 1378177b9d7dcf73c1fd73231cfc134108682621
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-webview: 53d0b4e398e8f59a1e9870685d079ace9228db70
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
@@ -409,6 +418,7 @@ SPEC CHECKSUMS:
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: b5352547ad51ed44d37013dcee69a3783fbfe793

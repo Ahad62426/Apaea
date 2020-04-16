@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Linking, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { Image, View, TouchableOpacity, PermissionsAndroid, Platform } from 'react-native';
 import {
   Card,
   CardItem,
@@ -12,6 +12,7 @@ import {
 } from 'native-base';
 import Icon from 'react-native-vector-icons/AntDesign';
 import RNFetchBlob from 'rn-fetch-blob';
+import Toast from 'react-native-simple-toast';
 
 import { ActionButton } from '../Utilities';
 import store from '../../redux/store';
@@ -73,26 +74,30 @@ _bgdownload = async url => {
         'message': 'This aap needs access to your storage to download.'
       }
     )
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    if (granted === PermissionsAndroid.RESULTS.GRANTED || Platform.OS === "ios") {
       const { config, fs } = RNFetchBlob
       let { DownloadDir } = fs.dirs
       const options = {
         fileCache: true,
-        path: `${DownloadDir}${url.slice(url.lastIndexOf("/"))}`,
-        addAndroidDownloads : {
-          useDownloadManager : true,
-          notification : false,
-          description : 'Downloading image.'
-        }
+        useDownloadManager : true,
+        notification : true,
+        path: `${DownloadDir}${url.slice(url.lastIndexOf("/"))}`
       }
-      try {
-        config(options)
-        .fetch('GET', url)
-        .then(res => {
-          console.log('The file saved to ', res)
-        })
-      } catch (error) {
-        console.log('error', error)
+      console.log(RNFetchBlob.fs.exists(options.path))
+      if (await RNFetchBlob.fs.exists(options.path)) Toast.show("File already exists", Toast.LONG);
+      else {
+        try {
+          config(options)
+          .fetch('GET', url)
+          .progress({ interval: 10 },(received,total)=>{
+              Toast.show(`Downloading ${((received/total)*100).toFixed(2)}%`, Toast.LONG);
+          })
+          .then(res => {
+            Toast.show(`File ${url.slice(url.lastIndexOf("/")+1)} download completed!`, Toast.LONG);
+          })
+        } catch (error) {
+          console.log('error', error)
+        }
       }
     }
     else Alert.alert("Storage Permission Not Granted");
