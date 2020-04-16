@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Linking, TouchableOpacity } from 'react-native';
+import { Image, View, Linking, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import {
   Card,
   CardItem,
@@ -11,6 +11,7 @@ import {
   Separator
 } from 'native-base';
 import Icon from 'react-native-vector-icons/AntDesign';
+import RNFetchBlob from 'rn-fetch-blob';
 
 import { ActionButton } from '../Utilities';
 import store from '../../redux/store';
@@ -62,6 +63,44 @@ CBlogPostTitle = title => {
     </Text>
   )
 }
+
+_bgdownload = async url => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      {
+        'title': 'Apaea',
+        'message': 'This aap needs access to your storage to download.'
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      const { config, fs } = RNFetchBlob
+      let { DownloadDir } = fs.dirs
+      const options = {
+        fileCache: true,
+        path: `${DownloadDir}${url.slice(url.lastIndexOf("/"))}`,
+        addAndroidDownloads : {
+          useDownloadManager : true,
+          notification : false,
+          description : 'Downloading image.'
+        }
+      }
+      try {
+        config(options)
+        .fetch('GET', url)
+        .then(res => {
+          console.log('The file saved to ', res)
+        })
+      } catch (error) {
+        console.log('error', error)
+      }
+    }
+    else Alert.alert("Storage Permission Not Granted");
+  } catch (err) {
+    console.warn(err)
+  }
+}
+
 renderCardBody = props => {
   switch (props.type) {
     case "actionCard":
@@ -122,7 +161,7 @@ renderCardBody = props => {
               <ActionButton
                 textColor={"white"}
                 btnText={"Download"}
-                callback={() => Linking.openURL(`${BASE_URL}/public/paper/${props.file}`)}
+                callback={() => this._bgdownload(`${BASE_URL}/public/paper/${props.file}`)}
                 icon={"download"}
                 style={{
                   borderRadius: 5,
@@ -203,7 +242,7 @@ renderCardBody = props => {
                   color: "white",
                   backgroundColor: TColors.bgSecondary
                 }}
-                callback={() => Linking.openURL(`${BASE_URL}/${props.file}`)}
+                callback={() => this._bgdownload(`${BASE_URL}/${props.file}`)}
               ></ActionButton> : null
             }
           </View>
