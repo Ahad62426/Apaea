@@ -1,7 +1,7 @@
 //references Region
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Alert, Modal, ActivityIndicator } from 'react-native';
-import { Container, Form, Item, Content, Input, Textarea, Title } from 'native-base';
+import { Container, Form, Item, Content, Input, Textarea } from 'native-base';
 import DocumentPicker from 'react-native-document-picker';
 import RNFetchBlob from 'rn-fetch-blob';
 import { TColors, DynamicWidth } from '../../components/Styles';
