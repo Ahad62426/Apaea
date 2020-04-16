@@ -1,8 +1,9 @@
 //references Region
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, Alert } from 'react-native';
-import { Container, Form, Item, Content, Input, Textarea } from 'native-base';
+import { View, TouchableOpacity, Text, Alert, Modal, ActivityIndicator } from 'react-native';
+import { Container, Form, Item, Content, Input, Textarea, Title } from 'native-base';
 import DocumentPicker from 'react-native-document-picker';
+import RNFetchBlob from 'rn-fetch-blob';
 import { TColors, DynamicWidth } from '../../components/Styles';
 import CstHeader from '../Headers';
 import { connect } from 'react-redux';
@@ -30,7 +31,9 @@ class ContactUs extends Component {
             keyword: null,
             file: null,
             fileNmae: null,
-            pages: null
+            file_extension: null,
+            pages: null,
+            encoding: false
         };
     }
 
@@ -48,13 +51,15 @@ class ContactUs extends Component {
                 abstract: null,
                 keyword: null,
                 file: null,
-                pages: null
+                fileNmae: null,
+                pages: null,
+                encoding: false
             });
         }
     }
 
     _submitForm = () => {
-        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, file, pages } = this.state;
+        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, file, file_extension, pages } = this.state;
         const { user, navigation, customisedAction } = this.props;
         let data = {}
         if (navigation.state.params.dataKey !== "constact-us-form") {
@@ -69,6 +74,7 @@ class ContactUs extends Component {
                 abstract,
                 keyword,
                 file,
+                file_extension,
                 pages,
                 user_id: user.id,
                 dataKey: navigation.state.params.dataKey
@@ -91,29 +97,27 @@ class ContactUs extends Component {
 
     async _selectFile() {
         try {
-            const file = await DocumentPicker.pick();
-            
-            const encodedFile = await this.fileToBase64(file.name, file.uri)
-            this.setState({ file: encodedFile, fileNmae: file.name })
-            
+            const file = await DocumentPicker.pick({
+                type: ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/txt", "text/plain"]
+            });
+
+            if (file) {
+                this.setState({ encoding: true })
+                const file_extension = file.name.slice(file.name.lastIndexOf("."));
+                RNFetchBlob.fs.readFile(file.uri, "base64")
+                .then(result => {
+                    this.setState({ file: result, fileNmae: file.name, file_extension, encoding: false })
+                })
+                .catch(() => 
+                    this.setState({ encoding: false }));
+            }
         } catch (err) {
-            console.log("Error", err)
+            this.setState({ encoding: false });
         }
     }
 
-    fileToBase64 = (filename, filepath) => {
-        return new Promise(resolve => {
-          var file = new File([filename], filepath);
-          var reader = new FileReader();
-          reader.onload = function(event) {
-            resolve(event.target.result);
-          };
-          reader.readAsDataURL(file);
-        });
-      };
-
     render() {
-        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, fileNmae, pages } = this.state;
+        const { name, email, subject, message, title, author, affiliation, presenter, abstract, keyword, fileNmae, pages, encoding } = this.state;
         const { dataKey } = this.props.navigation.state.params;
         const { loading } = this.props;
         return (
@@ -121,6 +125,13 @@ class ContactUs extends Component {
                 style={{
                     backgroundColor: '#E2E9F5',
                 }}>
+                <Modal
+                    transparent={true}
+                    visible={encoding}>
+                        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                            <ActivityIndicator size="large" color={TColors.bgSecondary} />
+                        </View>
+                </Modal>
                 <CstHeader
                     isMenuRight={true}
                     OpenMenu={() => {
@@ -232,6 +243,7 @@ class ContactUs extends Component {
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                                     <Input placeholder="Total No of Pages" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={pages}
+                                        keyboardType="numeric"
                                         onChangeText={value => this.setState({ pages: value })}
                                     />
                                 </Item>

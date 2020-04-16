@@ -9,5 +9,5 @@ export const RestClient = create({
     Accept: 'application/json',
     Authorization: '',
   },
-  timeout: 20000,
+  timeout: 300000,
 });

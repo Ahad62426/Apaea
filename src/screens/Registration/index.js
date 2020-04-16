@@ -164,6 +164,7 @@ class Registration extends Component {
                         <Item stackedLabel style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                             <Input placeholder="Phone Number" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                 value={phone}
+                                keyboardType="numeric"
                                 onChangeText={value => this.setState({ phone: value })}
                             />
                         </Item>
