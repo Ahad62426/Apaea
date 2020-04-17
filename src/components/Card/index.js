@@ -74,6 +74,7 @@ _bgdownload = async url => {
         'message': 'This aap needs access to your storage to download.'
       }
     )
+    
     if (granted === PermissionsAndroid.RESULTS.GRANTED || Platform.OS === "ios") {
       const { config, fs } = RNFetchBlob
       let { DownloadDir } = fs.dirs
@@ -83,7 +84,7 @@ _bgdownload = async url => {
         notification : true,
         path: `${DownloadDir}${url.slice(url.lastIndexOf("/"))}`
       }
-      console.log(RNFetchBlob.fs.exists(options.path))
+      
       if (await RNFetchBlob.fs.exists(options.path)) Toast.show("File already exists", Toast.LONG);
       else {
         try {
