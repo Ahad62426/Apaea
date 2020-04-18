@@ -1,12 +1,13 @@
 //references Region
 import React, {Component} from 'react';
-import { View, Modal, TouchableOpacity, Platform, ScrollView, Image } from 'react-native';
+import { View, Modal, TouchableOpacity, Platform, ScrollView } from 'react-native';
 import {
   Container,
-  Content,
   Title,
   Icon,
 } from 'native-base';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 import {TColors} from '../../components/Styles';
 import {connect} from 'react-redux';
 import CommonStyles, { DynamicM } from '../../components/Styles';
@@ -67,7 +68,7 @@ class ImagesDisplay extends Component {
                     padding: 10,
                     marginVertical: 20,
                     justifyContent: "center",
-                    backgroundColor: 'black',
+                    backgroundColor: 'white',
                     height: "100%",
                 },
               ]}
@@ -75,7 +76,18 @@ class ImagesDisplay extends Component {
               {data.images ?
                 <ScrollView style={{ marginBottom: 40 }}>
                   {data.images.map(image => 
-                    <Image style={{ width: "100%", aspectRatio: 2, resizeMode: "cover", marginTop: 10, marginBottom: 10 }} source={{ uri: `${BASE_URL}/dev/${image.path}`, cache: "force-cache" }}></Image>
+                    <Image 
+                      indicator={Progress.Pie}
+                      indicatorProps={{
+                        borderWidth: 0,
+                        color: TColors.bgColorPrimary,
+                        unfilledColor: TColors.lightGray,
+                      }}
+                      borderRadius={10}
+                      resizeMethod="resize"
+                      key={image.path}
+                      style={{ width: "100%", aspectRatio: 2, resizeMode: "cover", marginTop: 10, marginBottom: 10 }}
+                      source={{ uri: `${BASE_URL}/dev/${image.path}`, cache: "force-cache" }} />
                   )}
                 </ScrollView>
               : null}

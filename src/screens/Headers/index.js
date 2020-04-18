@@ -64,7 +64,9 @@ class MasterHeader extends Component {
                     this.props.customisedAction(SET_ACCOUNT_MENU, !accountMenu)
                 }} background={TouchableNativeFeedback.Ripple('rgba(0, 112, 210, 0.8)', true)}>
                     {!accountMenu ?
-                        <Image style={{ height: 25, width: 25, resizeMode: "contain", alignSelf: "center" }} source={require('../../assets/Icons/account.png')}></Image>
+                        <Image
+                            style={{ height: 25, width: 25, resizeMode: "contain", alignSelf: "center" }}
+                            source={require('../../assets/Icons/account.png')} />
                         : <Icon name="closecircleo" type="AntDesign" style={{ color: "white" }}></Icon>
                     }
                 </Button>

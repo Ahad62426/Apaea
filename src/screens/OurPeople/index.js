@@ -1,7 +1,9 @@
 //references Region
 import React, { Component } from 'react';
-import { View, ActivityIndicator, Image, Linking } from 'react-native';
+import { View, ActivityIndicator, Linking } from 'react-native';
 import { Container, Content, Label, Text } from 'native-base';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 import HTML from 'react-native-render-html';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
@@ -75,7 +77,18 @@ class OurPeople extends Component {
                                 <View>
                                     {people.image && people.image.includes('.') ?
                                         <View style={[{ flex: 1, }, CommonStyles.hc, DynamicM(15, 0, 0, 0)]}>
-                                            <Image style={{ width: 180, height: 180, resizeMode: "contain", resizeMethod: "resize", borderRadius: 100 }} source={{ uri: `${BASE_URL}/dev/${people.image}`, cache: "force-cache" }} ></Image>
+                                            <Image
+                                                indicator={Progress.Pie}
+                                                indicatorProps={{
+                                                borderWidth: 0,
+                                                color: TColors.bgColorPrimary,
+                                                unfilledColor: TColors.lightGray,
+                                                }}
+                                                borderRadius={100}
+                                                resizeMethod="resize"
+                                                key={people.image}
+                                                style={{ width: 180, height: 180, resizeMode: "contain" }}
+                                                source={{ uri: `${BASE_URL}/dev/${people.image}`, cache: "force-cache" }} />
                                         </View>
                                         : null }
                                     <Label

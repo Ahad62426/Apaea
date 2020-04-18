@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, TouchableOpacity, PermissionsAndroid, Platform } from 'react-native';
+import { View, TouchableOpacity, PermissionsAndroid, Platform } from 'react-native';
 import {
   Card,
   CardItem,
@@ -10,6 +10,8 @@ import {
   Right,
   Separator
 } from 'native-base';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/AntDesign';
 import RNFetchBlob from 'rn-fetch-blob';
 import Toast from 'react-native-simple-toast';
@@ -258,7 +260,17 @@ renderCardBody = props => {
     case "partnerCard":
       return (
         <Body style={[CommonStyles.vhc]}>
-          <Image style={{ width: 117, height: 90, resizeMode: "contain", resizeMethod: "scale" }} source={{ uri: `${BASE_URL}/dev/${props.image}`, cache: "force-cache" }}></Image>
+          <Image
+            indicator={Progress.Pie}
+            indicatorProps={{
+              borderWidth: 0,
+              color: TColors.bgColorPrimary,
+              unfilledColor: TColors.lightGray,
+            }}
+            resizeMethod="resize"
+            key={props.image}
+            style={{ width: 117, height: 90, resizeMode: "contain" }}
+            source={{ uri: `${BASE_URL}/dev/${props.image}`, cache: "force-cache" }} />
         </Body>
       )
       break;

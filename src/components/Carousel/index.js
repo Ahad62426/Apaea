@@ -1,11 +1,12 @@
 import React from 'react';
 import Carousel from 'react-native-banner-carousel';
-import { Image, View, Dimensions, Text } from 'react-native';
-import { DynamicFntSize, DynamicM } from '../Styles';
+import { View, Dimensions, Text } from 'react-native';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
+import { DynamicFntSize, DynamicM, TColors } from '../Styles';
 import { BASE_URL } from '../../constants';
 
 const BannerWidth = Dimensions.get('window').width;
-const BannerHeight = 200;
 
 const CCarousel = props => {
   if (props.type == "image-slider") {
@@ -21,8 +22,17 @@ const CCarousel = props => {
         {props.list.map((item, index) => (
           <View style={[{ flex: 1 }]}>
             <View style={{ flex: 8, borderRadius: 10, alignItems: "center", }}>
-              <Image style={[{ width: "100%", height: "84%", resizeMode: "contain", resizeMethod: "resize" }]} source={{ uri: `${BASE_URL}/dev/${item.path}`, cache: "force-cache" }} ></Image >
-
+              <Image 
+                indicator={Progress.Pie}
+                indicatorProps={{
+                  borderWidth: 0,
+                  color: TColors.bgColorPrimary,
+                  unfilledColor: TColors.lightGray,
+                }}
+                resizeMethod="resize"
+                key={item.path}
+                style={[{ width: "100%", height: "84%", resizeMode: "contain" }]}
+                source={{ uri: `${BASE_URL}/dev/${item.path}`, cache: "force-cache" }} />
             </View>
           </View>
         ))}

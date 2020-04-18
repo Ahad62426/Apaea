@@ -1,7 +1,9 @@
 //references Region
 import React, { Component } from 'react';
-import { View, FlatList, ActivityIndicator, TouchableOpacity, Text, Image } from 'react-native';
+import { View, FlatList, ActivityIndicator, TouchableOpacity, Text } from 'react-native';
 import { Container, Title } from 'native-base';
+import Image from 'react-native-image-progress';
+import * as Progress from 'react-native-progress';
 import { NavigationEvents } from 'react-navigation';
 import { TColors } from '../../components/Styles';
 import CstHeader from '../Headers';
@@ -31,7 +33,17 @@ class Gallery extends Component {
                     borderWidth: 1
                 }}
                 onPress={() => this.props.customisedAction(DISPLAY_IMAGES_SCREEN, { title: "Images", images: item.subData })} >
-                <Image style={{ height: 160, width: 200, resizeMode: "cover", borderRadius: 10 }} 
+                <Image
+                    indicator={Progress.Pie}
+                    indicatorProps={{
+                    borderWidth: 0,
+                    color: TColors.bgColorPrimary,
+                    unfilledColor: TColors.lightGray,
+                    }}
+                    borderRadius={10}
+                    resizeMethod="resize"
+                    key={item.path}
+                    style={{ height: 160, width: 200, resizeMode: "cover" }} 
                     source={{ uri: `${BASE_URL}/dev/${item.subData[0].path}`, cache: "force-cache" }} />
                 <Text style={{ marginTop: 10 }}>{textArray[index]}</Text>
             </TouchableOpacity>
