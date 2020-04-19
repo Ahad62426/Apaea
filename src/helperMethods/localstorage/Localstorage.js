@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import I18n from '../../i18n';
+import RNRestart from 'react-native-restart';
 
 export const setItem = async (key, value) => {
   try {
@@ -9,6 +11,21 @@ export const setItem = async (key, value) => {
       console.error('error stringifying value', error);
     }
     await AsyncStorage.setItem(key, data);
+  } catch (e) {
+    console.error('error saving value', e);
+  }
+};
+
+export const setLanguage = async value => {
+  try {
+    let data = value;
+    try {
+      data = JSON.stringify(data);
+    } catch (error) {
+      console.error('error stringifying value', error);
+    }
+    await AsyncStorage.setItem('@language', data);
+    RNRestart.Restart();
   } catch (e) {
     console.error('error saving value', e);
   }
@@ -25,6 +42,24 @@ export const getItem = async key => {
         console.error('error parsing value', error);
       }
       return data;
+    }
+  } catch (e) {
+    console.error('error reading value', e);
+  }
+  return null;
+};
+
+export const getLanguage = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@language');
+    if (value !== null) {
+      let language = value;
+      try {
+        language = JSON.parse(language);
+      } catch (error) {
+        console.error('error parsing value', error);
+      }
+      return I18n.locale = language;
     }
   } catch (e) {
     console.error('error reading value', e);

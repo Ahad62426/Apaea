@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Platform, Alert } from 'react-native';
+import { View, TouchableOpacity, Platform, Alert, Image } from 'react-native';
 import {
   Text,
   Container,
@@ -18,6 +18,8 @@ import { DynamicM } from '../../components/Styles';
 import UserImg from '../ThumbNail';
 import { CSvg } from '../../components/SVGassets';
 import { customisedAction } from '../../redux/actions';
+import I18n from '../../i18n'
+import { setLanguage } from '../../helperMethods/localstorage';
 
 class SideBar extends Component {
   constructor(props) {
@@ -256,6 +258,22 @@ class SideBar extends Component {
                 );
             })}
           </List>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <TouchableOpacity
+              onPress={async () => await setLanguage('en')}
+              style={{ margin: 10, marginRight: 20 }}>
+              <Image
+                style={{ height: 20, width: 40 }}
+                source={require('../../assets/Icons/usflag.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={async () => await setLanguage('zh')}
+              style={{ margin: 10, marginRight: 20 }}>
+              <Image
+                style={{ height: 20, width: 40 }}
+                source={require('../../assets/Icons/chflag.png')} />
+            </TouchableOpacity>
+          </View>
         </Content>
       </Container>
     );

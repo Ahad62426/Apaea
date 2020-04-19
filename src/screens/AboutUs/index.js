@@ -19,6 +19,7 @@ import CommonStyles, {
 } from '../../components/Styles';
 import { customisedAction } from '../../redux/actions';
 import { GET_BOARDING_DATA } from '../../constants';
+import I18n from '../../i18n'
 
 class AboutUs extends Component {
   constructor(props) {
@@ -69,7 +70,7 @@ class AboutUs extends Component {
           {dataKey === 'aboutUs' ?
             <Label
               style={[DynamicP(10, 10, 0, 0), {fontSize: 14, fontWeight: '700'}]}>
-              About Asia-Pacific Applied Economics Association
+              {I18n.t('about_us')}
             </Label> : null
           }
           {loadingData ? 

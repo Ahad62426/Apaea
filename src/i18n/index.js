@@ -1,3 +1,20 @@
-import * as en from './en';
+import * as RNLocalize from 'react-native-localize';
+import I18n from 'i18n-js';
 
-export {en};
+import en from './locales/en';
+import zh from './locales/zh';
+
+const locales = RNLocalize.getLocales();
+if (Array.isArray(locales)) {
+    I18n.locale = locales[0].languageTag;
+}
+
+I18n.translations = {
+    default: en,
+    en,
+    zh
+};
+
+I18n.fallbacks = true;
+
+export default I18n;
