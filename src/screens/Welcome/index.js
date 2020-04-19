@@ -68,6 +68,7 @@ class SignIn extends Component {
                   <View style={[{ flex: 3 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
                     <CCarousel
                       list={sliderImages}
+                      user={user}
                       callback={ProductID => this._getProduct(ProductID)}
                       type={"image-slider"}
       
