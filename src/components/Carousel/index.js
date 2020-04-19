@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-native-banner-carousel';
-import { View, Dimensions, Text } from 'react-native';
+import { View, Dimensions, Text, Platform } from 'react-native';
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
 import { DynamicFntSize, DynamicM, TColors } from '../Styles';
@@ -31,7 +31,7 @@ const CCarousel = props => {
                 }}
                 resizeMethod="resize"
                 key={item.path}
-                style={[{ width: "100%", height: props.user ? "84%" : "100%", resizeMode: "cover" }]}
+                style={[{ width: "100%", height: props.user ? Platform.OS === "ios" ? "80%" : "84%" : "100%", resizeMode: "cover" }]}
                 source={{ uri: `${BASE_URL}/dev/${item.path}`, cache: "force-cache" }} />
             </View>
           </View>

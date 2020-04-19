@@ -140,16 +140,7 @@ class SignIn extends Component {
                     value={this.state.email}
                     style={{ color: "white", backgroundColor: TColors.bgSecondary, borderBottomColor: "white", borderBottomWidth: .2 }}
                     KeyboardCallback={val => this.animateLogo(val)}
-                    onSubmitEditing={email =>
-                      this.setState({ email })
-                    }
-
-                    onChangeText={uname => {
-
-                      this.validateUserName(uname);
-
-                    }}
-
+                    onChangeText={uname => this.validateUserName(uname)}
                   />
 
                   {this.state.isUserNameValid ? <Icon name="checkmark-circle" /> : null}

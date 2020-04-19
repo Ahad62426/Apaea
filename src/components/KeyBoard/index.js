@@ -53,12 +53,7 @@ export default class CInput extends Component {
         placeholderTextColor={this.props.placeholderTextColor !== undefined ? this.props.placeholderTextColor : {}}
         value={this.props.value}
         onChangeText={val => this.props.onChangeText(val)}
-        onSubmitEditing={() => {
-          Keyboard.dismiss();
-          this.props.onSubmitEditing();
-        }}
-        
-        
+        onSubmitEditing={() => Keyboard.dismiss()}
       />
     );
   }
