@@ -31,7 +31,7 @@ const CCarousel = props => {
                 }}
                 resizeMethod="resize"
                 key={item.path}
-                style={[{ width: "100%", height: "84%", resizeMode: "contain" }]}
+                style={[{ width: "100%", height: props.user ? "84%" : "100%", resizeMode: "cover" }]}
                 source={{ uri: `${BASE_URL}/dev/${item.path}`, cache: "force-cache" }} />
             </View>
           </View>
