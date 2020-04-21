@@ -13,6 +13,7 @@ import { LoadingButton } from '../../components/Utilities';
 import CommonStyles, { DynamicP, DynamicM, DynamicFntSize } from '../../components/Styles';
 import { customisedAction } from '../../redux/actions';
 import { SUBMIT_DATA } from '../../constants';
+import I18n from '../../i18n';
 //endregion
 
 class ContactUs extends Component {
@@ -63,9 +64,9 @@ class ContactUs extends Component {
         const { user, navigation, customisedAction } = this.props;
         let data = {}
         if (navigation.state.params.dataKey !== "constact-us-form") {
-            if (!title) return Alert.alert("Title is required");
-            if (!author) return Alert.alert("Author is required");
-            if (!presenter) return Alert.alert("Presenter is required");
+            if (!title) return Alert.alert(I18n.t('title_alert'));
+            if (!author) return Alert.alert(I18n.t('author_alert'));
+            if (!presenter) return Alert.alert(I18n.t('presenter_alert'));
             data = {
                 title,
                 author,
@@ -80,10 +81,10 @@ class ContactUs extends Component {
                 dataKey: navigation.state.params.dataKey
             }
         } else {
-            if (!name) return Alert.alert("Name is required");
-            if (!email) return Alert.alert("Email is required");
-            if (!subject) return Alert.alert("Subject is required");
-            if (!message) return Alert.alert("Message is required");
+            if (!name) return Alert.alert(I18n.t('name_alert'));
+            if (!email) return Alert.alert(I18n.t('email_alert'));
+            if (!subject) return Alert.alert(I18n.t('subject_alert'));
+            if (!message) return Alert.alert(I18n.t('message_alert'));
             data = {
                 name,
                 email,
@@ -163,26 +164,26 @@ class ContactUs extends Component {
                         {dataKey === "constact-us-form" ?
                             <View>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Name" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Name')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={name}
                                         onChangeText={value => this.setState({ name: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Email Address" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('email')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={email}
                                         onChangeText={value => this.setState({ email: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Subject" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Subject')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={subject}
                                         onChangeText={value => this.setState({ subject: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                                     <Textarea
-                                        placeholder="Message"
+                                        placeholder={I18n.t('Message')}
                                         style={[CommonStyles.inputRadius, DynamicP(10, 10, 10, 10), DynamicWidth("100%")
                                             , { alignSelf: "flex-start" }]} rowSpan={4} bordered
                                         value={message}
@@ -192,32 +193,32 @@ class ContactUs extends Component {
                             </View>
                         :   <View>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Title" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('title')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={title}
                                         onChangeText={value => this.setState({ title: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Main Author" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Author')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={author}
                                         onChangeText={value => this.setState({ author: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Affiliation" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Affiliation')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={affiliation}
                                         onChangeText={value => this.setState({ affiliation: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Presenter" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Presenter')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={presenter}
                                         onChangeText={value => this.setState({ presenter: value })}
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
                                     <Textarea
-                                        placeholder="Abstract"
+                                        placeholder={I18n.t('Abstract')}
                                         style={[CommonStyles.inputRadius, DynamicP(10, 10, 10, 10), DynamicWidth("100%")
                                             , { alignSelf: "flex-start" }]} rowSpan={4} bordered
                                         value={abstract}
@@ -225,7 +226,7 @@ class ContactUs extends Component {
                                     />
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Keyword(s)" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Keywords')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={keyword}
                                         onChangeText={value => this.setState({ keyword: value })}
                                     />
@@ -236,12 +237,12 @@ class ContactUs extends Component {
                                         onPress={() => this._selectFile()}
                                     >
                                         <Text style={[DynamicFntSize(15), { color: 'rgba(0, 0, 0, 0.7)'} ]}>
-                                            {fileNmae || 'Choose file'}
+                                            {fileNmae || I18n.t('File')}
                                         </Text>
                                     </TouchableOpacity>
                                 </Item>
                                 <Item style={[CommonStyles.noBorder, DynamicM(10, 5, 0, 0)]}  >
-                                    <Input placeholder="Total No of Pages" style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
+                                    <Input placeholder={I18n.t('Pages')} style={[CommonStyles.inputRadius, DynamicFntSize(15), DynamicP(10, 10, 10, 10), DynamicWidth("100%")]}
                                         value={pages}
                                         keyboardType="numeric"
                                         onChangeText={value => this.setState({ pages: value })}
@@ -252,11 +253,11 @@ class ContactUs extends Component {
                         <LoadingButton
                             isBlock={true}
                             submitting={loading}
-                            submittingText={dataKey === "constact-us-form" ? "Sending" : "Submitting"}
+                            submittingText={dataKey === "constact-us-form" ? I18n.t('sending') : I18n.t('submitting')}
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={dataKey === "constact-us-form" ? "Send message" : "Submit Paper"}
+                            btnText={dataKey === "constact-us-form" ? I18n.t('send_message') : I18n.t('submit_paper')}
                             style={[DynamicM(25, 5, 0, 0), {
                                 width: "90%", alignSelf: "center",
                                 backgroundColor: TColors.bgSecondary,

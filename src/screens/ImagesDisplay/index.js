@@ -26,9 +26,7 @@ class ImagesDisplay extends Component {
           transparent={true}
           visible={display}>
         <Container
-          style={{
-            backgroundColor: '#E2E9F5',
-          }}>
+          style={{ backgroundColor: '#E2E9F5' }}>
           <View style={{height: 0}}>
             <View
               style={{

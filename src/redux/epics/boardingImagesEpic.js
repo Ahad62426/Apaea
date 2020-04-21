@@ -10,10 +10,9 @@ import {
   BOARDING_IMAGES_FAILURE,
   API_ENDPOINTS,
   NETWORK_ERROR_MSG,
-  ERROR_MSG,
-  UNKNOWN_ERROR_MSG,
 } from '../../constants';
 import { RestClient } from '../../network/RestClient';
+import I18n from '../../i18n';
 
 export class boardingImagesEpic {
   static boardingImages = action$ =>
@@ -35,12 +34,12 @@ export class boardingImagesEpic {
             if (problem && problem === NETWORK_ERROR_MSG) {
               return customisedAction(BOARDING_IMAGES_FAILURE);
             }
-            Alert.alert(ERROR_MSG);
+            Alert.alert(I18n.t('ERROR_MSG'));
             return customisedAction(BOARDING_IMAGES_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('BoardingImages Unknown Error', error);
-            Alert.alert(UNKNOWN_ERROR_MSG);
+            Alert.alert(I18n.t('UNKNOWN_ERROR_MSG'));
             return customisedAction(BOARDING_IMAGES_FAILURE);
           }
         }

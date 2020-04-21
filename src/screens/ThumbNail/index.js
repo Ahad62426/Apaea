@@ -30,7 +30,7 @@ class Thumbs extends Component {
             color: "white",
             textTransform: "uppercase",
             fontWeight: "bold",
-            fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 20,
+            fontSize: this.props.fontSize !== undefined ? this.props.fontSize : 20
           }]}
         >
           {`${this.props.UserInfo.FirstName[0] || ''}${this.props.UserInfo.LastName[0] || ''}`}

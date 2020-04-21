@@ -4,11 +4,7 @@ import {
   Card,
   CardItem,
   Text,
-  Button,
-  Left,
-  Body,
-  Right,
-  Separator
+  Body
 } from 'native-base';
 import Image from 'react-native-image-progress';
 import * as Progress from 'react-native-progress';
@@ -21,6 +17,7 @@ import store from '../../redux/store';
 import CommonStyles, { DynamicM, DynamicP, TColors, DynamicFntW, DynamicFntSize } from '../Styles';
 import { BASE_URL } from '../../constants/Apis';
 import { DISPLAY_DATA_SCREEN } from '../../constants';
+import I18n from '../../i18n';
 
 CactionCardItemHeading = text => {
   return (
@@ -73,7 +70,7 @@ _bgdownload = async url => {
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       {
         'title': 'Apaea',
-        'message': 'This aap needs access to your storage to download.'
+        'message': I18n.t('download_message')
       }
     )
     
@@ -87,23 +84,23 @@ _bgdownload = async url => {
         path: `${DownloadDir}${url.slice(url.lastIndexOf("/"))}`
       }
       
-      if (await RNFetchBlob.fs.exists(options.path)) Toast.show("File already exists", Toast.LONG);
+      if (await RNFetchBlob.fs.exists(options.path)) Toast.show(I18n.t('file_already_exists'), Toast.LONG);
       else {
         try {
           config(options)
           .fetch('GET', url)
           .progress({ interval: 10 },(received,total)=>{
-              Toast.show(`Downloading ${((received/total)*100).toFixed(2)}%`, Toast.LONG);
+              Toast.show(`${I18n.t('downloading')} ${((received/total)*100).toFixed(2)}%`, Toast.LONG);
           })
           .then(res => {
-            Toast.show(`File ${url.slice(url.lastIndexOf("/")+1)} download completed!`, Toast.LONG);
+            Toast.show(`${url.slice(url.lastIndexOf("/")+1)} ${I18n.t('download_completed')}`, Toast.LONG);
           })
         } catch (error) {
           console.log('error', error)
         }
       }
     }
-    else Alert.alert("Storage Permission Not Granted");
+    else Alert.alert(I18n.t('not_granted'));
   } catch (err) {
     console.warn(err)
   }
@@ -114,31 +111,31 @@ renderCardBody = props => {
     case "actionCard":
       return (
         <Body>
-          {CactionCardItemHeading("Title :")}
+          {CactionCardItemHeading(`${I18n.t('title')} :`)}
           {CactionCardItemtext(props.title)}
 
-          {props.mauthor ? CactionCardItemHeading("Main Author :") : null}
+          {props.mauthor ? CactionCardItemHeading(`${I18n.t('Author')} :`) : null}
           {props.mauthor ? CactionCardItemtext(props.mauthor) : null}
 
-          {props.sub_type && !props.mauthor ? CactionCardItemHeading("Sub-Type :") : null}
+          {props.sub_type && !props.mauthor ? CactionCardItemHeading(`${I18n.t('SubType')} :`) : null}
           {props.sub_type && !props.mauthor ? CactionCardItemtext(props.sub_type) : null}
 
-          {props.affilliation && !props.mauthor ? CactionCardItemHeading("Affilliation :") : null}
+          {props.affilliation && !props.mauthor ? CactionCardItemHeading(`${I18n.t('Affiliation')} :`) : null}
           {props.affilliation && !props.mauthor ? CactionCardItemtext(props.affilliation) : null}
 
-          {props.email && !props.mauthor ? CactionCardItemHeading("Email :") : null}
+          {props.email && !props.mauthor ? CactionCardItemHeading(`${I18n.t('Email')} :`) : null}
           {props.email && !props.mauthor ? CactionCardItemtext(props.email) : null}
 
-          {props.presenter && !props.mauthor ? CactionCardItemHeading("Presenter :") : null}
+          {props.presenter && !props.mauthor ? CactionCardItemHeading(`${I18n.t('Presenter')} :`) : null}
           {props.presenter && !props.mauthor ? CactionCardItemtext(props.presenter) : null}
 
-          {props.preaffiliation && !props.mauthor ? CactionCardItemHeading("P-Affiliation:") : null}
+          {props.preaffiliation && !props.mauthor ? CactionCardItemHeading(`${I18n.t('PAffiliation')} :`) : null}
           {props.preaffiliation && !props.mauthor ? CactionCardItemtext(props.preaffiliation) : null}
 
-          {props.pre_email && !props.mauthor ? CactionCardItemHeading("P-Email :") : null}
+          {props.pre_email && !props.mauthor ? CactionCardItemHeading(`${I18n.t('PEmail')} :`) : null}
           {props.pre_email && !props.mauthor ? CactionCardItemtext(props.pre_email) : null}
 
-          {props.keyword && !props.mauthor ? CactionCardItemHeading("Keyword :") : null}
+          {props.keyword && !props.mauthor ? CactionCardItemHeading(`${I18n.t('Keywords')} :`) : null}
           {props.keyword && !props.mauthor ? CactionCardItemtext(props.keyword) : null}
 
           {props.abstract ?
@@ -156,10 +153,10 @@ renderCardBody = props => {
               }, DynamicM(3, 10, 0, 0)]}
               onPress={() => 
                 store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: {
-                  header: "Abstract", description: props.abstract
+                  header: I18n.t('Abstract'), description: props.abstract
                 }})
               }>
-              {CactionCardItemHeading("Abstract :")}
+              {CactionCardItemHeading(`${I18n.t('Abstract')} :`)}
                 <Icon name="right" size={15} color="black" />
             </TouchableOpacity>
             : null
@@ -168,7 +165,7 @@ renderCardBody = props => {
             <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
               <ActionButton
                 textColor={"white"}
-                btnText={"Download"}
+                btnText={I18n.t('download')}
                 callback={() => this._bgdownload(`${BASE_URL}/public/paper/${props.file}`)}
                 icon={"download"}
                 style={{
@@ -190,14 +187,14 @@ renderCardBody = props => {
       return (
         <Body>
           {this.CBlogPostTitle(props.title)}
-          {this.CTwoColText("Manager:", props.name, "Price:", `USD ${props.price || ''}`)}
-          {this.CTwoColText("Accomodation:", `USD ${props.accomodation || ''}`, "Food:", `USD ${props.food || ''}`)}
-          {this.CTwoColText("Transportation:", `USD ${props.transportation || ''}`, "Discount:", `${props.discount || ''}%`)}
-          {this.CTwoColText("Total:", `USD ${props.total || ''}`)}
+          {this.CTwoColText(I18n.t('Manager'), props.name, I18n.t('Price'), `${I18n.t('USD')} ${props.price || ''}`)}
+          {this.CTwoColText(I18n.t('Accomodation'), `${I18n.t('USD')} ${props.accomodation || ''}`, I18n.t('Food'), `${I18n.t('USD')} ${props.food || ''}`)}
+          {this.CTwoColText(I18n.t('Transportation'), `${I18n.t('USD')} ${props.transportation || ''}`, I18n.t('Discount'), `${props.discount || ''}%`)}
+          {this.CTwoColText(I18n.t('Total'), `${I18n.t('USD')} ${props.total || ''}`)}
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
-              btnText={"Register"}
+              btnText={I18n.t('register')}
               style={{
                 borderRadius: 5,
                 height: 45,
@@ -221,7 +218,7 @@ renderCardBody = props => {
           {/* {props.description || props.excerpt ? */}
               <ActionButton
                 textColor={"white"}
-                btnText={props.is_active ? "Register" : "Read More"}
+                btnText={props.is_active ? I18n.t('register') : I18n.t('read_more')}
                 style={{
                   borderRadius: 5,
                   height: 45,
@@ -239,7 +236,7 @@ renderCardBody = props => {
             {props.file && props.file.includes('.') ?
               <ActionButton
                 textColor={"white"}
-                btnText={"Download"}
+                btnText={I18n.t('download')}
                 icon={"download"}
                 style={{
                   borderRadius: 5,
@@ -275,7 +272,7 @@ renderCardBody = props => {
       )
       break;
     default:
-      <Text>Card Type Not selected </Text>
+      <Text>{I18n.t('invalid_card')}</Text>
       break;
   }
 }
@@ -338,137 +335,4 @@ const CPartnerCard = props => {
   );
 };
 
-const CBreadCrumb = props => {
-  return (
-    <Separator
-      style={[
-        {
-          flexDirection: 'row',
-          padding: 10,
-          height: 'auto',
-          borderBottomColor: '#c5c5c5',
-          borderBottomWidth: 1,
-          justifyContent: 'center',
-        },
-        props.style !== undefined ? props.style : {},
-      ]}>
-      {props.left !== false ? (
-        <CardItem
-          style={[DynamicM(0, 0, 0, 0), DynamicP(0, 0, 0, 0), { flex: 2 }]}>
-          <Left>
-            <Body style={{ flex: 1, justifyContent: 'flex-start' }}>
-              <Text
-                style={[CommonStyles.cardTitle, CommonStyles.uppercase]}
-                numberOfLines={1}>
-                {props.text}
-              </Text>
-            </Body>
-          </Left>
-          {props.right !== false ? (
-            <Right>
-              <Button transparent>
-                <Text>View All</Text>
-                <Icon name="right" size={15} color="black" />
-              </Button>
-            </Right>
-          ) : null}
-        </CardItem>
-      ) : (
-          <Text
-            style={{
-              fontSize: 18,
-              textTransform: 'uppercase',
-              fontWeight: '700',
-              color: props.color,
-            }}
-            numberOfLines={1}>
-            {props.text}
-          </Text>
-        )}
-    </Separator>
-  );
-};
-//Product card
-const CPCard = props => {
-
-  return (
-    <>
-      <CardItem
-        cardBody
-        style={[
-          CommonStyles.vhc,
-          props.Imagestyle != undefined ? props.Imagestyle : {},
-          { paddingTop: 40 },
-        ]}>
-        <Image
-          resizeMode={'contain'}
-          source={{
-            uri: props.item.ImageURL_Thumb,
-          }}
-          style={{ height: 150, width: 150 }}
-        />
-      </CardItem>
-
-      <CardItem>
-        <Left>
-          <Body>
-            <Text style={{ color: '#2e2e2e', fontWeight: '700' }}>
-              {props.item.Name}
-            </Text>
-            <Text>
-              <Text style={{ color: '#2e2e2e', fontWeight: '700' }}>
-                £{props.item.DiscountPrice}
-              </Text>
-              <Text
-                style={[
-                  {
-                    color: 'red',
-                    fontWeight: '700',
-                    textDecorationColor: 'blue',
-                    textDecorationLine: 'line-through',
-                    paddingLeft: 10
-                  },
-                  DynamicP(0, 0, 0, 20),
-                ]}>
-                £{props.item.SellingPrice}
-              </Text>
-            </Text>
-          </Body>
-        </Left>
-      </CardItem>
-      <CardItem>
-        <Left>
-          <Button transparent>
-            <Cart size={25} color={'#377CE1'} />
-          </Button>
-        </Left>
-        <Right>
-          <Button transparent>
-            <Icon name="hearto" size={20} color="#ed5565" />
-          </Button>
-        </Right>
-      </CardItem>
-    </>
-  );
-};
-
-// const CBreadCrumb = props => {
-
-//   return (
-//     <Card style={{}}>
-//       <CardItem
-//         style={[{
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         },props.style != undefined ? props.style :{}]}>
-//         <Text
-//           style={{fontSize: 18,textTransform:'uppercase', fontWeight: '700', color: props.color}}
-//           numberOfLines={1}>
-//           {props.text}
-//         </Text>
-//       </CardItem>
-//     </Card>
-//   );
-// };
-
-export { CCard, CBreadCrumb, CPCard, CPartnerCard };
+export { CCard, CPartnerCard };

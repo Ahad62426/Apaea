@@ -15,8 +15,9 @@ import { CLogo, LoadingButton, } from '../../components/Utilities';
 import { CCarousel } from '../../components/Carousel';
 import { customisedAction } from '../../redux/actions';
 import { GET_BOARDING_DATA, GET_BOARDING_IMAGES } from '../../constants';
+import I18n from '../../i18n';
 
-class SignIn extends Component {
+class Welcome extends Component {
   constructor(props) {
     super(props);
   }
@@ -45,7 +46,7 @@ class SignIn extends Component {
           OpenMenu={() => {
             this.props.navigation.dispatch(DrawerActions.toggleDrawer());
           }}
-          Screen={'Welcome to A-PAEA'}
+          Screen={I18n.t('welcome')}
         />
           <View
             style={[
@@ -83,7 +84,7 @@ class SignIn extends Component {
                   </View>
                 </View>
               : <View style={[{ flex: 1 }, CommonStyles.vthc, DynamicM(10, 5, 0, 0)]}>
-                  <Title style={{ fontSize: 18 }}>Slider data not available!</Title>
+                  <Title style={{ fontSize: 18 }}>{I18n.t('no_slider')}</Title>
                 </View>
             }
             {user ? null :
@@ -94,7 +95,7 @@ class SignIn extends Component {
                   rounded={true}
                   loaderColor={'white'}
                   textColor={"white"}
-                  btnText={'Login'}
+                  btnText={I18n.t('login')}
                   style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.primaryColor }]}
                   callback={() => this._takeMeTOLogin()}
                 />
@@ -105,7 +106,7 @@ class SignIn extends Component {
                   textColor={"white"}
 
                   loaderColor={'white'}
-                  btnText={'Create Account'}
+                  btnText={I18n.t('create_account')}
                   style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderColor: "white", borderWidth: 1 }]}
                   callback={() => this._takeMeTOSignUp()}
                 />
@@ -122,4 +123,4 @@ const mapStateToProps = ({ boardingDataReducer: { loadingData, loadingImages, sl
   user
 });
 
-export default connect(mapStateToProps, { customisedAction })(SignIn);
+export default connect(mapStateToProps, { customisedAction })(Welcome);

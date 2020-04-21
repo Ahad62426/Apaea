@@ -13,7 +13,7 @@ import CommonStyles, {
   DynamicFntSize
 } from '../Styles';
 import { CGradient } from '../Gradient';
-
+import I18n from '../../i18n';
 
 
 //Button
@@ -96,7 +96,7 @@ const LoadingButton = props => {
       style={props.style}
       onPress={!props.submitting ? props.callback : null}>
       <Text style={[CommonStyles.BtnTxt, { color: props.textColor }, props.textStyle ]}>
-        {props.submitting ? props.submittingText || `Submitting` : `${props.btnText}`}
+        {props.submitting ? props.submittingText || I18n.t('submitting') : `${props.btnText}`}
       </Text>
       {props.submitting ? (
         <ActivityIndicator size="small" color={props.loaderColor} />

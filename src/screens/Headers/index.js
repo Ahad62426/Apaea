@@ -75,7 +75,7 @@ class MasterHeader extends Component {
     }
 
     render() {
-        var cstmStyles = this.props.customStyle == undefined ? {} : this.props.customStyle;
+        var cstmStyles = !this.props.customStyle ? {} : this.props.customStyle;
         return (
             <Header style={[{ zIndex: 10, backgroundColor: TColors.bgColorPrimary }, cstmStyles]}>
                 <Left style={{ flex: 2, flexDirection: "row" }}>

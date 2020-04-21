@@ -11,6 +11,7 @@ import { DrawerActions } from 'react-navigation-drawer';
 import { CHeading } from '../../components/Utilities';
 
 import CommonStyles, { DynamicM } from '../../components/Styles';
+import I18n from '../../i18n';
 
 class MyAccount extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class MyAccount extends Component {
         const { dataKey, heading } = this.props.navigation.state.params;
         const { loading, data } = this.props;
         let ScreenData = data[dataKey];
-        if (heading === "Conference Paper Submission" && ScreenData.data) ScreenData = ScreenData.data;
+        if (dataKey === "conference" && ScreenData.data) ScreenData = ScreenData.data;
         return (
             <Container
                 style={{
@@ -34,7 +35,7 @@ class MyAccount extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={'My Account'}
+                    Screen={I18n.t('MyAccount')}
                 />
                 <View style={{ height: 0 }}>
                     <View style={{ height: 200, backgroundColor: TColors.bgColorPrimary }}></View>

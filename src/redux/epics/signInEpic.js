@@ -10,10 +10,9 @@ import {
   SIGN_IN_FAILURE,
   API_ENDPOINTS,
   NETWORK_ERROR_MSG,
-  ERROR_MSG,
-  UNKNOWN_ERROR_MSG
 } from '../../constants';
 import { RestClient } from '../../network/RestClient';
+import I18n from '../../i18n';
 
 export class signInEpic {
   static signIn = action$ =>
@@ -36,15 +35,15 @@ export class signInEpic {
               return customisedAction(SIGN_IN_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(I18n.t('NETWORK_ERROR_MSG'));
               return customisedAction(SIGN_IN_FAILURE);
             }
-            Alert.alert(ERROR_MSG);
+            Alert.alert(I18n.t('ERROR_MSG'));
             return customisedAction(SIGN_IN_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('SignIn Unknown Error', error);
-            Alert.alert(UNKNOWN_ERROR_MSG);
+            Alert.alert(I18n.t('UNKNOWN_ERROR_MSG'));
             return customisedAction(SIGN_IN_FAILURE);
           }
         }

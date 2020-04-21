@@ -9,6 +9,7 @@ import {DrawerActions} from 'react-navigation-drawer';
 import {CAccordian} from '../../components/Accordian';
 
 import CommonStyles, { DynamicM, DynamicFntW, DynamicFntSize } from '../../components/Styles';
+import I18n from '../../i18n';
 //endregion
 
 class FAQ extends Component {
@@ -63,11 +64,11 @@ class FAQ extends Component {
                 : data[dataKey] ? data[dataKey].length ?
                   <CAccordian dataArray={data[dataKey]} />
                 : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                      <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No Data available For {navigation.state.params.title}.</Text>
-                      <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                      <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('no_data_for')} {navigation.state.params.title}.</Text>
+                      <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>{I18n.t('sorry')}</Text>
                   </View> 
                 : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                    <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
+                    <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('unable')}</Text>
                 </View>
             }
         </View>

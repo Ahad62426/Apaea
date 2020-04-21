@@ -9,10 +9,9 @@ import {
   DATA_SUBMISSION_SUCCESS,
   DATA_SUBMISSION_FAILURE,
   NETWORK_ERROR_MSG,
-  ERROR_MSG,
-  UNKNOWN_ERROR_MSG,
 } from '../../constants';
 import { RestClient } from '../../network/RestClient';
+import I18n from '../../i18n';
 
 export class dataSubmissionEpic {
   static dataSubmission = action$ =>
@@ -32,14 +31,15 @@ export class dataSubmissionEpic {
               return customisedAction(DATA_SUBMISSION_FAILURE);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
+              Alert.alert(I18n.t('NETWORK_ERROR_MSG'));
               return customisedAction(DATA_SUBMISSION_FAILURE);
             }
-            Alert.alert(ERROR_MSG);
+            Alert.alert(I18n.t('ERROR_MSG'));
             return customisedAction(DATA_SUBMISSION_FAILURE);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('DataSubmission Unknown Error', error);
-            Alert.alert(UNKNOWN_ERROR_MSG);
+            Alert.alert(I18n.t('UNKNOWN_ERROR_MSG'));
             return customisedAction(DATA_SUBMISSION_FAILURE);
           }
         }

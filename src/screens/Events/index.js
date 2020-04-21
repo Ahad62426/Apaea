@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { DrawerActions } from 'react-navigation-drawer';
 
 import CommonStyles, { DynamicM, DynamicFntW, DynamicFntSize } from '../../components/Styles';
+import I18n from '../../i18n';
 
 class Events extends Component {
     constructor(props) {
@@ -68,11 +69,11 @@ class Events extends Component {
                             >
                             </FlatList>
                         :   <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No {navigation.state.params.title} Posted yet.</Text>
-                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('no')} {navigation.state.params.title} {I18n.t('posted_yet')}</Text>
+                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>{I18n.t('sorry')}</Text>
                             </View> 
                         :   <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('unable')}</Text>
                             </View>
                     }
                 </View>

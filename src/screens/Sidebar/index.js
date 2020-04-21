@@ -80,7 +80,7 @@ class SideBar extends Component {
                 fontSize: 20,
                 color: '#FFFFFF',
               }}>
-              {user ? user.name : "Not Logged In"}
+              {user ? user.name : I18n.t('no_login')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -112,14 +112,15 @@ class SideBar extends Component {
         key={1}
         onPress={() => {
           if (o.authRequired && !user) {
-            Alert.alert("SignIn Required!")
+            Alert.alert(I18n.t('signin_required'))
+            this.setState({ activeMenu: '' })
             return this.props.navigation.navigate('Welcome')
           }
-          if (o.action) this.props.customisedAction(o.action, o.dataKey || o.Text)
+          if (o.action) this.props.customisedAction(o.action, o.dataKey)
           if (o.metaDataAction) {
             if (!data[o.dataKey] && !loading) this.props.customisedAction(o.metaDataAction, { dataKey: o.dataKey, sub_url: o.sub_url, extraKey: o.extraKey })
           }
-          this._checkDrawer(o.Text, o.Navigation, { title: o.Text, dataKey: o.dataKey })
+          this._checkDrawer(o.Text, o.Navigation, { title: I18n.t(o.Text), dataKey: o.dataKey })
         }}>
         <Body
           style={{
@@ -135,7 +136,7 @@ class SideBar extends Component {
               width: 10,
               height: 10,
             }}></View>
-          <Text style={[{ marginLeft: 5 }, this.state.activeMenu === o.Text && { color: 'white' }]}>{o.Text}</Text>
+          <Text style={[{ marginLeft: 5 }, this.state.activeMenu === o.Text && { color: 'white' }]}>{I18n.t(o.Text)}</Text>
         </Body>
       </ListItem>
     ));
@@ -151,7 +152,7 @@ class SideBar extends Component {
           alignItems: 'center',
           backgroundColor: 'transparent',
         }}>
-        <Text style={{ fontWeight: '600' }}>{item.Text}</Text>
+        <Text style={{ fontWeight: '600' }}>{I18n.t(item.Text)}</Text>
         {expanded ? (
           <AntIcon name="caretdown" size={10} color="#0E3968" />
         ) : (
@@ -193,7 +194,7 @@ class SideBar extends Component {
                   <CSvg size={20} name="login" />
                 </Col>
                 <Col size={8}>
-                  <Text style={{ padding: 5, color: 'white' }}>Login</Text>
+                  <Text style={{ padding: 5, color: 'white' }}>{I18n.t('login')}</Text>
                 </Col>
               </TouchableOpacity>
             </Item>
@@ -214,7 +215,7 @@ class SideBar extends Component {
                   <CSvg size={20} name="joinUS" />
                 </Col>
                 <Col size={8}>
-                  <Text style={{ padding: 5, color: 'white' }}>Join Us</Text>
+                  <Text style={{ padding: 5, color: 'white' }}>{I18n.t('joinus')}</Text>
                 </Col>
               </TouchableOpacity>
             </Item>
@@ -229,11 +230,11 @@ class SideBar extends Component {
                   key={index}
                   style={{ borderColor: 'transparent', marginLeft: 0 }}
                   onPress={() => {
-                    if (Obje.action) this.props.customisedAction(Obje.action, Obje.dataKey || Obje.Text)
+                    if (Obje.action) this.props.customisedAction(Obje.action, Obje.dataKey)
                     if (Obje.metaDataAction) {
                       if (!data[Obje.dataKey] && !loading) this.props.customisedAction(Obje.metaDataAction, { dataKey: Obje.dataKey, sub_url: Obje.sub_url })
                     }
-                    this._checkDrawer(Obje.Text, Obje.Navigation, { title: Obje.Text, dataKey: Obje.dataKey })
+                    this._checkDrawer(Obje.Text, Obje.Navigation, { title: I18n.t(Obje.Text), dataKey: Obje.dataKey })
                   }}>
                   <Body style={{ flex: 10 }}>
                     <Text
@@ -242,7 +243,7 @@ class SideBar extends Component {
                           ? { color: 'white' }
                           : {}
                       }>
-                      {Obje.Text}
+                      {I18n.t(Obje.Text)}
                     </Text>
                   </Body>
                 </ListItem>
@@ -263,14 +264,14 @@ class SideBar extends Component {
               onPress={async () => await setLanguage('en')}
               style={{ margin: 10, marginRight: 20 }}>
               <Image
-                style={{ height: 20, width: 40 }}
+                style={{ height: 20, width: 40, borderRadius: 3 }}
                 source={require('../../assets/Icons/usflag.png')} />
             </TouchableOpacity>
             <TouchableOpacity
               onPress={async () => await setLanguage('zh')}
               style={{ margin: 10, marginRight: 20 }}>
               <Image
-                style={{ height: 20, width: 40 }}
+                style={{ height: 20, width: 40, borderRadius: 3 }}
                 source={require('../../assets/Icons/chflag.png')} />
             </TouchableOpacity>
           </View>

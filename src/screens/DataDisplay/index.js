@@ -18,6 +18,7 @@ import CommonStyles, {
 } from '../../components/Styles';
 import { customisedAction } from '../../redux/actions';
 import { HIDE_DATA_SCREEN } from '../../constants';
+import I18n from '../../i18n';
 
 class DataDisplay extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class DataDisplay extends Component {
           visible={display}>
         <Container
           style={{
-            backgroundColor: '#E2E9F5',
+            backgroundColor: '#E2E9F5'
           }}>
           <View style={{height: 0}}>
             <View
@@ -90,7 +91,7 @@ class DataDisplay extends Component {
                 <View>
                   <Label
                     style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
-                    Excerpt:
+                    {I18n.t('excerpt')}:
                   </Label>
                   <Text style={{fontSize:13,lineHeight:20}}>
                     {data.excerpt.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}
@@ -99,11 +100,11 @@ class DataDisplay extends Component {
                   </Text>
                   <Label
                     style={[DynamicP(10, 10, 0, 0), {fontSize: 16, fontWeight: '700'}]}>
-                    Description:
+                    {I18n.t('description')}:
                   </Label>
                 </View>
               }
-              <View>
+              <View style={{ paddingBottom: 30 }}>
                 {data.description ?
                   <Text style={{fontSize:13,lineHeight:20}}>
                     {data.description.replace(/&nbsp;/g, ' ').replace(/  +/g, ' ')}

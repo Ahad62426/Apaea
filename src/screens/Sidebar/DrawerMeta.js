@@ -1,15 +1,16 @@
 import { API_ENDPOINTS, GET_META_DATA, SET_DATA_KEY } from '../../constants';
+import I18n from '../../i18n';
 
 export default [
   {
-    Text: 'About Us',
+    Text: 'AboutUs',
     Navigation: 'AboutUs',
     dataKey: 'aboutUs',
     color: '#545454',
     cstmClass: '',
   },
   {
-    Text: 'Our People',
+    Text: 'OurPeople',
     color: '#545454',
     cstmClass: '',
     subMenu: [
@@ -44,7 +45,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Vice-Presidents',
+        Text: 'VicePresidents',
         Navigation: 'OurPeople',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -54,7 +55,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Advisory Board',
+        Text: 'AdvisoryBoard',
         Navigation: 'OurPeople',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -64,7 +65,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Resource Persons',
+        Text: 'ResourcePersons',
         Navigation: 'OurPeople',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -76,7 +77,7 @@ export default [
     ],
   },
   {
-    Text: 'Activities & Events',
+    Text: 'ActivitiesNEvents',
     color: '#545454',
     cstmClass: '',
     subMenu: [
@@ -99,7 +100,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Upcoming Events',
+        Text: 'UpcomingEvents',
         Navigation: 'Events',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -124,7 +125,7 @@ export default [
     cstmClass: '',
     subMenu: [
       {
-        Text: 'Conference Proceedings',
+        Text: 'ConferenceProceedings',
         Navigation: 'Publications',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -144,7 +145,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Submission Form',
+        Text: 'SubmissionForm',
         Navigation: 'ContactUs',
         dataKey: 'submission-form',
         authRequired: true,
@@ -152,7 +153,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Working Paper Series',
+        Text: 'WorkingPaperSeries',
         Navigation: 'Publications',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -164,12 +165,12 @@ export default [
     ],
   },
   {
-    Text: 'Our Services',
+    Text: 'OurServices',
     color: '#545454',
     cstmClass: '',
     subMenu: [
       {
-        Text: 'International Conferences',
+        Text: 'InternationalConferences',
         Navigation: 'Publications',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -178,7 +179,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'New datasets',
+        Text: 'NewDatasets',
         Navigation: 'Publications',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -187,7 +188,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Proof reading of manuscripts',
+        Text: 'ProofReadingOfManuscripts',
         Navigation: 'ContactUs',
         dataKey: 'proof-reading-of-manuscripts',
         authRequired: true,
@@ -195,7 +196,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Review of Papers',
+        Text: 'ReviewOfPapers',
         Navigation: 'ContactUs',
         dataKey: 'review-of-papers',
         authRequired: true,
@@ -203,7 +204,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Submission of Working Papers',
+        Text: 'SubmissionOfWorkingPapers',
         Navigation: 'ContactUs',
         dataKey: 'submission-of-working-papers',
         authRequired: true,
@@ -211,7 +212,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Conference Paper Submission',
+        Text: 'ConferencePaperSubmission',
         Navigation: 'Publications',
         metaDataAction: GET_META_DATA,
         action: SET_DATA_KEY,
@@ -222,7 +223,7 @@ export default [
         cstmClass: '',
       },
       {
-        Text: 'Editorial Services',
+        Text: 'EditorialServices',
         Navigation: 'AboutUs',
         dataKey: 'editorial_services',
         color: '#545454',
@@ -264,7 +265,7 @@ export default [
     cstmClass: '',
   },
   {
-    Text: 'Contact Us',
+    Text: 'ContactUs',
     Navigation: 'ContactUs',
     dataKey: 'constact-us-form',
     color: '#545454',

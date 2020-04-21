@@ -10,12 +10,11 @@ import {
   SET_USER_SESSION,
   API_ENDPOINTS,
   NETWORK_ERROR_MSG,
-  ERROR_MSG,
-  UNKNOWN_ERROR_MSG,
   SIGN_UP_FAILURE
 } from '../../constants';
 import NavigationService from '../../helperMethods/navigationService';
 import { RestClient } from '../../network/RestClient';
+import I18n from '../../i18n';
 
 export class sessionEpic {
   static session = action$ =>
@@ -28,7 +27,7 @@ export class sessionEpic {
             const { status, data: resObj, problem } = response;
             if (status && status === 200) {
               const { user } = resObj;
-              if (failure_action === SIGN_UP_FAILURE) Alert.alert("Signed Up Successfully!");
+              if (failure_action === SIGN_UP_FAILURE) Alert.alert(I18n.t('Signed_Up_Successfully'));
               NavigationService.navigate('Welcome') 
               await setItem('@UserAuth', user);
               return customisedAction(SET_USER_SESSION, user);
@@ -38,15 +37,15 @@ export class sessionEpic {
               return customisedAction(failure_action);
             }
             if (problem && problem === NETWORK_ERROR_MSG) {
-              Alert.alert(NETWORK_ERROR_MSG);
+              Alert.alert(I18n.t('NETWORK_ERROR_MSG'));
               return customisedAction(failure_action);
             }
-            Alert.alert(ERROR_MSG);
+            Alert.alert(I18n.t('ERROR_MSG'));
             return customisedAction(failure_action);
           } catch (error) {
             // eslint-disable-next-line no-console
             console.log('Session Unknown Error', error);
-            Alert.alert(UNKNOWN_ERROR_MSG);
+            Alert.alert(I18n.t('UNKNOWN_ERROR_MSG'));
             return customisedAction(failure_action);
           }
         }

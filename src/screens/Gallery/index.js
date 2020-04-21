@@ -14,8 +14,9 @@ import { customisedAction } from '../../redux/actions';
 import { GET_BOARDING_IMAGES, BASE_URL, DISPLAY_IMAGES_SCREEN } from '../../constants';
 
 import CommonStyles, { DynamicM } from '../../components/Styles';
+import I18n from '../../i18n';
 
-const textArray = ['Universitas Airlangga', 'Home Page Slider']
+const textArray = ['universitas_airlangga', 'home_page_slider']
 
 class Gallery extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class Gallery extends Component {
                     borderRadius: 10,
                     borderWidth: 1
                 }}
-                onPress={() => this.props.customisedAction(DISPLAY_IMAGES_SCREEN, { title: "Images", images: item.subData })} >
+                onPress={() => this.props.customisedAction(DISPLAY_IMAGES_SCREEN, { title: I18n.t('images'), images: item.subData })} >
                 <Image
                     indicator={Progress.Pie}
                     indicatorProps={{
@@ -45,13 +46,13 @@ class Gallery extends Component {
                     key={item.path}
                     style={{ height: 160, width: 200, resizeMode: "cover" }} 
                     source={{ uri: `${BASE_URL}/dev/${item.subData[0].path}`, cache: "force-cache" }} />
-                <Text style={{ marginTop: 10 }}>{textArray[index]}</Text>
+                <Text style={{ marginTop: 10 }}>{I18n.t(textArray[index])}</Text>
             </TouchableOpacity>
         );
     }
 
     render() {
-        const { loadingImages, galleryImages, customisedAction } = this.props;
+        const { loadingImages, galleryImages, customisedAction, navigation } = this.props;
         return (
             <Container
                 style={{
@@ -66,7 +67,7 @@ class Gallery extends Component {
                     OpenMenu={() => {
                         this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                     }}
-                    Screen={'Gallery'}
+                    Screen={navigation.state.params.title}
                 />
                 <View style={{ height: 0 }}>
                     <View style={{ height: 200, backgroundColor: TColors.bgColorPrimary }}></View>
@@ -98,7 +99,7 @@ class Gallery extends Component {
                                 >
                                 </FlatList>
                             </View>
-                        :   <View style={{ flex: 1, justifyContent: "center" }}><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>Images Not Available!</Title></View> 
+                        :   <View style={{ flex: 1, justifyContent: "center" }}><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>{I18n.t('no_images')}</Title></View> 
                     }
 
                 </View>

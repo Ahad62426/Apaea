@@ -19,7 +19,7 @@ import CommonStyles, {
 } from '../../components/Styles';
 import { customisedAction } from '../../redux/actions';
 import { GET_BOARDING_DATA } from '../../constants';
-import I18n from '../../i18n'
+import I18n from '../../i18n';
 
 class AboutUs extends Component {
   constructor(props) {
@@ -92,7 +92,7 @@ class AboutUs extends Component {
                   </TouchableOpacity> : null
                 }
               </View>
-            : <View><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>Data Not Available!</Title></View>
+            : <View><Title style={{ fontSize: 14, color: TColors.bgSecondary }}>{I18n.t('no_data')}</Title></View>
           }
         </Content>
       </Container>

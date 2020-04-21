@@ -15,6 +15,7 @@ import CInput from '../../components/KeyBoard';
 import { CAlert, LoadingButton } from '../../components/Utilities';
 import { customisedAction } from '../../redux/actions';
 import { SIGN_IN } from '../../constants'
+import I18n from '../../i18n';
 
 class SignIn extends Component {
   constructor(props) {
@@ -124,7 +125,7 @@ class SignIn extends Component {
                     CommonStyles.white,
                     CommonStyles.uppercase,
                   ]}>
-                  Login Into App
+                  {I18n.t('login_heading')}
                 </Text>
               </View>
                 <Item
@@ -135,7 +136,7 @@ class SignIn extends Component {
 
                   <CInput
                     placeholderTextColor={'#A6BCD0'}
-                    placeholder="username"
+                    placeholder={I18n.t('username')}
                     placeholderTextColor="white"
                     value={this.state.email}
                     style={{ color: "white", backgroundColor: TColors.bgSecondary, borderBottomColor: "white", borderBottomWidth: .2 }}
@@ -153,7 +154,7 @@ class SignIn extends Component {
                   style={[DynamicM(5, 15, 0, 0), CommonStyles.stdInput]}>
                   <CInput
                     placeholderTextColor={'#A6BCD0'}
-                    placeholder="password"
+                    placeholder={I18n.t('password')}
                     placeholderTextColor="white"
                     secureTextEntry={true}
                     value={this.state.password}
@@ -176,13 +177,13 @@ class SignIn extends Component {
                 rounded={true}
                 loaderColor={TColors.bgSecondary}
                 textColor="black"
-                btnText={'Login'}
+                btnText={I18n.t('login')}
                 style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white" }]}
                 callback={() => this.submit()}
               />
               <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
                 <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
-                <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>or</Text>
+                <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>{I18n.t('or')}</Text>
                 <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
               </View>
               <LoadingButton
@@ -191,7 +192,7 @@ class SignIn extends Component {
                 rounded={true}
                 loaderColor={'white'}
                 textColor="white"
-                btnText={'Registers'}
+                btnText={I18n.t('register')}
                 style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderWidth: 1, borderColor: "white" }]}
                 callback={() => this.props.navigation.navigate('SignUp')}
               />

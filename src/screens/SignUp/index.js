@@ -12,6 +12,7 @@ import { DrawerActions } from 'react-navigation-drawer';
 
 import CstHeader from '../Headers';
 import { LoadingButton } from '../../components/Utilities';
+import I18n from '../../i18n';
 
 class SignUp extends Component {
   constructor(props) {
@@ -65,7 +66,7 @@ class SignUp extends Component {
                 CommonStyles.white,
                 CommonStyles.uppercase,
               ]}>
-              Choose Membership Type
+              {I18n.t('signup_heading')}
             </Text>
           </View>
           <View style={[{ flex: 3, flexDirection: "column", }]}>
@@ -76,13 +77,13 @@ class SignUp extends Component {
               rounded={true}
               loaderColor={'white'}
               textColor="white"
-              btnText={'Individual Membership'}
+              btnText={I18n.t('indivisual_membership')}
               style={[DynamicM(10, 5, 0, 0), { backgroundColor: TColors.bgSecondary, borderWidth: 1, borderColor: "white" }]}
               callback={() => this._takeMeTORegistration("Individual")}
             />
             <View style={[{ width: "100%", height: "auto", flexDirection: "row" }, DynamicM(2, 2, 0, 0), CommonStyles.vhc]}>
               <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
-              <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>or</Text>
+              <Text style={[DynamicM(0, 0, 10, 10), CommonStyles.txtWhite]}>{I18n.t('or')}</Text>
               <View style={{ width: "43%", borderBottomColor: "white", borderBottomWidth: 1, height: 2 }}></View>
             </View>
             <LoadingButton
@@ -91,7 +92,7 @@ class SignUp extends Component {
               rounded={true}
               loaderColor={'white'}
               textColor="black"
-              btnText={'Institutional Membership'}
+              btnText={I18n.t('institutional_membership')}
               style={[DynamicM(10, 5, 0, 0), { backgroundColor: "white", borderColor: "white" }]}
               callback={() => this._takeMeTORegistration("Institutional")}
             />

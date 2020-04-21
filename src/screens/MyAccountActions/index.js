@@ -9,6 +9,7 @@ import CommonStyles, { DynamicM } from '../../components/Styles';
 import NavigationService from '../../helperMethods/navigationService';
 import { customisedAction } from '../../redux/actions';
 import { SET_ACCOUNT_MENU } from '../../constants'
+import I18n from '../../i18n';
 
 class MyAccountActions extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class MyAccountActions extends Component {
                     <CstHeader
                         isMenuRight={true}
                         OpenMenu={null}
-                        Screen={'My Account'}
+                        Screen={I18n.t('MyAccount')}
                     />
 
                     <Content
@@ -57,7 +58,7 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'My Assigned Working Paper'}
+                            btnText={I18n.t('AssignedWorkingPaper')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0), {
                                 backgroundColor: '#31567E', borderWidth: 1,
@@ -66,7 +67,7 @@ class MyAccountActions extends Component {
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Assigned Working Paper",
+                                    heading: I18n.t('AssignedWorkingPaper'),
                                     dataKey: "workinhistory"
                                 })
                             }}
@@ -78,14 +79,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'My Submitted Working Paper'}
+                            btnText={I18n.t('SubmittedWorkingPaper')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Submitted Working Paper",
+                                    heading: I18n.t('SubmittedWorkingPaper'),
                                     dataKey: "workingpaper"
                                 })
                             }}
@@ -97,14 +98,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Assigned Review Paper'}
+                            btnText={I18n.t('AssignedReviewPaper')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Assigned Review Paper",
+                                    heading: I18n.t('AssignedReviewPaper'),
                                     dataKey: "reviewhistory"
                                 })
                             }}
@@ -116,14 +117,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Submitted Review Paper'}
+                            btnText={I18n.t('SubmittedReviewPaper')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Submitted Review Paper",
+                                    heading: I18n.t('SubmittedReviewPaper'),
                                     dataKey: "reviewpaper"
                                 })
                             }}
@@ -135,14 +136,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Assigned Proof Reading Scripts'}
+                            btnText={I18n.t('AssignedProofReadingScripts')}
                             textStyle={{ fontSize: 17 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Assigned Proof Reading Scripts",
+                                    heading: I18n.t('AssignedProofReadingScripts'),
                                     dataKey: "proofpaper"
                                 })
                             }}
@@ -154,14 +155,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Submitted Proof Reading Scripts'}
+                            btnText={I18n.t('SubmittedProofReadingScripts')}
                             textStyle={{ fontSize: 16 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Submitted Proof Reading Scripts",
+                                    heading: I18n.t('SubmittedProofReadingScripts'),
                                     dataKey: "proofreading"
                                 })
                             }}
@@ -172,14 +173,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Conference Paper Assigned'}
+                            btnText={I18n.t('AssignedConferencePaper')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Assigned Conference Paper",
+                                    heading: I18n.t('AssignedConferencePaper'),
                                     dataKey: "conferencehistory1"
                                 })
                             }}
@@ -190,14 +191,14 @@ class MyAccountActions extends Component {
                             rounded={true}
                             loaderColor={'white'}
                             textColor="white"
-                            btnText={'Conference Paper Submission'}
+                            btnText={I18n.t('ConferencePaperSubmission')}
                             textStyle={{ fontSize: 18 }}
                             style={[DynamicM(10, 5, 0, 0),
                             { backgroundColor: '#31567E', borderWidth: 1, borderColor: "white" }]}
                             callback={() => {
                                 this.props.customisedAction(SET_ACCOUNT_MENU, false)
                                 NavigationService.navigate('MyAccount', {
-                                    heading: "Conference Paper Submission",
+                                    heading: I18n.t('ConferencePaperSubmission'),
                                     dataKey: "conference"
                                 })
                             }}

@@ -17,8 +17,7 @@ import CommonStyles, {
     DynamicM,
 } from '../../components/Styles';
 import { BASE_URL } from '../../constants';
-
-const TabsSize = CommonStyles.fullWidth > 480 ? 100 : 50;
+import I18n from '../../i18n';
 
 //endregion
 
@@ -117,11 +116,11 @@ class OurPeople extends Component {
                                 </View>)
                             
                             : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>No Data available For {navigation.state.params.title}.</Text>
-                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>Sorry for the inconvenience</Text>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('no_data_for')} {navigation.state.params.title}.</Text>
+                                <Text style={[CommonStyles.txtColorSub, DynamicFntSize(12)]}>{I18n.t('sorry')}</Text>
                             </View> 
                             : <View style={[CommonStyles.hc, DynamicM(20, 0, 0, 0)]}>
-                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>Unable to fetch data</Text>
+                                <Text style={[DynamicFntW("700"), DynamicFntSize(15)]}>{I18n.t('unable')}</Text>
                             </View>
                         }
 
