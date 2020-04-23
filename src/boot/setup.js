@@ -8,7 +8,7 @@ import NavigationService from '../helperMethods/navigationService';
 import store from '../redux/store';
 import SplashScreen from 'react-native-splash-screen';
 import { GET_BOARDING_DATA, GET_BOARDING_IMAGES, SET_USER_SESSION } from '../constants';
-import { getItem, setItem, removeItem } from '../helperMethods/localstorage';
+import { getItem, setItem } from '../helperMethods/localstorage';
 import MyAccountActions from '../screens/MyAccountActions'
 import DataDisplay from '../screens/DataDisplay'
 import ImagesDisplay from '../screens/ImagesDisplay'
