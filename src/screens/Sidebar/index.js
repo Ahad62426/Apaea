@@ -261,14 +261,22 @@ class SideBar extends Component {
           </List>
           <View style={{ flexDirection: "row", justifyContent: "center" }}>
             <TouchableOpacity
-              onPress={async () => await setLanguage('en')}
+              onPress={async () => {
+                await setLanguage('en')
+                this.props.navigation.closeDrawer();
+                this.props.navigation.navigate('Welcome', { lang: 'en' });
+              }}
               style={{ margin: 10, marginRight: 20 }}>
               <Image
                 style={{ height: 20, width: 40, borderRadius: 3 }}
                 source={require('../../assets/Icons/usflag.png')} />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={async () => await setLanguage('zh')}
+              onPress={async () => {
+                await setLanguage('zh')
+                this.props.navigation.closeDrawer();
+                this.props.navigation.navigate('Welcome', { lang: 'zh' });
+              }}
               style={{ margin: 10, marginRight: 20 }}>
               <Image
                 style={{ height: 20, width: 40, borderRadius: 3 }}

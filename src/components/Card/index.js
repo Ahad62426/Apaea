@@ -191,7 +191,7 @@ renderCardBody = props => {
           {this.CTwoColText(I18n.t('Accomodation'), `${I18n.t('USD')} ${props.accomodation || ''}`, I18n.t('Food'), `${I18n.t('USD')} ${props.food || ''}`)}
           {this.CTwoColText(I18n.t('Transportation'), `${I18n.t('USD')} ${props.transportation || ''}`, I18n.t('Discount'), `${props.discount || ''}%`)}
           {this.CTwoColText(I18n.t('Total'), `${I18n.t('USD')} ${props.total || ''}`)}
-          <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+          {/* <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
             <ActionButton
               textColor={"white"}
               btnText={I18n.t('register')}
@@ -206,7 +206,7 @@ renderCardBody = props => {
               }}
             ></ActionButton>
 
-          </View>
+          </View> */}
         </Body>
       )
       break;
@@ -215,10 +215,10 @@ renderCardBody = props => {
         <Body>
           {this.CBlogPostTitle(props.title || props.heading || props.name)}
           <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
-          {/* {props.description || props.excerpt ? */}
+          {!props.is_active ?
               <ActionButton
                 textColor={"white"}
-                btnText={props.is_active ? I18n.t('register') : I18n.t('read_more')}
+                btnText={I18n.t('read_more')}
                 style={{
                   borderRadius: 5,
                   height: 45,
@@ -228,11 +228,9 @@ renderCardBody = props => {
                   color: "white",
                   backgroundColor: TColors.bgSecondary
                 }}
-                callback={() => {
-                  if (!props.is_active)
-                  store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })
-                }}></ActionButton>
-            {/* } */}
+                callback={() => store.dispatch({ type: DISPLAY_DATA_SCREEN, payload: props })} />
+                : null
+            }
             {props.file && props.file.includes('.') ?
               <ActionButton
                 textColor={"white"}

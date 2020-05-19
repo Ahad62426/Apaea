@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import I18n from '../../i18n';
-import RNRestart from 'react-native-restart';
 
 export const setItem = async (key, value) => {
   try {
@@ -24,8 +23,8 @@ export const setLanguage = async value => {
     } catch (error) {
       console.error('error stringifying value', error);
     }
+    I18n.locale = value
     await AsyncStorage.setItem('@language', data);
-    RNRestart.Restart();
   } catch (e) {
     console.error('error saving value', e);
   }
