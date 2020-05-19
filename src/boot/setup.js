@@ -24,12 +24,12 @@ export default class Setup extends Component {
 
   async componentDidMount() {
     console.disableYellowBox = true;
-    const expired = await getItem('@expired');
-    if (expired) this.setState({ appExpired: true });
-    else {
-      const date = new Date();
-      if (date.getMonth() >= 4 && date.getDate() >= 1) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
-    }
+    // const expired = await getItem('@expired');
+    // if (expired) this.setState({ appExpired: true });
+    // else {
+    //   const date = new Date();
+    //   if (date.getMonth() >= 4 && date.getDate() >= 1) this.setState({ appExpired: true }, async () => await setItem('@expired', 'expired'));
+    // }
     
     getLanguage();
     const session = await getItem('@UserAuth');
