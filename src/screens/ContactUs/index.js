@@ -265,6 +265,15 @@ class ContactUs extends Component {
                             callback={() => this._submitForm()}
                         />
                     </Form>
+                    {dataKey === "constact-us-form" ?
+                        <View>
+                            <Text>Address: 3 Montham Close</Text>
+                            <Text>Berwick 3806</Text>
+                            <Text>Melbourne, Australia</Text>
+                            <Text>Email: contact.apaea@gmail.com</Text>
+                            <Text>Website: https://www.a-paea.org/</Text>
+                        </View> : null
+                    }
                 </Content>
             </Container>
         );

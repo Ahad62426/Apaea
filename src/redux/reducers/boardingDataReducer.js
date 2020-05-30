@@ -27,9 +27,12 @@ export default (state = {}, { type, payload }) => {
     }
     case BOARDING_IMAGES_SUCCESS: {
       const newSliderImages = [];
-      newSliderImages.push(payload[1].subData[2])
-      newSliderImages.push(payload[1].subData[1])
       newSliderImages.push(payload[1].subData[0])
+      newSliderImages.push(payload[1].subData[1])
+      newSliderImages.push(payload[1].subData[2])
+      newSliderImages.push(payload[1].subData[3])
+      newSliderImages.push(payload[1].subData[4])
+      newSliderImages.push(payload[1].subData[5])
       return {
         ...state, loadingImages: false,
         sliderImages: newSliderImages,
